@@ -1,16 +1,35 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
+[Serializable]
+public class JobAppearance
+{
+    public UnitJob job;
+
+    [Header("Job Object")]
+    public GameObject jobRoot;
+    public GameObject[] decorations;
+
+    [Header("Head Decoration")]
+    public GameObject headDecoration;
+    public bool coverHead;
+    public bool coverHair;
+}
 
 public class MaleUnitAppearance : MonoBehaviour
 {
-    //장식물
-    static readonly string[] KnightDecorationNames =
-    {
-        "GreatHelm", "Pauldrons", "NeckScarf", "SwordSheathed"
-    }; 
-    static readonly string[] SwordsmanDecorationNames =
-    {
-        "SkullCap"
-    };
+    [Header("Job Appearance")]
+    [SerializeField] JobAppearance jobAppearances;
+
+    [Header("Common Head Objects")]
+    [SerializeField] GameObject face;
+    [SerializeField] Transform eyebrows;
+    [SerializeField] Transform eyes;
+    [SerializeField] Transform mouths;
+    [SerializeField] Transform facialHair;
+    [SerializeField] Transform hair;
+    [SerializeField] Transform hairForHeadwear;
 
     //갑옷 색
     const string ObjectsMaterialName = "RGBRecolor_Objects";
@@ -19,129 +38,76 @@ public class MaleUnitAppearance : MonoBehaviour
     static readonly int Color3Id = Shader.PropertyToID("_Color3");
     Material objectsMaterialInstance;
 
-    public bool ApplyAppearance(UnitJob job)
+    public bool ApplyAppearance()
     {
-        return job switch
-        {
-            UnitJob.Knight => ApplyKnightAppearance(),
-            UnitJob.Swordsman => ApplySwordsmanAppearance(),
-            _ => true
-        };
-    }
+        RandomizeDecorations(jobAppearances.decorations);
 
-    bool ApplyKnightAppearance()
-    {
-        Transform knightRoot = FindChildByName(transform, "M_Knight");
-
-        if(!knightRoot)
-        {
-            Debug.LogError( "[MaleUnitAppearance] M_Knight를 찾지 못했습니다.", this);
-            return false;
-        }
-
-        //if (!CreateRandomObjectsMaterial(knightRoot))
-        //{
-        //    return false;
-        //}
-
-        RandomizeDecorations(knightRoot, KnightDecorationNames);
-
-
-        Transform greatHelm = FindChildByName(knightRoot, "M_Knight_GreatHelm");
-
-        if (!greatHelm)
-        {
-            Debug.LogError("[MaleUnitAppearance] GreatHelm을 찾지 못했습니다.", this);
-            return false;
-        }
-
-        bool helmEnabled = greatHelm.gameObject.activeSelf;
-
-        return ApplyHeadAppearance(faceCovered: helmEnabled, hairCovered: helmEnabled);
-    }
-    bool ApplySwordsmanAppearance()
-    {
-        Transform swordsmantRoot = FindChildByName(transform, "M_Swordsman");
-
-        if (!swordsmantRoot)
-        {
-            Debug.LogError("[MaleUnitAppearance] M_Swordsman을 찾지 못했습니다.", this);
-            return false;
-        }
-        //if (!CreateRandomObjectsMaterial(swordsmantRoot))
-        //{
-        //    return false;
-        //}
-
-        RandomizeDecorations(swordsmantRoot, SwordsmanDecorationNames);
-
-        Transform skullcap = FindChildByName(swordsmantRoot, "M_Swordsman_SkullCap");
+        bool headDecorationActive = RandomizeHeadDecoration(jobAppearances.headDecoration, 0.4f);
         
+        //투구 있고 투구가 머리를 가린다면 그대로 끝
+        if (headDecorationActive && jobAppearances.coverHead) return true;
 
-        if (!skullcap)
-        {
-            Debug.LogError("[MaleUnitAppearance] SkullCap을 찾지 못했습니다.", this);
-            return false;
-        }
-
-        return ApplyHeadAppearance(faceCovered: false, hairCovered: skullcap.gameObject.activeSelf);
+        return ApplyHeadAppearance(headDecorationActive && jobAppearances.coverHead, headDecorationActive, jobAppearances.coverHair);
     }
 
-    bool ApplyHeadAppearance(bool faceCovered, bool hairCovered)
-    {
-        Transform face = FindChildByName(transform, "Face");
-        Transform facialHair = FindChildByName(transform, "FacialHair");
-        Transform hair = FindChildByName(transform, "Hair");
-        Transform hairForHeadwear = FindChildByName(transform, "Hair_forHeadwear");
 
-        if (!face || !facialHair || !hair)
+    bool ApplyHeadAppearance(bool headCovered, bool headDecorationActive , bool hairCovered)
+    {
+        if (!face || !eyebrows || !eyes || !mouths || !facialHair || !hair || !hairForHeadwear)
         {
             Debug.LogError("[MaleUnitAppearance] 공통 머리 외형 오브젝트를 찾지 못했습니다.", this);
             return false;
         }
 
-        // 현재는 사용하지 않음
-        if (hairForHeadwear)
+        // Knight_GreatHelm처럼 얼굴 전체를 가리는 경우
+        if (headCovered)
         {
-            hairForHeadwear.gameObject.SetActive(false);
-        }
-
-        // GreatHelm처럼 얼굴 전체를 가리는 경우
-        if (faceCovered)
-        {
-            face.gameObject.SetActive(false);
+            face.SetActive(false);
             facialHair.gameObject.SetActive(false);
             hair.gameObject.SetActive(false);
-
+            hairForHeadwear.gameObject.SetActive(false);
             return true;
         }
 
-        face.gameObject.SetActive(true);
+        //혹시 꺼졌을 수 있으니까 켜주기
+        face.SetActive(true);
+        eyes.gameObject.SetActive(true);
+        eyebrows.gameObject.SetActive(true);
+        mouths.gameObject.SetActive(true);
         facialHair.gameObject.SetActive(true);
 
-        Transform eyebrows = FindChildByName(face, "Eyebrows");
-        Transform eyes = FindChildByName(face, "Eyes");
-        Transform mouths = FindChildByName(face, "Mouths");
-
-        if (!eyebrows || !eyes || !mouths)
-        {
-            Debug.LogError("[MaleUnitAppearance] Face 아래의 Eyebrows, Eyes, Mouths를 찾지 못했습니다.", this);
-            return false;
-        }
-
+        //얼굴 각 요소 결정하기
         SetOnlyRandomChildActive(eyebrows, false);
         SetOnlyRandomChildActive(eyes, false);
         SetOnlyRandomChildActive(mouths, false);
-        RandomizeEachChild(facialHair);
+        RandomizeEachChild(facialHair, 0.2f);
 
-        if (hairCovered)
-        {
-            hair.gameObject.SetActive(false);
-        }
-        else
+        hair.gameObject.SetActive(false);
+        hairForHeadwear.gameObject.SetActive(false);
+
+        //머리장식이 꺼져있으면 일반머리 사용
+        if (!headDecorationActive)
         {
             hair.gameObject.SetActive(true);
-            SetOnlyRandomChildActive(hair, true);
+            SetOnlyRandomChildActive(hair, false);
+            return true;
+        }
+
+        // 머리 장식이 머리카락 전체를 가리는 경우
+        if (hairCovered)
+        {
+            return true;
+        }
+
+        // 머리 장식이 있지만 머리카락 전체를 가리지 않는 경우
+        hairForHeadwear.gameObject.SetActive(true);
+        Transform selectedHair = SetOnlyRandomChildActive(hairForHeadwear, false);
+        if (selectedHair)
+        {
+            for (int i = 0; i < selectedHair.childCount; i++)
+            {
+                selectedHair.GetChild(i).gameObject.SetActive(false);
+            }
         }
 
         return true;
@@ -194,8 +160,7 @@ public class MaleUnitAppearance : MonoBehaviour
         return Random.ColorHSV(0f, 1f, 0.35f, 1f, 0.35f, 1f);
     }
 
-
-    static void SetOnlyRandomChildActive(Transform group, bool allowNone)
+    static Transform SetOnlyRandomChildActive(Transform group, bool allowNone)
     {
         int selectedIndex = allowNone
             ? Random.Range(-1, group.childCount)
@@ -205,37 +170,31 @@ public class MaleUnitAppearance : MonoBehaviour
         {
             group.GetChild(i).gameObject.SetActive(i == selectedIndex);
         }
+
+        return selectedIndex >= 0 ? group.GetChild(selectedIndex) : null;
     }
 
-    static void RandomizeEachChild(Transform group)
+    static void RandomizeEachChild(Transform group, float percent)
     {
         for (int i = 0; i < group.childCount; i++)
         {
-            group.GetChild(i).gameObject.SetActive(Random.value < 0.5f);
+            group.GetChild(i).gameObject.SetActive(Random.value < percent);
         }
     }
 
-    static void RandomizeDecorations(Transform root, string[] decorationNames)
+    static void RandomizeDecorations(GameObject[] decorations)
     {
-        Transform[] children = root.GetComponentsInChildren<Transform>(true);
-
-        foreach(string decorationName in decorationNames)
+        if (decorations is null)
         {
-            string targetName = $"{root.name}_{decorationName}";
+            Debug.LogWarning($"[MaleUnitAppearance] 장식들을 찾지 못했습니다.");
+            return;
+        }
 
-            Transform decoration = null;
-
-            foreach(Transform child in children)
-            {
-                if (child.name != targetName) continue;
-
-                decoration = child;
-                break;
-            }
-
+        foreach (GameObject decoration in decorations)
+        {
             if (!decoration)
             {
-                Debug.LogWarning($"[MaleUnitAppearance] '{targetName}'을 찾지 못했습니다.");
+                Debug.LogWarning($"[MaleUnitAppearance] '{decoration.name}'을 찾지 못했습니다.");
                 continue;
             }
 
@@ -243,18 +202,17 @@ public class MaleUnitAppearance : MonoBehaviour
         }
     }
 
-    static Transform FindChildByName(Transform root, string childName)
+    static bool RandomizeHeadDecoration(GameObject headDecoration, float percent)
     {
-        Transform[] children = root.GetComponentsInChildren<Transform>(true);
-
-        foreach(Transform child in children)
+        if (!headDecoration)
         {
-            if(child.name == childName)
-            {
-                return child;
-            }
+            Debug.LogWarning($"[MaleUnitAppearance] 머리 장식을 찾지 못했습니다.");
+            return false;
         }
-        return null;
+
+        bool isActive = Random.value < percent;
+        headDecoration.SetActive(isActive);
+        return isActive;
     }
 
     void OnDestroy()

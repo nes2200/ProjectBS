@@ -74,6 +74,7 @@ public class PlacementManager : MonoBehaviour
         if (worldPosition.x > 0) return;
 
         //바닥에 맞았으면 유닛 생성
+        //GameObject newUnit = ObjectManager.CreateObject(selectedUnitDefinition.UnitPrefab);
         GameObject newUnit = ObjectManager.CreateObjectWithoutRegistration(selectedUnitDefinition.UnitPrefab);
 
         //생성됬으면 등록하기
@@ -91,7 +92,7 @@ public class PlacementManager : MonoBehaviour
             newUnit.transform.position = indicator.GetCurrentIndicatorLoaction();
             newUnit.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
             ObjectManager.RegistrationObject(newUnit);
-          
+
             //추적할 적 유닛 등록하기
             TargetingModule targetModule = newUnit.GetComponent<TargetingModule>();
             if (targetModule)
@@ -151,10 +152,9 @@ public class PlacementManager : MonoBehaviour
 
         MaleUnitAppearance appearance = unit.GetComponent<MaleUnitAppearance>();
         if (!appearance) appearance = unit.AddComponent<MaleUnitAppearance>();
-        if (!appearance.ApplyAppearance(definition.Job)) return false;
+        if (!appearance.ApplyAppearance()) return false;
 
         character.SetStatus(definition.Status);
-        animator.runtimeAnimatorController = definition.AnimatorController;
         return true;
     }
 

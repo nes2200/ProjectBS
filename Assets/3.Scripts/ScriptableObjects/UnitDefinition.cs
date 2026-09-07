@@ -25,12 +25,10 @@ public class UnitDefinition : ScriptableObject
 
     [Header("Job Data")]
     [SerializeField] UnitStatus status;
-    [SerializeField] RuntimeAnimatorController animatorController;
 
     public UnitJob Job => job;
     public GameObject UnitPrefab => unitPrefab;
     public UnitStatus Status => status;
-    public RuntimeAnimatorController AnimatorController => animatorController;
 
-    public bool IsValid => job != UnitJob.None && unitPrefab && status && animatorController;
+    public bool IsValid => job != UnitJob.None && unitPrefab && status;
 }

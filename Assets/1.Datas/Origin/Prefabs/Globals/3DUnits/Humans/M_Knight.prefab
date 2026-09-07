@@ -8,6 +8,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: jobAppearances.job
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: jobAppearances.jobRoot
+      value: 
+      objectReference: {fileID: 585682654976795333}
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: jobAppearances.coverFace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: jobAppearances.coverHair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: jobAppearances.coverHead
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: jobAppearances.headDecoration
+      value: 
+      objectReference: {fileID: 1543437447394523428}
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: jobAppearances.decorations.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: 'jobAppearances.decorations.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1398994998385505824}
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: 'jobAppearances.decorations.Array.data[1]'
+      value: 
+      objectReference: {fileID: 38914805380483088}
+    - target: {fileID: -3220077024357565034, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: 'jobAppearances.decorations.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2369690299481739874}
     - target: {fileID: 9733742948024976, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -122,7 +162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1705638408808029620, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1730914488587196863, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_IsActive
@@ -215,7 +255,7 @@ PrefabInstance:
     - target: {fileID: 2871185227891549063, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: cf710b1b241c1b247a1d340b610aeff5, type: 2}
+      objectReference: {fileID: 22100000, guid: 9841e7467a8ba5545a401d44cce0ae48, type: 2}
     - target: {fileID: 2938988743875097519, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -330,7 +370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3753065824782698657, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3887252901198128668, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_IsActive
@@ -530,7 +570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6633081625263502218, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6726446228674689637, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Layer
@@ -708,13 +748,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8806712643757130783, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8811651244869716983, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9073831747385920187, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9108332564852445464, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_IsActive
@@ -741,3 +785,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+--- !u!1 &38914805380483088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2446780174207662485, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+  m_PrefabInstance: {fileID: 2413636199901606277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &585682654976795333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2980879447606383424, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+  m_PrefabInstance: {fileID: 2413636199901606277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1398994998385505824 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3608737745389242277, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+  m_PrefabInstance: {fileID: 2413636199901606277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1543437447394523428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3753065824782698657, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+  m_PrefabInstance: {fileID: 2413636199901606277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2369690299481739874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 116004593978368999, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+  m_PrefabInstance: {fileID: 2413636199901606277}
+  m_PrefabAsset: {fileID: 0}

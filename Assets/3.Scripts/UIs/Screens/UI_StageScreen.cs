@@ -112,6 +112,9 @@ public class UI_StageScreen : UI_ScreenBase
     {
         stageManager = newStageManager;
 
+        //화면 전환이 끝나기 전이라면 Open에서 다시 연결됨
+        if (!isActiveAndEnabled) return;
+
         hpBarGroup.Connect(stageManager.CharacterRegistry);
         SetCostLimitText(stageManager.GetCostLimits());
         starController.RefreshState(stageManager.GetCurrentCost());
