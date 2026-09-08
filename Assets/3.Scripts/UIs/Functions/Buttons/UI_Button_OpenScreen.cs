@@ -29,4 +29,8 @@ public class UI_Button_OpenScreen : MonoBehaviour
         saveScreen.saveSlot.IsSave = false;
         OpenScreen();
     }
+    public void OpenSandbox()
+    {
+        GameManager.SceneLoad.LoadSandbox("StageScene");
+    }
 }

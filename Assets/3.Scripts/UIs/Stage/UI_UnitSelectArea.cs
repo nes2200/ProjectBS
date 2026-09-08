@@ -7,8 +7,6 @@ public class UI_UnitSelectArea : MonoBehaviour
     [SerializeField] UI_Button_UnitSelect buttonPrefab;
     [SerializeField] Transform buttonParent;
 
-    [SerializeField] GameObject contentRoot;
-
     readonly List<UI_Button_UnitSelect> createdButtons = new();
 
     private void OnEnable()
@@ -16,7 +14,7 @@ public class UI_UnitSelectArea : MonoBehaviour
         if (GameManager.StageLoad == null) return;
         GameManager.StageLoad.OnSelectableUnitsLoaded -= RebuildButtons;
         GameManager.StageLoad.OnSelectableUnitsLoaded += RebuildButtons;
-        RebuildButtons(GameManager.StageLoad.SelectableUnitDefinitions);
+        RebuildButtons(GameManager.StageLoad.SelectableUnits);
     }
 
     private void OnDisable()
@@ -24,18 +22,18 @@ public class UI_UnitSelectArea : MonoBehaviour
         GameManager.StageLoad.OnSelectableUnitsLoaded -= RebuildButtons;
     }
 
-    public void RebuildButtons(IReadOnlyList<UnitDefinition> unitDefinitions)
+    public void RebuildButtons(IReadOnlyList<GameObject> unitPrefabs)
     {
         ClearButtons();
 
-        if (unitDefinitions == null) return;
+        if (unitPrefabs == null) return;
 
-        foreach(UnitDefinition unitDefinition in unitDefinitions)
+        foreach(GameObject unitPrefab in unitPrefabs)
         {
-            if (!unitDefinition) continue;
+            if (!unitPrefab) continue;
 
             UI_Button_UnitSelect button = Instantiate(buttonPrefab, buttonParent);
-            button.Initialize(unitDefinition);
+            button.Initialize(unitPrefab);
             createdButtons.Add(button);
         }
     }
@@ -50,10 +48,5 @@ public class UI_UnitSelectArea : MonoBehaviour
             }
         }
         createdButtons.Clear();
-    }
-
-    public void SetVisible(bool value)
-    {
-        contentRoot.SetActive(value);
     }
 }

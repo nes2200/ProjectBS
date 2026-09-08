@@ -106,8 +106,8 @@
       }
     },
     {
-      "name": "CrossLine",
-      "prefabName": "CrossLine",
+      "name": "TeamLine",
+      "prefabName": "TeamLine",
       "parentName": "Terrain",
       "position": {
         "x": 0.0,

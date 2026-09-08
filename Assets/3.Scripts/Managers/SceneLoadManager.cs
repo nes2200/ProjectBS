@@ -7,6 +7,7 @@ public class SceneLoadManager : ManagerBase
 {
     private string currentStageSceneName;
     private TextAsset currentStageData;
+    private UIType currentScreen;
     private bool isLoading;
 
     protected override IEnumerator Onconnected(GameManager newManager)
@@ -31,9 +32,28 @@ public class SceneLoadManager : ManagerBase
 
         currentStageSceneName = sceneName;
         currentStageData = stageData;
+        currentScreen = UIType.Stage;
 
         isLoading = true;
-        StartCoroutine(CoReloadSceneAndSetup(sceneName, stageData));
+        StartCoroutine(CoReloadSceneAndSetup(sceneName, stageData, UIType.Stage));
+    }
+
+    public void LoadSandbox(string sceneName)
+    {
+        if (isLoading) return;
+
+        if(string.IsNullOrEmpty(sceneName))
+        {
+            Debug.LogError("[SceneLoadManager] 샌드박스 씬 이름이 비어 있습니다.");
+            return;
+        }
+
+        currentStageSceneName = sceneName;
+        currentStageData = null;
+        currentScreen = UIType.Sandbox;
+
+        isLoading = true;
+        StartCoroutine(CoReloadSceneAndSetup(sceneName, null, UIType.Sandbox));
     }
 
     public void RestartCurrentStage()
@@ -49,12 +69,12 @@ public class SceneLoadManager : ManagerBase
         UIManager.ClaimCloseUI(UIType.Stage);
 
         isLoading = true;
-        StartCoroutine(CoReloadSceneAndSetup(currentStageSceneName, currentStageData));
+        StartCoroutine(CoReloadSceneAndSetup(currentStageSceneName, currentStageData, currentScreen));
     }
 
-    private IEnumerator CoReloadSceneAndSetup(string sceneName, TextAsset stageData)
+    private IEnumerator CoReloadSceneAndSetup(string sceneName, TextAsset stageData, UIType targetScreen)
     {
-        UIManager.ClaimOpenScreen(UIType.Stage, ScreenChangeType.SlideChanger);
+        UIManager.ClaimOpenScreen(targetScreen, ScreenChangeType.SlideChanger);
 
         //해당 씬 로드 확인
         Scene targetScene = SceneManager.GetSceneByName(sceneName);
@@ -82,11 +102,17 @@ public class SceneLoadManager : ManagerBase
         SceneManager.SetActiveScene(newScene);
 
         //로드한 씬에서 스테이지 업데이트하기
-        GameManager.StageLoad.LoadStage(stageData, newScene);
+        if (stageData)
+        {
+            GameManager.StageLoad.LoadStage(stageData, newScene);
+        }
+        else
+        {
+            GameManager.Camera.SetCameraDefaultPosition();
+            GameManager.Camera.AddCameraController();
+        }
 
-        isLoading = false;
+            isLoading = false;
         yield return null;
     }
-
-
 }

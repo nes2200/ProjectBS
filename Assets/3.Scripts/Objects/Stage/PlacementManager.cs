@@ -7,7 +7,7 @@ public class PlacementManager : MonoBehaviour
     [Header("StageManager")]
     [SerializeField] StageManager stageManager;
 
-    UnitDefinition selectedUnitDefinition;
+    GameObject selectedUnit;
 
     [Header("Each Team Parent")]
     [SerializeField] Transform teamA_Parent;
@@ -16,6 +16,8 @@ public class PlacementManager : MonoBehaviour
     [Header("Indicator")]
     [SerializeField] UnitPlaceIndicator indicator;
     public UnitPlaceIndicator Indicator => indicator;
+
+    TeamLine teamLine;
 
     public static event UnitSpawnEvent OnUnitSpawn;
     public static event UnitSpawnEvent OnUnitDespawn;
@@ -32,6 +34,16 @@ public class PlacementManager : MonoBehaviour
     {
         InputManager.OnMouseLeftButton -= HandlePlacementClick;
         InputManager.OnUnitSelect -= ChangeCurrentSelectedUnit;
+    }
+
+    public void SetTeamLine(TeamLine newTeamLine)
+    {
+        teamLine = newTeamLine;
+    }
+
+    public bool IsInsideTeamArea(TeamID team, Vector3 worldPosition, float footprintRadius = 0f)
+    {
+        return teamLine != null && teamLine.Contains(team, worldPosition, footprintRadius);
     }
 
     private void HandlePlacementClick(bool value, Vector2 screenPosition, Vector3 worldPosition)
@@ -62,25 +74,21 @@ public class PlacementManager : MonoBehaviour
         if (stageManager.CurrentState != StageState.Ready) return;
 
         //프리팹에 유닛이 저장되있지 않으면 생성 안함
-        if(!selectedUnitDefinition || !selectedUnitDefinition.IsValid) return;
+        if(!selectedUnit) return;
 
         //생성할 유닛 비용이 추가될 시 리미트 최고점을 넘으면 생성 안함
-        if (!IsCostEnoughToSpawn(selectedUnitDefinition.Status.cost)) return;
+        if (!IsCostEnoughToSpawn(selectedUnit.GetComponent<CharacterBase>().Status.cost)) return;
 
         //생성 불가능한 위치라면 생성 안함
         if (!indicator.CanSpawn) return;
 
-        //위치가 생성 불가한 위치인지 체크하고 불가하면 안함
-        if (worldPosition.x > 0) return;
-
         //바닥에 맞았으면 유닛 생성
-        //GameObject newUnit = ObjectManager.CreateObject(selectedUnitDefinition.UnitPrefab);
-        GameObject newUnit = ObjectManager.CreateObjectWithoutRegistration(selectedUnitDefinition.UnitPrefab);
+        GameObject newUnit = ObjectManager.CreateObjectWithoutRegistration(selectedUnit);
 
         //생성됬으면 등록하기
         if (newUnit)
         {
-            if (!TryConfigureUnit(newUnit, selectedUnitDefinition, out CharacterBase targetCharacter))
+            if (!TryConfigureUnit(newUnit, out CharacterBase targetCharacter))
             {
                 Destroy(newUnit);
                 return;
@@ -118,7 +126,7 @@ public class PlacementManager : MonoBehaviour
         if (!GameManager.Instance.IsPlaying) return;
         if (value) return;
         if (!indicator.TryGetLockedRemoveTarget(out CharacterBase targetCharacter)) return;
-        if (targetCharacter.transform.position.x > 0f) return;
+        if (!teamLine.Contains(TeamID.TeamA, targetCharacter.transform.position)) return;
       
         int unitCost = targetCharacter.Status.cost;
 
@@ -129,12 +137,12 @@ public class PlacementManager : MonoBehaviour
     }
 
     //유닛 선택 버튼 클릭시 해당 유닛 정보를 받아오는 기능
-    public void ChangeCurrentSelectedUnit(UnitDefinition newUnitDefinition)
+    public void ChangeCurrentSelectedUnit(GameObject newSelectedUnit)
     {
-        selectedUnitDefinition = newUnitDefinition;
+        selectedUnit = newSelectedUnit;
     }
 
-    bool TryConfigureUnit(GameObject unit, UnitDefinition definition, out CharacterBase character)
+    bool TryConfigureUnit(GameObject unit, out CharacterBase character)
     {
         character = unit.GetComponent<CharacterBase>();
         if (!character)
@@ -154,7 +162,7 @@ public class PlacementManager : MonoBehaviour
         if (!appearance) appearance = unit.AddComponent<MaleUnitAppearance>();
         if (!appearance.ApplyAppearance()) return false;
 
-        character.SetStatus(definition.Status);
+        character.SetStatus(character.Status);
         return true;
     }
 

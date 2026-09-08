@@ -398,9 +398,9 @@ RectTransform:
   - {fileID: 5074597083696770407}
   m_Father: {fileID: 5117716679924856933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -25}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2469808940755216037
@@ -1196,9 +1196,9 @@ RectTransform:
   - {fileID: 9030540734598803765}
   m_Father: {fileID: 5117716679924856933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 240, y: -25}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1661804951413352137
@@ -1690,12 +1690,12 @@ GameObject:
   - component: {fileID: 412041754021555647}
   - component: {fileID: 7491449494129908698}
   m_Layer: 5
-  m_Name: UnitWeaponSwapButtons
+  m_Name: UnitEnemySwapButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5117716679924856933
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1715,7 +1715,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5314576}
   m_AnchorMax: {x: 0, y: 0.5314576}
   m_AnchoredPosition: {x: 0, y: 24.854}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 320, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &661074261133099657
 MonoBehaviour:
@@ -2640,7 +2640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 851718823883334047, guid: d9d2cd646e3f4f540b7985cb057d9396, type: 3}
       propertyPath: m_Name
-      value: WeaponSelectArea
+      value: EnemySelectArea
       objectReference: {fileID: 0}
     - target: {fileID: 851718823883334047, guid: d9d2cd646e3f4f540b7985cb057d9396, type: 3}
       propertyPath: m_IsActive

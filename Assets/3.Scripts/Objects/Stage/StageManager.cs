@@ -25,6 +25,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] StageCharacterRegistry characterRegistry;
     [SerializeField] PlacementManager placementManager;
     [SerializeField] CostTracker costTracker;
+    TeamLine teamLine;
 
     [Header("Initial Objects")]
     [SerializeField] Transform floor;
@@ -92,5 +93,11 @@ public class StageManager : MonoBehaviour
     public bool IsCostEnoughToSpawn(int unitCost)
     {
         return costTracker.IsCostEnoughToSpawn(unitCost);
+    }
+
+    public void SetTeamLine(TeamLine newTeamLine)
+    {
+        teamLine = newTeamLine;
+        placementManager.SetTeamLine(teamLine);
     }
 }

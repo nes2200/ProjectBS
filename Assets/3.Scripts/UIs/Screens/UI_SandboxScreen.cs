@@ -2,17 +2,12 @@ using UnityEngine;
 
 public class UI_SandboxScreen : UI_ScreenBase
 {
-    public override void Open()
+    public override void Registration(UIManager manager)
     {
-        base.Open();
-        InputManager.OnCancel -= BackToTitle;
-        InputManager.OnCancel += BackToTitle;
+        base.Registration(manager);
     }
-    public override void Close()
+    public override void Unregistration(UIManager manager)
     {
-        InputManager.OnCancel -= BackToTitle;
-        base.Close();
+        base.Unregistration(manager);
     }
-
-    void BackToTitle(bool value) => UIManager.ClaimOpenScreen(UIType.Title, ScreenChangeType.ScreenChanger);
 }

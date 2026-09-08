@@ -52,7 +52,6 @@ public class UI_StageScreen : UI_ScreenBase
         StageManager.OnBattleEnd -= OpenBattleResult;
         StageManager.OnBattleEnd += OpenBattleResult;
 
-
         startButton.SetActive(true);
 
         if (stageManager) ConnectStage(stageManager);

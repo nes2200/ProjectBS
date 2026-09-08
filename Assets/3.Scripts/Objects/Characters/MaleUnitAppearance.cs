@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum UnitJob { Archer, Fighter, Hunter, Knight, Mage, Rogue, Sorcerer, Swordsman, Warlock}
+    
 [Serializable]
 public class JobAppearance
 {
@@ -31,6 +33,10 @@ public class MaleUnitAppearance : MonoBehaviour
     [SerializeField] Transform hair;
     [SerializeField] Transform hairForHeadwear;
 
+    [Header("Compoenet Percent")]
+    [SerializeField] float headDecorationPercent = 0.4f;
+    [SerializeField] float facialHairPercent = 0.25f;
+
     //갑옷 색
     const string ObjectsMaterialName = "RGBRecolor_Objects";
     static readonly int Color1Id = Shader.PropertyToID("_Color1");
@@ -42,7 +48,7 @@ public class MaleUnitAppearance : MonoBehaviour
     {
         RandomizeDecorations(jobAppearances.decorations);
 
-        bool headDecorationActive = RandomizeHeadDecoration(jobAppearances.headDecoration, 0.4f);
+        bool headDecorationActive = RandomizeHeadDecoration(jobAppearances.headDecoration, headDecorationPercent);
         
         //투구 있고 투구가 머리를 가린다면 그대로 끝
         if (headDecorationActive && jobAppearances.coverHead) return true;
@@ -80,7 +86,7 @@ public class MaleUnitAppearance : MonoBehaviour
         SetOnlyRandomChildActive(eyebrows, false);
         SetOnlyRandomChildActive(eyes, false);
         SetOnlyRandomChildActive(mouths, false);
-        RandomizeEachChild(facialHair, 0.2f);
+        RandomizeEachChild(facialHair, facialHairPercent);
 
         hair.gameObject.SetActive(false);
         hairForHeadwear.gameObject.SetActive(false);
@@ -109,7 +115,6 @@ public class MaleUnitAppearance : MonoBehaviour
                 selectedHair.GetChild(i).gameObject.SetActive(false);
             }
         }
-
         return true;
     }
 

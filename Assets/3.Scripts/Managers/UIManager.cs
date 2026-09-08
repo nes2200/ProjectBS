@@ -9,7 +9,7 @@ public enum UIType
 {
     None, 
     Loading, Title, Sandbox, SaveSlot, Option, ChapterSelect, StageSelect, Stage,
-    GameQuit, BattleResult, TargetHoverInfo, Inventory,  Movable, Menu, Info, ItemCursorSlot,
+    GameQuit, BattleResult, TargetHoverInfo, Inventory,  Movable, Menu, Info, ItemCursorSlot, SandboxSelect,    
     _Length
 }
 
@@ -37,6 +37,7 @@ public class UIManager : ManagerBase
         new(UIType.Stage, "StageScreen"),
         new(UIType.ChapterSelect, "ChapterSelectScreen"),
         new(UIType.StageSelect, "StageSelectScreen"),
+        new(UIType.SandboxSelect, "SandboxSelectScreen"),
     };
 
     Canvas _mainCanvas;

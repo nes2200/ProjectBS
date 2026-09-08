@@ -9,7 +9,7 @@ public class UI_Button_UnitSelect : UIBase
     //추가될 비용이 최대 코스트 제한을 넘으면 생성 안됨
 
     [Header("유닛 프리팹")]
-    [SerializeField] UnitDefinition unitDefinition;
+    [SerializeField] GameObject unitPrefab;
     
     UnitStatus status;
 
@@ -18,16 +18,27 @@ public class UI_Button_UnitSelect : UIBase
     [SerializeField] TextMeshProUGUI unitCostText;
     [SerializeField] Image unitImage;
 
-    public void Initialize(UnitDefinition newUnitDefinition)
+    public void Initialize(GameObject newUnitPrefab)
     {
-        if(!newUnitDefinition || !newUnitDefinition.IsValid)
+        if(!newUnitPrefab)
         {
             Debug.LogError("[UI_Button_UnitSelect] 유효한 유닛 정의가 필요합니다.");
             return;
         }
 
-        unitDefinition = newUnitDefinition;
-        status = unitDefinition.Status;
+        unitPrefab = newUnitPrefab;
+        CharacterBase character = unitPrefab.GetComponent<CharacterBase>();
+        if (!character)
+        {
+            Debug.LogError("[UI_Button_UnitSelect] 선택된 프리팹은 캐릭터가 아닙니다.");
+            return;
+        }
+        status = character.Status;
+        if (!status)
+        {
+            Debug.LogError("[UI_Button_UnitSelect] 선택된 프리팹에 정보가 없습니다.");
+            return;
+        }
 
         unitNameText.text = status.unitName;
         unitCostText.text = status.cost.ToString();
@@ -35,9 +46,9 @@ public class UI_Button_UnitSelect : UIBase
 
     public void OnClickUnitSelect()
     {
-        if(unitDefinition && status)
+        if(unitPrefab && status)
         {
-            InputManager.InvokeUnitSelect(unitDefinition);
+            InputManager.InvokeUnitSelect(unitPrefab);
         }
     }
 }
