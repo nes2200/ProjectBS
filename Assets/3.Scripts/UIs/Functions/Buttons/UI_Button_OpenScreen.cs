@@ -4,6 +4,7 @@ public class UI_Button_OpenScreen : MonoBehaviour
 {
     [SerializeField] UIType wantType;
     [SerializeField] ScreenChangeType changeType;
+    [SerializeField] TextAsset sandboxData;
     public void OpenScreen()
     {
         UIManager.ClaimOpenScreen(wantType, changeType);
@@ -31,6 +32,6 @@ public class UI_Button_OpenScreen : MonoBehaviour
     }
     public void OpenSandbox()
     {
-        GameManager.SceneLoad.LoadSandbox("StageScene");
+        GameManager.SceneLoad.LoadSandbox("StageScene", sandboxData);
     }
 }

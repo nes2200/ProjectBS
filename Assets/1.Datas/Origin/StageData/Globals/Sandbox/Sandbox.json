@@ -1,0 +1,34 @@
+{
+  "objects": [
+    {
+      "name": "Terrain",
+      "prefabName": "Terrain",
+      "parentName": "Floor",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 48.037,
+        "y": 0.055,
+        "z": 34.167
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      }
+    }
+  ],
+  "selectableUnits": [
+    { "unitPrefabName": "M_Knight" },
+    { "unitPrefabName": "M_Swordsman" },
+    { "unitPrefabName": "M_Archer" }
+  ],
+  "selectableEnemies": [
+    { "unitPrefabName": "Monster_Wolf" },
+    { "unitPrefabName": "Monster_WolfPup" }
+  ]
+}

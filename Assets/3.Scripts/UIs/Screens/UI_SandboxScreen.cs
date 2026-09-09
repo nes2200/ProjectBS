@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UI_SandboxScreen : UI_ScreenBase
+public class UI_SandboxScreen : UI_BattlefieldScreen
 {
     public override void Registration(UIManager manager)
     {

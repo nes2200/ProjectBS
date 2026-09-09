@@ -11,11 +11,14 @@ using UnityEngine.UIElements;
 public class StageLoadManager : ManagerBase
 {
     //내 유닛 로드시 StageScreen에서 버튼 생성하도록 명령 내리기
-    public event Action<IReadOnlyList<GameObject>> OnSelectableUnitsLoaded;
     public event Action<StageManager> OnStageLoaded;
 
     private readonly List<GameObject> selectableUnits = new();
+    private readonly List<GameObject> selectableEnemies = new();
     public IReadOnlyList<GameObject> SelectableUnits => selectableUnits;
+    public IReadOnlyList<GameObject> SelectableEnemies => selectableEnemies;
+
+    public event Action OnSelectableCharactersLoaded;
 
     protected override IEnumerator Onconnected(GameManager newManager)
     {
@@ -25,17 +28,18 @@ public class StageLoadManager : ManagerBase
     protected override void OnDisconnected()
     {
         selectableUnits.Clear();
-        OnSelectableUnitsLoaded = null;
+        selectableEnemies.Clear();
+        OnSelectableCharactersLoaded = null;
     }
 
-    public void LoadStage(TextAsset stageData, Scene stageScene)
+    public void LoadStage(TextAsset stageData, Scene stageScene, BattleFieldMode mode = BattleFieldMode.Stage)
     {
-        ExecuteLoad(stageData, stageScene);
+        ExecuteLoad(stageData, stageScene, mode);
         //카메라 위치 초기화
         GameManager.Camera.SetCameraDefaultPosition();
     }
 
-    private void ExecuteLoad(TextAsset stageData, Scene stageScene)
+    private void ExecuteLoad(TextAsset stageData, Scene stageScene, BattleFieldMode mode)
     {
         //씬 유효성 검사
         if(!stageScene.IsValid() || !stageScene.isLoaded)
@@ -88,8 +92,9 @@ public class StageLoadManager : ManagerBase
             return;
         }
 
-        LoadSelectableUnits(loadData.selectableUnits);
-       
+        LoadSelectableUnits(loadData.selectableUnits, selectableUnits);
+        LoadSelectableUnits(loadData.selectableEnemies, selectableEnemies); 
+        OnSelectableCharactersLoaded?.Invoke();
 
         //씬에 있는 주요 부모/관리자를 미리 검색하여 등록
         StageManager stageManager = FindStageManager(stageScene);
@@ -98,7 +103,8 @@ public class StageLoadManager : ManagerBase
             Debug.LogError("[StageLoadManager] StageManager를 찾지 못했습니다.");
             return;
         }
-        if(!stageManager.Floor || !stageManager.Probs || !stageManager.TeamA || !stageManager.TeamB)
+        stageManager.SetFieldMode(mode);
+        if (!stageManager.Floor || !stageManager.Probs || !stageManager.TeamA || !stageManager.TeamB)
         {
             Debug.LogError("[StageLoadManager] StageManager의 컨테이너 참조가 설정되지 않았습니다.");
             return;
@@ -271,7 +277,6 @@ public class StageLoadManager : ManagerBase
                 targetModule.SetHostileGroupParents(teamATransform);
             }
         }
-        OnSelectableUnitsLoaded?.Invoke(SelectableUnits);
         OnStageLoaded?.Invoke(stageManager);
     }
 
@@ -315,33 +320,24 @@ public class StageLoadManager : ManagerBase
         }
     }
 
-    private void LoadSelectableUnits(IReadOnlyList<StageUnitEntry> entries)
+    private void LoadSelectableUnits(IReadOnlyList<StageUnitEntry> entries, List<GameObject> result)
     {
-        selectableUnits.Clear();
+        result.Clear();
+
         if (entries == null) return;
 
-        HashSet<string> loadedUnitNames = new();
+        HashSet<string> loadNames = new();
 
-        foreach (StageUnitEntry entry in entries)
+        foreach(StageUnitEntry entry in entries)
         {
-            if (entry == null || string.IsNullOrWhiteSpace(entry.unitPrefabName))
-            {
-                Debug.LogWarning("[StageLoadManager] selectableUnits에 잘못된 항목이 있습니다.");
-                continue;
-            }
+            if (entry == null || string.IsNullOrEmpty(entry.unitPrefabName)) continue;
 
-            if (!loadedUnitNames.Add(entry.unitPrefabName))
-            {
-                Debug.LogWarning($"[StageLoadManager] 중복 유닛 '{entry.unitPrefabName}'은 제외합니다.");
-                continue;
-            }
+            if (!loadNames.Add(entry.unitPrefabName)) continue;
 
-            if (!DataManager.TryLoadDataFile(entry.unitPrefabName, out GameObject findObject))
+            if(DataManager.TryLoadDataFile(entry.unitPrefabName, out GameObject prefab))
             {
-                Debug.LogWarning($"[StageLoadManager] 유닛 정의 '{entry.unitPrefabName}'을 찾지 못했습니다.");
-                continue;
+                result.Add(prefab);
             }
-            selectableUnits.Add(findObject);
         }
     }
     

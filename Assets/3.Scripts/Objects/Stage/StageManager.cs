@@ -8,6 +8,11 @@ public enum StageState
     Result
 }
 
+public enum BattleFieldMode
+{
+    Stage, Sandbox
+}
+
 public delegate void StageStateChangeEvent(StageState oldState, StageState newState);
 public delegate void BattleStartEvent();
 public delegate void BattleEndEvent(bool isPlayer);
@@ -42,6 +47,9 @@ public class StageManager : MonoBehaviour
     public StageCharacterRegistry CharacterRegistry => characterRegistry;
     public UnitPlaceIndicator Indicator => placementManager.Indicator;
 
+    BattleFieldMode fieldMode = BattleFieldMode.Stage;
+    public BattleFieldMode FieldMode => fieldMode;
+    public bool IsSandbox => FieldMode == BattleFieldMode.Sandbox;
 
     //스테이지 상태 변경
     public void ChangeState(StageState newState)
@@ -52,6 +60,11 @@ public class StageManager : MonoBehaviour
         StageState oldState = CurrentState;
         _currentState = newState;
         OnStageStateChange?.Invoke(oldState, newState);
+    }
+
+    public void SetFieldMode(BattleFieldMode newMode)
+    {
+        fieldMode = newMode;
     }
 
     public void StartBattle()

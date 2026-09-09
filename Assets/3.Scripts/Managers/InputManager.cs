@@ -16,7 +16,7 @@ public delegate void MouseWheelEvent(Vector2 value);
 public delegate void ButtonEvent(bool value);
 public delegate void VectorEvent(Vector2 value);
 public delegate void AxisEvent(float value);
-public delegate void UnitSelectEvent(GameObject selectedUnit);
+public delegate void UnitSelectEvent(GameObject selectedUnit, TeamID team);
 
 //특정 클래스는 특정 컴포넌트와 함께 사용해야 한다
 //특정 클래스가 다른 클래스를 Dependence, 의존하는 경우
@@ -57,7 +57,7 @@ public class InputManager : ManagerBase
 
     //스크립트간 이벤트 입력 구역
     public static event UnitSelectEvent OnUnitSelect;
-    public static void InvokeUnitSelect(GameObject selectedUnit) => OnUnitSelect?.Invoke(selectedUnit);
+    public static void InvokeUnitSelect(GameObject selectedUnit, TeamID team) => OnUnitSelect?.Invoke(selectedUnit, team);
 
 
     PlayerInput targetInput;

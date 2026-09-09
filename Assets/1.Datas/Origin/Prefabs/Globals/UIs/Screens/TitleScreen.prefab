@@ -714,6 +714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
   wantType: 3
   changeType: 1
+  sandboxData: {fileID: 4900000, guid: c7db202b9e26bfb418361cd78b69e696, type: 3}
 --- !u!1 &4940164195117281587
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,7 +774,7 @@ MonoBehaviour:
     uiType: 9
     isOpen: 0
     isOverlay: 0
-  closeWithScreen: 
+  closeWithScreen: 09000000
 --- !u!95 &5002377203322431696
 Animator:
   serializedVersion: 7
@@ -1081,6 +1082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
   wantType: 7
   changeType: 1
+  sandboxData: {fileID: 0}
 --- !u!1 &5926394449266159750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,6 +1443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
   wantType: 5
   changeType: 1
+  sandboxData: {fileID: 0}
 --- !u!1 &7433882745912391559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,3 +1941,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
   wantType: 4
   changeType: 1
+  sandboxData: {fileID: 0}

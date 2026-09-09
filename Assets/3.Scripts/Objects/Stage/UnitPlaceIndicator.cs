@@ -8,6 +8,7 @@ public enum UnitPlacementMode
     Place, Remove
 }
 
+
 public class UnitPlaceIndicator : MonoBehaviour
 {
     [Header("Settings")]
@@ -33,6 +34,8 @@ public class UnitPlaceIndicator : MonoBehaviour
 
     Camera mainCam;
     Material runtimeIndicatorMat;
+
+    TeamID selectedTeam;
 
     readonly int tintColorPorpertyID = Shader.PropertyToID("_Tint");
 
@@ -158,7 +161,7 @@ public class UnitPlaceIndicator : MonoBehaviour
         }
 
         CharacterBase character = hit.collider.GetComponentInParent<CharacterBase>();
-        if (!character || character.Team != TeamID.TeamA)
+        if (!placementManager.CanRemove(character))
         {
             ClearRemoveTarget();
             return;
@@ -183,13 +186,9 @@ public class UnitPlaceIndicator : MonoBehaviour
         //소환할 유닛이 소환 가능 지역에 있나
         bool isOnNavMesh = NavMesh.SamplePosition(floorPosition, out NavMeshHit hit, navMeshCheckRadius, NavMesh.AllAreas);
         //소환할 유닛이 원하는 영역에 있나
-        bool isInsidePlayerArea = placementManager.IsInsideTeamArea(TeamID.TeamA, floorPosition, size);
+        bool isInsidePlayerArea = placementManager.IsInsideTeamArea(selectedTeam, floorPosition, size);
         bool spawnableCheck = isOnNavMesh && isInsidePlayerArea;
-        
-        if(spawnableCheck && hit.position.x > -size)
-        {
-            spawnableCheck = false;
-        }
+       
         //인디케이터와 유닛 충돌 체크
         if (spawnableCheck)
         {
@@ -226,7 +225,7 @@ public class UnitPlaceIndicator : MonoBehaviour
     {
         target = lockedRemovedTarget;
 
-        return currentMode == UnitPlacementMode.Remove && indicator.activeSelf && target != null && target.Team == TeamID.TeamA;
+        return currentMode == UnitPlacementMode.Remove && indicator.activeSelf && placementManager.CanRemove(target);
     }
     void ClearRemoveTarget()
     {
@@ -304,7 +303,7 @@ public class UnitPlaceIndicator : MonoBehaviour
         runtimeIndicatorMat.SetColor(tintColorPorpertyID, color);
     }
 
-    void ChangeCurrentSelectedUnit(GameObject selectedUnit)
+    void ChangeCurrentSelectedUnit(GameObject selectedUnit, TeamID team)
     {
         if (!selectedUnit) return;
         CharacterBase character = selectedUnit.GetComponent<CharacterBase>();
@@ -318,6 +317,7 @@ public class UnitPlaceIndicator : MonoBehaviour
         SetMode(UnitPlacementMode.Place);
         selected = true;
         size = status.colliderRadius;
+        selectedTeam = team;
 
         if (decal)
         {
@@ -330,6 +330,7 @@ public class UnitPlaceIndicator : MonoBehaviour
     }
 
     //다시 로딩하지 않는 한 켜지지 않도록 꺼버리기(혹시나 몰라서, 나중에 필요하면 수정할꺼)
+    //켜는건 UI_BattlefieldScreen에서 켜지게 만들어놨음
     void DisableIndicator()
     {
         gameObject.SetActive(false);

@@ -36,7 +36,7 @@ public class TeamLine : MonoBehaviour
         float requiredDistance = lineHalfWidth + footPrintRadius;
 
         bool wantsNegativeSide = team == TeamID.TeamA ? teamAOnNegativeSide : !teamAOnNegativeSide;
-        return wantsNegativeSide ? distance <= -requiredDistance : distance <= requiredDistance;
+        return wantsNegativeSide ? distance <= -requiredDistance : distance >= requiredDistance;
     }
 
     public TeamID GetTeamAt(Vector3 worldPosition)

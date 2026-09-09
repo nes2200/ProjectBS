@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+
+public enum SelectAreaType { Unit, Enemy }
 
 public class UI_UnitSelectArea : MonoBehaviour
 {
@@ -7,33 +10,39 @@ public class UI_UnitSelectArea : MonoBehaviour
     [SerializeField] UI_Button_UnitSelect buttonPrefab;
     [SerializeField] Transform buttonParent;
 
+    [Header("Area Type")]
+    [SerializeField] SelectAreaType areaType;
+
     readonly List<UI_Button_UnitSelect> createdButtons = new();
 
     private void OnEnable()
     {
         if (GameManager.StageLoad == null) return;
-        GameManager.StageLoad.OnSelectableUnitsLoaded -= RebuildButtons;
-        GameManager.StageLoad.OnSelectableUnitsLoaded += RebuildButtons;
-        RebuildButtons(GameManager.StageLoad.SelectableUnits);
+        GameManager.StageLoad.OnSelectableCharactersLoaded -= RebuildButtons;
+        GameManager.StageLoad.OnSelectableCharactersLoaded += RebuildButtons;
+        RebuildButtons();
     }
 
     private void OnDisable()
     {
-        GameManager.StageLoad.OnSelectableUnitsLoaded -= RebuildButtons;
+        if (GameManager.StageLoad == null) return;
+        GameManager.StageLoad.OnSelectableCharactersLoaded -= RebuildButtons;
     }
 
-    public void RebuildButtons(IReadOnlyList<GameObject> unitPrefabs)
+    public void RebuildButtons()
     {
         ClearButtons();
 
-        if (unitPrefabs == null) return;
+        IReadOnlyList<GameObject> prefabs = areaType == SelectAreaType.Unit ?
+            GameManager.StageLoad.SelectableUnits : GameManager.StageLoad.SelectableEnemies;
+        TeamID team = areaType == SelectAreaType.Unit ? TeamID.TeamA : TeamID.TeamB;
 
-        foreach(GameObject unitPrefab in unitPrefabs)
+        foreach(GameObject prefab in prefabs)
         {
-            if (!unitPrefab) continue;
+            if (!prefab) continue;
 
             UI_Button_UnitSelect button = Instantiate(buttonPrefab, buttonParent);
-            button.Initialize(unitPrefab);
+            button.Initialize(prefab, team);
             createdButtons.Add(button);
         }
     }
@@ -48,5 +57,15 @@ public class UI_UnitSelectArea : MonoBehaviour
             }
         }
         createdButtons.Clear();
+    }
+
+    IReadOnlyList<GameObject> GetCurrentPrefabs()
+    {
+        return areaType switch
+        {
+            SelectAreaType.Unit => GameManager.StageLoad.SelectableUnits,
+            SelectAreaType.Enemy => GameManager.StageLoad.SelectableEnemies,
+            _ => null
+        };
     }
 }

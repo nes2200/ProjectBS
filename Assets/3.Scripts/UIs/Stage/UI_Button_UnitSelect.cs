@@ -12,13 +12,14 @@ public class UI_Button_UnitSelect : UIBase
     [SerializeField] GameObject unitPrefab;
     
     UnitStatus status;
+    TeamID placementTeam;
 
     [Header("오브젝트 구성 요소")]
     [SerializeField] TextMeshProUGUI unitNameText;
     [SerializeField] TextMeshProUGUI unitCostText;
     [SerializeField] Image unitImage;
 
-    public void Initialize(GameObject newUnitPrefab)
+    public void Initialize(GameObject newUnitPrefab, TeamID newTeam)
     {
         if(!newUnitPrefab)
         {
@@ -39,6 +40,7 @@ public class UI_Button_UnitSelect : UIBase
             Debug.LogError("[UI_Button_UnitSelect] 선택된 프리팹에 정보가 없습니다.");
             return;
         }
+        placementTeam = newTeam;
 
         unitNameText.text = status.unitName;
         unitCostText.text = status.cost.ToString();
@@ -48,7 +50,7 @@ public class UI_Button_UnitSelect : UIBase
     {
         if(unitPrefab && status)
         {
-            InputManager.InvokeUnitSelect(unitPrefab);
+            InputManager.InvokeUnitSelect(unitPrefab, placementTeam);
         }
     }
 }

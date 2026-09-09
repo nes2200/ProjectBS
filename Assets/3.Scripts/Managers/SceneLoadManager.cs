@@ -38,22 +38,22 @@ public class SceneLoadManager : ManagerBase
         StartCoroutine(CoReloadSceneAndSetup(sceneName, stageData, UIType.Stage));
     }
 
-    public void LoadSandbox(string sceneName)
+    public void LoadSandbox(string sceneName, TextAsset sandboxData)
     {
         if (isLoading) return;
 
-        if(string.IsNullOrEmpty(sceneName))
+        if(string.IsNullOrEmpty(sceneName) || sandboxData is null)
         {
             Debug.LogError("[SceneLoadManager] 샌드박스 씬 이름이 비어 있습니다.");
             return;
         }
 
         currentStageSceneName = sceneName;
-        currentStageData = null;
+        currentStageData = sandboxData;
         currentScreen = UIType.Sandbox;
 
         isLoading = true;
-        StartCoroutine(CoReloadSceneAndSetup(sceneName, null, UIType.Sandbox));
+        StartCoroutine(CoReloadSceneAndSetup(sceneName, sandboxData, UIType.Sandbox));
     }
 
     public void RestartCurrentStage()
@@ -102,17 +102,10 @@ public class SceneLoadManager : ManagerBase
         SceneManager.SetActiveScene(newScene);
 
         //로드한 씬에서 스테이지 업데이트하기
-        if (stageData)
-        {
-            GameManager.StageLoad.LoadStage(stageData, newScene);
-        }
-        else
-        {
-            GameManager.Camera.SetCameraDefaultPosition();
-            GameManager.Camera.AddCameraController();
-        }
+        BattleFieldMode mode = targetScreen == UIType.Sandbox ? BattleFieldMode.Sandbox : BattleFieldMode.Stage;
+        GameManager.StageLoad.LoadStage(stageData, newScene, mode);
 
-            isLoading = false;
+        isLoading = false;
         yield return null;
     }
 }

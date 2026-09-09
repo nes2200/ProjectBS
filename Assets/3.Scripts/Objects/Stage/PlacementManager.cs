@@ -8,6 +8,7 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] StageManager stageManager;
 
     GameObject selectedUnit;
+    TeamID selectedTeam;
 
     [Header("Each Team Parent")]
     [SerializeField] Transform teamA_Parent;
@@ -44,6 +45,20 @@ public class PlacementManager : MonoBehaviour
     public bool IsInsideTeamArea(TeamID team, Vector3 worldPosition, float footprintRadius = 0f)
     {
         return teamLine != null && teamLine.Contains(team, worldPosition, footprintRadius);
+    }
+
+    public bool CanRemove(CharacterBase target)
+    {
+        if (!target) return false;
+        if (!GameManager.Instance.IsPlaying) return false;
+        if (stageManager.CurrentState != StageState.Ready) return false;
+
+        if (stageManager.IsSandbox)
+        {
+            return target.Team == TeamID.TeamA || target.Team == TeamID.TeamB;
+        }
+
+        return target.Team == TeamID.TeamA && IsInsideTeamArea(TeamID.TeamA, target.transform.position);
     }
 
     private void HandlePlacementClick(bool value, Vector2 screenPosition, Vector3 worldPosition)
@@ -94,7 +109,7 @@ public class PlacementManager : MonoBehaviour
                 return;
             }
 
-            Transform unitParent = teamA_Parent;
+            Transform unitParent = selectedTeam == TeamID.TeamB ? teamB_Parent : teamA_Parent;
             //유닛의 부모 설정으로 팀 배정
             newUnit.transform.SetParent(unitParent, false);
             newUnit.transform.position = indicator.GetCurrentIndicatorLoaction();
@@ -112,10 +127,10 @@ public class PlacementManager : MonoBehaviour
             //배치한 만큼 코스트 증가시키기
             if (targetCharacter)
             {
-                stageManager.CharacterRegistry.Register(targetCharacter, TeamID.TeamA);
+                stageManager.CharacterRegistry.Register(targetCharacter, selectedTeam);
 
                 int unitCost = targetCharacter.Status.cost;
-                stageManager.CostIncreasByUnitSpawn(unitCost);
+                if(!stageManager.IsSandbox) stageManager.CostIncreasByUnitSpawn(unitCost);
             }
             OnUnitSpawn?.Invoke(targetCharacter);
         }
@@ -126,20 +141,21 @@ public class PlacementManager : MonoBehaviour
         if (!GameManager.Instance.IsPlaying) return;
         if (value) return;
         if (!indicator.TryGetLockedRemoveTarget(out CharacterBase targetCharacter)) return;
-        if (!teamLine.Contains(TeamID.TeamA, targetCharacter.transform.position)) return;
+        if (!CanRemove(targetCharacter)) return;
       
         int unitCost = targetCharacter.Status.cost;
 
-        stageManager.CostDecreaseByUnitDespawn(unitCost);
+        if (!stageManager.IsSandbox) stageManager.CostDecreaseByUnitDespawn(unitCost);
         OnUnitDespawn?.Invoke(targetCharacter);
         stageManager.CharacterRegistry.Unregister(targetCharacter);
         ObjectManager.DestroyObject(targetCharacter.gameObject); 
     }
 
     //유닛 선택 버튼 클릭시 해당 유닛 정보를 받아오는 기능
-    public void ChangeCurrentSelectedUnit(GameObject newSelectedUnit)
+    public void ChangeCurrentSelectedUnit(GameObject newSelectedUnit, TeamID newTeam)
     {
         selectedUnit = newSelectedUnit;
+        selectedTeam = newTeam;
     }
 
     bool TryConfigureUnit(GameObject unit, out CharacterBase character)
@@ -168,7 +184,7 @@ public class PlacementManager : MonoBehaviour
 
     public bool IsCostEnoughToSpawn(int unitCost)
     {
-        return stageManager.IsCostEnoughToSpawn(unitCost);
+        return stageManager.IsSandbox || stageManager.IsCostEnoughToSpawn(unitCost);
     }
     
 }
