@@ -95,6 +95,11 @@ public class StageManager : MonoBehaviour
         costTracker.DecreaseCost(unitCost);
     }
 
+    public void InitializeCostLimits(int[] limits)
+    {
+        costTracker.Initialize(limits);
+    }
+
     //텍스트 세팅시, UI가 각 코스트 한계 비용을 얻어오기 위한 함수
     public int[] GetCostLimits()
     {

@@ -104,6 +104,7 @@ public class StageLoadManager : ManagerBase
             return;
         }
         stageManager.SetFieldMode(mode);
+        stageManager.InitializeCostLimits(loadData.costLimits);
         if (!stageManager.Floor || !stageManager.Probs || !stageManager.TeamA || !stageManager.TeamB)
         {
             Debug.LogError("[StageLoadManager] StageManager의 컨테이너 참조가 설정되지 않았습니다.");

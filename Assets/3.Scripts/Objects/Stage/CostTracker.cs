@@ -11,24 +11,22 @@ public class CostTracker : MonoBehaviour
     [Header("Stage Manager")]
     [SerializeField] StageManager stageManager;
 
-    [Header("Cost Limits")]
-    [SerializeField] int[] costLimits;
+    int[] costLimits;
 
     private FillValue costValue;
 
-    private void OnEnable()
-    {
-        SetFillValue();
-    }
     private void OnDisable()
     {
         costValue.OnChanged -= InvokeCostChange;
     }
 
-    public void SetFillValue()
+    public void Initialize(int[] limits)
     {
-        costValue = new FillValue(0, costLimits[costLimits.Length - 1]);
+        if (limits is null || limits.Length == 0) return;
         costValue.OnChanged -= InvokeCostChange;
+
+        costLimits = (int[])limits.Clone();
+        costValue = new FillValue(0, costLimits[costLimits.Length - 1]);
         costValue.OnChanged += InvokeCostChange;
     }
     private void InvokeCostChange()
@@ -39,12 +37,10 @@ public class CostTracker : MonoBehaviour
     public void IncreaseCost(int amount)
     {
         costValue.IncreaseCurrent(amount);
-        OnCostChange?.Invoke(costValue.Current);
     }
     public void DecreaseCost(int amount)
     {
         costValue.DecreaseCurrent(amount);
-        OnCostChange?.Invoke(costValue.Current);
     }
     
     public int[] GetCostLimits()

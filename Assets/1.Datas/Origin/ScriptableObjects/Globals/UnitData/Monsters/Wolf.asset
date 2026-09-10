@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wolf
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
   unitName: "\uB291\uB300"
-  cost: 10
+  cost: 20
   maxHP: 80
   damage: 13
   attackSpeed: 2

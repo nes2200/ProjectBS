@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.AI.Navigation;
 using UnityEditor;
+using UnityEditor.Overlays;
+using UnityEditor.PackageManager;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 public class SceneScannerWindow : EditorWindow
@@ -160,7 +162,7 @@ public class SceneScannerWindow : EditorWindow
             if (obj.scene != activeScene) continue;
 
             //예외 처리
-            if (obj.name == "Terrain" || obj.name == "CrossLine")
+            if (obj.name == "Terrain" || obj.name == "TeamLine")
             {
                 targetObjects.Add(obj);
                 continue;
@@ -206,34 +208,10 @@ public class SceneScannerWindow : EditorWindow
             EditorUtility.DisplayDialog("저장 실패", "StageDataAuthoring을 찾지 못했습니다.", "확인");
             return;
         }
-        HashSet<string> savedUnitNames = new();
 
-        foreach (GameObject unitPrefab in authoring.SelectableUnitsEntry)
-        {
-            if (!unitPrefab)
-            {
-                Debug.LogWarning("[SceneScanner] Selectable Units Entry에 비어 있는 항목이 있습니다.");
-                continue;
-            }
-            if (!PrefabUtility.IsPartOfPrefabAsset(unitPrefab))
-            {
-                Debug.LogWarning($"[SceneScanner] '{unitPrefab.name}'은 프리팹 에셋이 아니므로 저장하지 않습니다.");
-                continue;
-            }
-
-            string prefabName = unitPrefab.name;
-
-            if (!savedUnitNames.Add(prefabName))
-            {
-                Debug.LogWarning($"[SceneScanner] 중복 유닛 '{prefabName}'은 한 번만 저장합니다.");
-                continue;
-            }
-
-            saveData.selectableUnits.Add(new StageUnitEntry
-            {
-                unitPrefabName = prefabName
-            });
-        }
+        SaveUnits(saveData, authoring.SelectableUnitsEntry, TeamID.TeamA);
+        SaveUnits(saveData, authoring.SelectableEnemiesEntry, TeamID.TeamB);
+        saveData.costLimits = authoring.GetCostLimits();
 
         string jsonResult = JsonConvert.SerializeObject(saveData, Formatting.Indented);
         string directoryPath = Path.Combine(Application.dataPath, subPath);
@@ -292,35 +270,10 @@ public class SceneScannerWindow : EditorWindow
         }
 
         List<GameObject> selectableUnitPrefabs = new();
-
-        if (loadData.selectableUnits != null)
-        {
-            HashSet<string> loadedUnitNames = new();
-            foreach (StageUnitEntry entry in loadData.selectableUnits)
-            {
-                if (entry == null || string.IsNullOrWhiteSpace(entry.unitPrefabName))
-                {
-                    Debug.LogWarning("[SceneScanner] selectableUnits에 잘못된 항목이 있습니다.");
-                    continue;
-                }
-
-                if (!loadedUnitNames.Add(entry.unitPrefabName))
-                {
-                    Debug.LogWarning($"중복 유닛 '{entry.unitPrefabName}'은 제외합니다.");
-                    continue;
-                }
-
-                GameObject unitPrefab = FindPrefabAsset(entry.unitPrefabName);
-
-                if (!unitPrefab)
-                {
-                    Debug.LogWarning($"[SceneScanner] 선택 가능 유닛 프리팹 '{entry.unitPrefabName}'을 찾지 못했습니다.");
-                    continue;
-                }
-               
-                selectableUnitPrefabs.Add(unitPrefab);
-            }
-        }
+        List<GameObject> selectableEnemyPrefabs = new();
+        LoadUnits(loadData.selectableUnits, selectableUnitPrefabs);
+        LoadUnits(loadData.selectableEnemies, selectableEnemyPrefabs);
+        
 
         //씬에 있는 주요 부모/관리자를 미리 검색하여 등록   
         string[] requiredNames ={ "Probs", "TeamA", "TeamB", "Terrain", "Floor"};
@@ -355,11 +308,11 @@ public class SceneScannerWindow : EditorWindow
         //Terrain이나 Floor를 지우면 안되니까 자식만 특정하기
         if (parentContainer.TryGetValue("Terrain", out GameObject terrain))
         {
-            Transform crossLine = terrain.transform.Find("CrossLine");
+            Transform teamLine = terrain.transform.Find("TeamLine");
 
-            if (crossLine)
+            if (teamLine)
             {
-                Undo.DestroyObjectImmediate(crossLine.gameObject);
+                Undo.DestroyObjectImmediate(teamLine.gameObject);
             }
         }
         
@@ -459,7 +412,6 @@ public class SceneScannerWindow : EditorWindow
             }
         }
 
-
         //유닛들의 내부 참조 해주기
         Transform teamA = parentContainer["TeamA"].transform;
         Transform teamB = parentContainer["TeamB"].transform;
@@ -471,8 +423,16 @@ public class SceneScannerWindow : EditorWindow
                 targetModule.SetHostileGroupParents(teamA);
             }
         }
+        Undo.RecordObject(authoring, "Load Stage Data");
 
-        ApplySelectableUnits(authoring, selectableUnitPrefabs, "Load Selectable Units");
+        authoring.SetCostLimits(loadData.costLimits);
+        authoring.SetSelectableUnits(selectableUnitPrefabs);
+        authoring.SetSelectableEnemies(selectableEnemyPrefabs);
+        EditorUtility.SetDirty(authoring);
+        if (PrefabUtility.IsPartOfPrefabInstance(authoring))
+        {
+            PrefabUtility.RecordPrefabInstancePropertyModifications(authoring);
+        }
 
         // 실행 기록을 하나의 Undo 그룹으로 병합
         Undo.CollapseUndoOperations(undoGroup);
@@ -490,11 +450,21 @@ public class SceneScannerWindow : EditorWindow
         //Probs와 TeamB 비워주기
         removedCount += ClearContainerChildren(GameObject.Find("Probs"));
         removedCount += ClearContainerChildren(GameObject.Find("TeamB"));
+        removedCount += ClearContainerChildren(GameObject.Find("Terrain"));
 
         //사용할 유닛 데이터 비워주기
         StageDataAuthoring authoring = FindStageDataAuthoring();
-        bool unitsCleared = ApplySelectableUnits(authoring, null, "Clear Selectable Units");
-
+        bool unitsCleared = authoring != null;
+        if(authoring)
+        {
+            Undo.RecordObject(authoring, "Clear Selectable Entries");
+            authoring.ClearData();
+            EditorUtility.SetDirty(authoring);
+            if (PrefabUtility.IsPartOfPrefabInstance(authoring))
+            {
+                PrefabUtility.RecordPrefabInstancePropertyModifications(authoring);
+            }
+        }
 
         Undo.CollapseUndoOperations(undoGroup);
         SceneView.RepaintAll();
@@ -521,18 +491,91 @@ public class SceneScannerWindow : EditorWindow
 
         string[] guids = AssetDatabase.FindAssets($"{prefabName} t:Prefab");
 
-        foreach(string guid in guids)
+        foreach (string guid in guids)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(guid);
             GameObject prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
 
-            if(prefabAsset && prefabAsset.name == prefabName)
+            if (prefabAsset && prefabAsset.name == prefabName)
             {
                 return prefabAsset;
             }
         }
         return null;
     }
+
+    private void SaveUnits(SceneSaveData saveData, IReadOnlyList<GameObject> entry, TeamID team)
+    {
+        HashSet<string> savedNames = new();
+        foreach (GameObject unitPrefab in entry)
+        {
+            if (!unitPrefab)
+            {
+                Debug.LogWarning("[SceneScanner] Selectable Units Entry에 비어 있는 항목이 있습니다.");
+                continue;
+            }
+            if (!PrefabUtility.IsPartOfPrefabAsset(unitPrefab))
+            {
+                Debug.LogWarning($"[SceneScanner] '{unitPrefab.name}'은 프리팹 에셋이 아니므로 저장하지 않습니다.");
+                continue;
+            }
+
+            string prefabName = unitPrefab.name;
+
+            if (!savedNames.Add(prefabName))
+            {
+                Debug.LogWarning($"[SceneScanner] 중복 유닛 '{prefabName}'은 한 번만 저장합니다.");
+                continue;
+            }
+
+            if(team == TeamID.TeamA)
+            {
+                saveData.selectableUnits.Add(new StageUnitEntry
+                {
+                    unitPrefabName = prefabName
+                });
+            }
+            else if(team == TeamID.TeamB)
+            {
+                saveData.selectableEnemies.Add(new StageUnitEntry
+                {
+                    unitPrefabName = prefabName
+                });
+            }
+            
+        }
+    }
+    private void LoadUnits(IEnumerable<StageUnitEntry> entries, List<GameObject> selectablePrefabs)
+    {
+        if (entries is null) return;
+
+        HashSet<string> loadedUnitNames = new();
+        foreach (StageUnitEntry entry in entries)
+        {
+            if (entry == null || string.IsNullOrWhiteSpace(entry.unitPrefabName))
+            {
+                Debug.LogWarning("[SceneScanner] selectableUnits에 잘못된 항목이 있습니다.");
+                continue;
+            }
+
+            if (!loadedUnitNames.Add(entry.unitPrefabName))
+            {
+                Debug.LogWarning($"중복 유닛 '{entry.unitPrefabName}'은 제외합니다.");
+                continue;
+            }
+
+            GameObject unitPrefab = FindPrefabAsset(entry.unitPrefabName);
+
+            if (!unitPrefab)
+            {
+                Debug.LogWarning($"[SceneScanner] 선택 가능 유닛 프리팹 '{entry.unitPrefabName}'을 찾지 못했습니다.");
+                continue;
+            }
+
+            selectablePrefabs.Add(unitPrefab);
+        }
+    }
+
 
     private bool ApplySelectableUnits(StageDataAuthoring authoring, IEnumerable<GameObject> unitPrefabs, string undoName)
     {

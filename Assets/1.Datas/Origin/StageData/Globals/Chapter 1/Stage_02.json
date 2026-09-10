@@ -1,6 +1,90 @@
 {
   "objects": [
     {
+      "name": "Monster_WolfPup (1)",
+      "prefabName": "Monster_WolfPup",
+      "parentName": "TeamB",
+      "position": {
+        "x": 3.42,
+        "y": 0.028,
+        "z": -0.14
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_WolfPup (4)",
+      "prefabName": "Monster_WolfPup",
+      "parentName": "TeamB",
+      "position": {
+        "x": 7.89,
+        "y": 0.028,
+        "z": -3.68
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Acacia_Tree_l_03_LOD (2)",
+      "prefabName": "Acacia_Tree_l_03_LOD",
+      "parentName": "Probs",
+      "position": {
+        "x": 11.997,
+        "y": 0.028,
+        "z": -13.353
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.983,
+        "z": 0.0,
+        "w": -0.184
+      }
+    },
+    {
+      "name": "Monster_WolfPup (3)",
+      "prefabName": "Monster_WolfPup",
+      "parentName": "TeamB",
+      "position": {
+        "x": 9.23,
+        "y": 0.028,
+        "z": 1.95
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
       "name": "Terrain",
       "prefabName": "Terrain",
       "parentName": "Floor",
@@ -43,150 +127,24 @@
       }
     },
     {
-      "name": "Acacia_Tree_l_03_LOD (1)",
-      "prefabName": "Acacia_Tree_l_03_LOD",
-      "parentName": "Probs",
-      "position": {
-        "x": 17.02,
-        "y": 0.028,
-        "z": 3.3
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 0.735,
-        "z": 0.0,
-        "w": 0.678
-      }
-    },
-    {
-      "name": "Monster_WolfPup (3)",
-      "prefabName": "Monster_WolfPup",
-      "parentName": "TeamB",
-      "position": {
-        "x": 9.23,
-        "y": 0.028,
-        "z": 1.95
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 0.707,
-        "z": 0.0,
-        "w": -0.707
-      }
-    },
-    {
-      "name": "Acacia_Tree_l_03_LOD (2)",
-      "prefabName": "Acacia_Tree_l_03_LOD",
-      "parentName": "Probs",
-      "position": {
-        "x": 11.997,
-        "y": 0.028,
-        "z": -13.353
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 0.983,
-        "z": 0.0,
-        "w": -0.184
-      }
-    },
-    {
       "name": "TeamLine",
       "prefabName": "TeamLine",
       "parentName": "Terrain",
       "position": {
         "x": 0.0,
-        "y": 90.488,
+        "y": 90.0,
         "z": 0.0
       },
       "scale": {
-        "x": 0.021,
-        "y": 0.029,
-        "z": 18.098
-      },
-      "rotation": {
-        "x": 0.707,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.707
-      }
-    },
-    {
-      "name": "Monster_WolfPup (4)",
-      "prefabName": "Monster_WolfPup",
-      "parentName": "TeamB",
-      "position": {
-        "x": 7.89,
-        "y": 0.028,
-        "z": -3.68
-      },
-      "scale": {
         "x": 1.0,
         "y": 1.0,
         "z": 1.0
       },
       "rotation": {
-        "x": 0.0,
-        "y": 0.707,
-        "z": 0.0,
-        "w": -0.707
-      }
-    },
-    {
-      "name": "Acacia_Tree_l_03_LOD",
-      "prefabName": "Acacia_Tree_l_03_LOD",
-      "parentName": "Probs",
-      "position": {
-        "x": -13.94,
-        "y": 0.028,
-        "z": 7.31
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 1.0
-      }
-    },
-    {
-      "name": "Monster_WolfPup (1)",
-      "prefabName": "Monster_WolfPup",
-      "parentName": "TeamB",
-      "position": {
-        "x": 3.42,
-        "y": 0.028,
-        "z": -0.14
-      },
-      "scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 0.707,
-        "z": 0.0,
-        "w": -0.707
+        "x": 0.695,
+        "y": 0.129,
+        "z": -0.129,
+        "w": 0.695
       }
     },
     {
@@ -209,11 +167,59 @@
         "z": 0.0,
         "w": -0.707
       }
+    },
+    {
+      "name": "Acacia_Tree_l_03_LOD (1)",
+      "prefabName": "Acacia_Tree_l_03_LOD",
+      "parentName": "Probs",
+      "position": {
+        "x": 17.02,
+        "y": 0.028,
+        "z": 3.3
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.735,
+        "z": 0.0,
+        "w": 0.678
+      }
+    },
+    {
+      "name": "Acacia_Tree_l_03_LOD",
+      "prefabName": "Acacia_Tree_l_03_LOD",
+      "parentName": "Probs",
+      "position": {
+        "x": -13.94,
+        "y": 0.028,
+        "z": 7.31
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      }
     }
   ],
   "selectableUnits": [
     {
       "unitPrefabName": "M_Swordsman"
     }
+  ],
+  "selectableEnemies": [],
+  "costLimits": [
+    50,
+    60,
+    70
   ]
 }

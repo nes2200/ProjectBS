@@ -1,6 +1,27 @@
 {
   "objects": [
     {
+      "name": "TeamLine",
+      "prefabName": "TeamLine",
+      "parentName": "Terrain",
+      "position": {
+        "x": 0,
+        "y": 78.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.707,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
       "name": "Terrain",
       "prefabName": "Terrain",
       "parentName": "Floor",
@@ -23,12 +44,22 @@
     }
   ],
   "selectableUnits": [
-    { "unitPrefabName": "M_Knight" },
-    { "unitPrefabName": "M_Swordsman" },
-    { "unitPrefabName": "M_Archer" }
+    {
+      "unitPrefabName": "M_Knight"
+    },
+    {
+      "unitPrefabName": "M_Swordsman"
+    },
+    {
+      "unitPrefabName": "M_Archer"
+    }
   ],
   "selectableEnemies": [
-    { "unitPrefabName": "Monster_Wolf" },
-    { "unitPrefabName": "Monster_WolfPup" }
+    {
+      "unitPrefabName": "Monster_Wolf"
+    },
+    {
+      "unitPrefabName": "Monster_WolfPup"
+    }
   ]
 }

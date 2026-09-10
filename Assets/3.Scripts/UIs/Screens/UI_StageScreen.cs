@@ -23,8 +23,6 @@ public class UI_StageScreen : UI_BattlefieldScreen
         StageManager.OnBattleEnd -= OpenBattleResult;
         StageManager.OnBattleEnd += OpenBattleResult;
 
-        SetCostLimitText(costLimits);
-
         if (stageManager) ConnectStage(stageManager);
 
     }
@@ -34,11 +32,6 @@ public class UI_StageScreen : UI_BattlefieldScreen
 
         StageManager.OnBattleStart -= HidePreparationUI;
         StageManager.OnBattleEnd -= OpenBattleResult;
-    }
-
-    private void SetCostLimitText(int[] costLimits)
-    {
-        starController.SetAllCostLimitText(costLimits);
     }
 
     private void OpenBattleResult(bool isPlayerLoose)

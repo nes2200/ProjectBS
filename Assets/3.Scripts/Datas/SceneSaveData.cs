@@ -7,4 +7,5 @@ public class SceneSaveData
     public List<StageObject> objects = new();
     public List<StageUnitEntry> selectableUnits = new();
     public List<StageUnitEntry> selectableEnemies = new();
+    public int[] costLimits;
 }

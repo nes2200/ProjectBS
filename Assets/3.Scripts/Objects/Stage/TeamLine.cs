@@ -6,6 +6,7 @@ public class TeamLine : MonoBehaviour
     [Header("Area")]
     [SerializeField] bool teamAOnNegativeSide = true;
     [SerializeField, Min(0f)] float lineHalfWidth = 0f;
+    [SerializeField] float lineLength = 120f;
 
     [Header("Visual")]
     [SerializeField] DecalProjector decal;
@@ -52,5 +53,12 @@ public class TeamLine : MonoBehaviour
     public void HideVisual()
     {
         if (decal) decal.enabled = false;
+    }
+
+    public void SetDecalLength()
+    {
+        Vector3 currentSize = decal.size;
+        currentSize.y = lineLength;
+        decal.size = currentSize;
     }
 }

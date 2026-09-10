@@ -22,24 +22,24 @@
       }
     },
     {
-      "name": "Monster_Wolf",
-      "prefabName": "Monster_Wolf",
-      "parentName": "TeamB",
+      "name": "Terrain",
+      "prefabName": "Terrain",
+      "parentName": "Floor",
       "position": {
-        "x": 8.61,
-        "y": 0.59,
-        "z": -1.87
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
       },
       "scale": {
-        "x": 1.2,
-        "y": 1.2,
-        "z": 1.2
+        "x": 48.037,
+        "y": 0.055,
+        "z": 34.167
       },
       "rotation": {
         "x": 0.0,
-        "y": -0.707,
+        "y": 0.0,
         "z": 0.0,
-        "w": 0.707
+        "w": 1.0
       }
     },
     {
@@ -64,27 +64,6 @@
       }
     },
     {
-      "name": "Terrain",
-      "prefabName": "Terrain",
-      "parentName": "Floor",
-      "position": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "scale": {
-        "x": 48.037,
-        "y": 0.055,
-        "z": 34.167
-      },
-      "rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 1.0
-      }
-    },
-    {
       "name": "Acacia_Tree_l_03_LOD",
       "prefabName": "Acacia_Tree_l_03_LOD",
       "parentName": "Probs",
@@ -104,11 +83,38 @@
         "z": 0.0,
         "w": 1.0
       }
+    },
+    {
+      "name": "Monster_Wolf",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 8.61,
+        "y": 0.59,
+        "z": -1.87
+      },
+      "scale": {
+        "x": 1.2,
+        "y": 1.2,
+        "z": 1.2
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.707,
+        "z": 0.0,
+        "w": 0.707
+      }
     }
   ],
   "selectableUnits": [
     {
       "unitPrefabName": "M_Knight"
     }
+  ],
+  "selectableEnemies": [],
+  "costLimits": [
+    40,
+    50,
+    60
   ]
 }

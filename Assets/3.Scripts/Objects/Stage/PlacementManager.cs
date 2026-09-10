@@ -113,7 +113,7 @@ public class PlacementManager : MonoBehaviour
             //유닛의 부모 설정으로 팀 배정
             newUnit.transform.SetParent(unitParent, false);
             newUnit.transform.position = indicator.GetCurrentIndicatorLoaction();
-            newUnit.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+            newUnit.transform.rotation = selectedTeam == TeamID.TeamA ? Quaternion.Euler(0f, 90f, 0f) : Quaternion.Euler(0f, 270f, 0f);
             ObjectManager.RegistrationObject(newUnit);
 
             //추적할 적 유닛 등록하기
@@ -175,8 +175,7 @@ public class PlacementManager : MonoBehaviour
         }
 
         MaleUnitAppearance appearance = unit.GetComponent<MaleUnitAppearance>();
-        if (!appearance) appearance = unit.AddComponent<MaleUnitAppearance>();
-        if (!appearance.ApplyAppearance()) return false;
+        if (appearance && !appearance.ApplyAppearance()) return false;
 
         character.SetStatus(character.Status);
         return true;

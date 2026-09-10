@@ -57,7 +57,7 @@ MonoBehaviour:
     m_Bits: 2
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 5}
-  m_Size: {x: 0.1, y: 34, z: 10}
+  m_Size: {x: 0.1, y: 120, z: 10}
   m_FadeFactor: 1
   version: 1
   m_DecalLayerMask: 1
@@ -74,5 +74,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeamLine
   teamAOnNegativeSide: 1
-  lineHalfWidth: 0
+  lineHalfWidth: 0.05
+  lineLength: 120
   decal: {fileID: 446677680873475217}

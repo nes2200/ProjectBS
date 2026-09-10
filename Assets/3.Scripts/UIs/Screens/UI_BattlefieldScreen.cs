@@ -10,7 +10,6 @@ public class UI_BattlefieldScreen : UI_ScreenBase
     [Header("Star")]
     [SerializeField] protected UI_CostStarController starController;
     [SerializeField] protected GameObject starPrefab;
-    [SerializeField] protected int[] costLimits;
 
     [Header("HPBar Group")]
     [SerializeField] protected UI_HPBarGroup hpBarGroup;
@@ -96,6 +95,7 @@ public class UI_BattlefieldScreen : UI_ScreenBase
         if (!isActiveAndEnabled) return;
 
         hpBarGroup.Connect(stageManager.CharacterRegistry);
+        starController.SetAllCostLimitText(stageManager.GetCostLimits());
         starController.RefreshState(stageManager.GetCurrentCost());
         unitRemoveButton.Connect(newStageManager.Indicator);
         stageManager.Indicator.gameObject.SetActive(true);
