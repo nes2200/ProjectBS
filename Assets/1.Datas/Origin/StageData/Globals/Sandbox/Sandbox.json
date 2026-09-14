@@ -61,5 +61,10 @@
     {
       "unitPrefabName": "Monster_WolfPup"
     }
+  ],
+  "costLimits": [
+    20,
+    30,
+    40  
   ]
 }

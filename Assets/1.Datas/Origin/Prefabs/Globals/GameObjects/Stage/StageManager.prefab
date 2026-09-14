@@ -96,8 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89892e7fc071e42408d2f19b72983cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
+  characterRegistry: {fileID: 0}
   placementManager: {fileID: 6300853097538958855}
   costTracker: {fileID: 1931213985482458964}
+  stageDataAuthoring: {fileID: 4976969630288757795}
   floor: {fileID: 0}
   probs: {fileID: 0}
   teamA: {fileID: 8654407847892812325}
@@ -131,7 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CostTracker
   stageManager: {fileID: 7563474414963169350}
-  costLimits: 320000003c00000046000000
 --- !u!114 &6047999173754186199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageDataAuthoring
   selectableUnitsEntry: []
+  selectableEnemiesEntry: []
+  costLimits: 
 --- !u!1 &8947404172712272602
 GameObject:
   m_ObjectHideFlags: 0

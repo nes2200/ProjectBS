@@ -48,9 +48,18 @@ public class UI_Button_UnitSelect : UIBase
 
     public void OnClickUnitSelect()
     {
-        if(unitPrefab && status)
+        if (!unitPrefab || !status) return;
+
+        //샌드박스는 등록
+        UI_SandboxScreen sandboxScreen = UIManager.ClaimGetUI(UIType.Sandbox) as UI_SandboxScreen;
+        if(placementTeam == TeamID.TeamA && sandboxScreen && sandboxScreen.isActiveAndEnabled)
         {
-            InputManager.InvokeUnitSelect(unitPrefab, placementTeam);
+            sandboxScreen.RegisterSelectableUnit(unitPrefab);
+            return;
         }
+
+        //일반은 유닛 선택
+        InputManager.InvokeUnitSelect(unitPrefab, placementTeam);
+
     }
 }

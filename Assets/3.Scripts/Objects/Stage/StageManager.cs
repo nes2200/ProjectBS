@@ -30,6 +30,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] StageCharacterRegistry characterRegistry;
     [SerializeField] PlacementManager placementManager;
     [SerializeField] CostTracker costTracker;
+    [SerializeField] StageDataAuthoring stageDataAuthoring;
     TeamLine teamLine;
 
     [Header("Initial Objects")]
@@ -95,15 +96,36 @@ public class StageManager : MonoBehaviour
         costTracker.DecreaseCost(unitCost);
     }
 
+    //샌드박스 모드에서 유닛 등록하는 용도
+    public void RegisterSelectableUnit(GameObject prefab)
+    {
+        if (!IsSandbox) return;
+
+        stageDataAuthoring.RegisterSelectableUnit(prefab);
+    }
+
     public void InitializeCostLimits(int[] limits)
     {
+        if (limits == null || limits.Length == 0) return;
+        
         costTracker.Initialize(limits);
+
+        if (IsSandbox) stageDataAuthoring.SetCostLimits(costTracker.GetCostLimits());
     }
 
     //텍스트 세팅시, UI가 각 코스트 한계 비용을 얻어오기 위한 함수
     public int[] GetCostLimits()
     {
         return costTracker.GetCostLimits();
+    }
+
+    public bool TrySetCostLimits(int[] limits)
+    {
+        if (!costTracker.TrySetCostLimits(limits)) return false;
+
+        if(IsSandbox) stageDataAuthoring.SetCostLimits(costTracker.GetCostLimits());
+
+        return true;
     }
 
     public int GetCurrentCost() => costTracker.GetCurrentCost();

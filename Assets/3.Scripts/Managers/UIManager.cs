@@ -9,7 +9,7 @@ public enum UIType
 {
     None, 
     Loading, Title, Sandbox, SaveSlot, Option, ChapterSelect, StageSelect, Stage,
-    GameQuit, BattleResult, TargetHoverInfo, Inventory,  Movable, Menu, Info, ItemCursorSlot, SandboxSelect,    
+    GameQuit, BattleResult, TargetHoverInfo, Inventory,  Movable, Menu, Info, ItemCursorSlot, SandboxSelect, CostChangeWindow, 
     _Length
 }
 

@@ -55,6 +55,25 @@ public class CostTracker : MonoBehaviour
         return result;
     }
 
+    public bool TrySetCostLimits(int[] limits)
+    {
+        if (limits == null || costLimits == null || limits.Length != costLimits.Length || limits.Length == 0) return false;
+
+        if (limits[0] < 0) return false;
+
+        for (int i = 1; i < limits.Length; i++)
+        {
+            if (limits[i - 1] >= limits[i]) return false;
+        }
+
+        int max = limits[limits.Length - 1];
+        if (max < costValue.Current) return false;
+
+        costLimits = (int[])limits.Clone();
+        costValue.SetMax(max);
+        return true;
+    }
+
     public int GetCurrentCost()
     {
         return costValue.Current;
