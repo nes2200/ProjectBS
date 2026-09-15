@@ -87,7 +87,7 @@ public class UI_BattlefieldScreen : UI_ScreenBase
         OnMenuClose?.Invoke();
     }
 
-    public void ConnectStage(StageManager newStageManager)
+    public virtual void ConnectStage(StageManager newStageManager)
     {
         stageManager = newStageManager;
 

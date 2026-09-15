@@ -3,6 +3,7 @@ using UnityEngine;
 public class UI_SandboxScreen : UI_BattlefieldScreen
 {
     UI_CostChangeWindow costChangeWindow;
+    [SerializeField] UI_UnitEntryArea unitEntryArea;
 
     public override void Registration(UIManager manager)
     {
@@ -19,18 +20,19 @@ public class UI_SandboxScreen : UI_BattlefieldScreen
         base.Open();
         SetCurrentCostTexts();
     }
+    public override void ConnectStage(StageManager newStageManager)
+    {
+        base.ConnectStage(newStageManager);
+        if (!isActiveAndEnabled || !stageManager) return;
+
+        unitEntryArea.Rebuild(stageManager);
+    }
 
     public void SetCurrentCostTexts()
     {
         if (costChangeWindow) costChangeWindow.SetCurrentCostTexts(stageManager.GetCostLimits());
     }
 
-    public void RegisterSelectableUnit(GameObject prefab)
-    {
-        if (!stageManager) return;
-
-        stageManager.RegisterSelectableUnit(prefab);
-    }
 
     public bool TrySaveCostLimits(int[] limits)
     {

@@ -150,68 +150,15 @@ public class SceneScannerWindow : EditorWindow
 
     private void ExecuteScan(string fileName, string subPath)
     {
-        GameObject[] allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
-        SceneSaveData saveData = new();
-
-        //필터링된 오브젝트만 담을 리스트
-        List<GameObject> targetObjects = new();
-
-        Scene activeScene = EditorSceneManager.GetActiveScene();
-        foreach (GameObject obj in allObjects)
-        {
-            if (obj.scene != activeScene) continue;
-
-            //예외 처리
-            if (obj.name == "Terrain" || obj.name == "TeamLine")
-            {
-                targetObjects.Add(obj);
-                continue;
-            }
-
-            //부모 오브젝트가 있는 경우에만 검사
-            if (obj.transform.parent != null)
-            {
-                string parentName = obj.transform.parent.name;
-
-                if (parentName == "Probs" || parentName == "TeamB")
-                {
-                    targetObjects.Add(obj);
-                    continue;
-                }
-            }
-        }
-
-        foreach(GameObject obj in targetObjects)
-        {
-            //부모가 있으면 부모 이름을, 없으면 none을
-            string registeredParent = obj.transform.parent != null ? obj.transform.parent.name : "None";
-
-            GameObject originalPrefab = PrefabUtility.GetCorrespondingObjectFromSource(obj);
-            string sourcePrefabName = originalPrefab ? originalPrefab.name : obj.name;
-
-            StageObject data = new StageObject
-            {
-                name = obj.name,
-                prefabName = sourcePrefabName,
-                parentName = registeredParent,
-                position = obj.transform.localPosition,
-                scale = obj.transform.localScale,
-                rotation = obj.transform.localRotation
-            };
-            saveData.objects.Add(data);
-        }
-
-        //내가 사용할 유닛 데이터 저장소
         StageDataAuthoring authoring = FindStageDataAuthoring();
+
         if (!authoring)
         {
-            EditorUtility.DisplayDialog("저장 실패", "StageDataAuthoring을 찾지 못했습니다.", "확인");
+            EditorUtility.DisplayDialog("저장 실패", "StageDataAuthoring을 찾을 수 없음.", "확인");
             return;
         }
 
-        SaveUnits(saveData, authoring.SelectableUnitsEntry, TeamID.TeamA);
-        SaveUnits(saveData, authoring.SelectableEnemiesEntry, TeamID.TeamB);
-        saveData.costLimits = authoring.GetCostLimits();
+        SceneSaveData saveData = SceneScanner.Capture(EditorSceneManager.GetActiveScene(), authoring, GetEditorPrefabName);
 
         string jsonResult = JsonConvert.SerializeObject(saveData, Formatting.Indented);
         string directoryPath = Path.Combine(Application.dataPath, subPath);
@@ -621,6 +568,13 @@ public class SceneScannerWindow : EditorWindow
             removedCount++;
         }
         return removedCount;
+    }
+
+    private static string GetEditorPrefabName(GameObject obj)
+    {
+        GameObject originalPrefab = PrefabUtility.GetCorrespondingObjectFromSource(obj);
+
+        return originalPrefab ? originalPrefab.name : obj.name;
     }
 }
 #endif

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 //스테이지의 현재 상태
 public enum StageState
@@ -97,11 +98,23 @@ public class StageManager : MonoBehaviour
     }
 
     //샌드박스 모드에서 유닛 등록하는 용도
-    public void RegisterSelectableUnit(GameObject prefab)
+    public void SetSelectableUnit(GameObject prefab, bool select)
     {
-        if (!IsSandbox) return;
+        if (!IsSandbox || !stageDataAuthoring) return;
 
-        stageDataAuthoring.RegisterSelectableUnit(prefab);
+        stageDataAuthoring.SetSelectableUnit(prefab, select);
+    }
+    public bool IsSelectableUnit(GameObject prefab)
+    {
+        return stageDataAuthoring && stageDataAuthoring.IsSelectableUnit(prefab);
+    }
+   
+    //저장된 스테이지를 열었을 때 등록 목록을 복구하는 기능
+    public void InitializeSelectableUnits(IEnumerable<GameObject> prefabs)
+    {
+        if (!IsSandbox || !stageDataAuthoring) return;
+
+        stageDataAuthoring.SetSelectableUnits(prefabs);
     }
 
     public void InitializeCostLimits(int[] limits)
@@ -112,6 +125,7 @@ public class StageManager : MonoBehaviour
 
         if (IsSandbox) stageDataAuthoring.SetCostLimits(costTracker.GetCostLimits());
     }
+
 
     //텍스트 세팅시, UI가 각 코스트 한계 비용을 얻어오기 위한 함수
     public int[] GetCostLimits()

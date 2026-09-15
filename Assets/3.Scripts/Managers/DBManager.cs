@@ -14,46 +14,6 @@ public class DBManager : ManagerBase
     private FirebaseUser user;
     private DatabaseReference rootDB;
 
-    Transform rock;
-
-    public void ChangeRockTransform()
-    {
-        ProbData currentStatus = new ProbData()
-        {
-            name = rock.name,
-            position = rock.position,
-            rotation = rock.eulerAngles,
-            scale = rock.localScale
-        };
-
-        WriteData(currentStatus, "Custom_Uploaded_Maps", "1231585", "Map_Data", "Probs", "Probs_001");
-    }
-
-    public void CreateRock()
-    {
-        ReadDataAsync<ProbData>("Custom_Uploaded_Maps", "1231585", "Map_Data", "Probs", "Probs_001").ContinueWithOnMainThread( task => 
-        {
-            if(task is not null)
-            {
-                ProbData result = task.Result;
-                ObjectManager.CreateObject(result.name, result.position, Quaternion.Euler(result.rotation), result.scale);
-            }
-            else
-            {
-                Debug.Log("맵 데이터를 불러오지 못했습니다. 다시 확인해 주세요");
-            }
-        });
-    }
-
-    [Serializable]
-    public class ProbData
-    {
-        public string name;
-        public Vector3 position;
-        public Vector3 rotation;
-        public Vector3 scale;
-    }
-
     protected override IEnumerator Onconnected(GameManager newManager)
     {
         //              의존성 검사         비동기 
@@ -68,6 +28,11 @@ public class DBManager : ManagerBase
 
     void InitializeFirebase(Task<DependencyStatus> task)
     {
+        if(task is null)
+        {
+            Debug.Log($"Firebase Initialize Failed. No {task}");
+        }
+
         if(task.Result == DependencyStatus.Available)
         {
             //인증용 인스턴스 가져오기
@@ -88,13 +53,6 @@ public class DBManager : ManagerBase
         }
     }
 
-    public TMPro.TMP_InputField nickNameInput;
-
-    public void MakeUserData()
-    {
-        WriteData(MakeNewUserData(nickNameInput.text), "users", "userData", user.UserId);
-    }
-
     public async void GuestLogin()
     {
         //인증기가 없다면?
@@ -102,17 +60,7 @@ public class DBManager : ManagerBase
         //이미 로그인 되어있는지 체크하기
         if(user is not null)
         {
-            Debug.LogError($"Login Failed : Already Has Login Data ({user.IsValid()}, {user.UserId})");
-            UserData resultData = await ReadDataAsync<UserData>("users", "userData", "500");
-            if(resultData is not null)
-            {
-                //Debug.Log(resultData.steamNickname);
-                //Debug.Log(resultData.downloadedMaps_uuid._2138564);
-            }
-            else
-            {
-                WriteData(MakeNewUserData("Test"), "users", "userData", "500");
-            }
+            Debug.Log($"Already signed in : {user.UserId}");
             return;
         }
         //익명으로 로그인하기
@@ -130,36 +78,6 @@ public class DBManager : ManagerBase
         user = task.Result.User;
         Debug.Log($"Sign in Succeed : {user.UserId}");
     }
-
-    [Serializable]
-    public class UserData
-    {
-        public string steamNickname;
-        public DownloadedMaps downloadedMaps_uuid;
-        public UploadedMaps uploadedMaps_uuid;
-    }
-    [Serializable]
-    public class DownloadedMaps
-    {
-        public long _2138564 = 202605231322;
-        public long _52689845 = 202605241423;
-        public long _689456456 = 202605251156;
-    }
-    [Serializable]
-    public class UploadedMaps
-    {
-        public bool _231231 = true;
-        public bool _8852486 = true;
-        public bool _23844213 = true;
-    }
-
-    public UserData MakeNewUserData(string wantNickname) => new()
-    {
-        steamNickname = wantNickname,
-        downloadedMaps_uuid = new DownloadedMaps(),
-        uploadedMaps_uuid = new UploadedMaps()
-        
-    };
 
     public DatabaseReference GetFinalDirectory(DatabaseReference root, params string[] directory)
     {

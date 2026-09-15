@@ -50,11 +50,21 @@ public class StageDataAuthoring : MonoBehaviour
         }
     }
 
-    public void RegisterSelectableUnit(GameObject prefab)
+    public void SetSelectableUnit(GameObject prefab, bool selected)
     {
-        if (!prefab || selectableUnitsEntry.Contains(prefab)) return;
-
-        selectableUnitsEntry.Add(prefab);
+        if (!prefab) return;
+        if (selected)
+        {
+            if (!selectableUnitsEntry.Contains(prefab)) selectableUnitsEntry.Add(prefab);
+        }
+        else
+        {
+            selectableUnitsEntry.Remove(prefab);
+        }
+    }
+    public bool IsSelectableUnit(GameObject prefab)
+    {
+        return selectableUnitsEntry.Contains(prefab);
     }
 
     public int[] GetCostLimits() => (int[])costLimits?.Clone();
