@@ -11,16 +11,4 @@ public class UI_PullUpWindow : MonoBehaviour, IPointerDownHandler
     {
         transform.SetAsLastSibling();
     }
-
-
-    public int solution(int[] ingredient)
-    {
-        List<int> stack = new();
-        for(int i = 0; i < ingredient.Length; i++)
-        {
-            stack.Add(ingredient[i]);
-            if (stack.Count < 4) continue;
-        }
-        return 0; 
-    }
 }

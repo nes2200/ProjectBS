@@ -18,18 +18,6 @@ public class UI_Button_OpenScreen : MonoBehaviour
             GameManager.UnPause();
         }
     }
-    public void OpenSaveScreen()
-    {
-        UI_SaveLoadScreen saveScreen = UIManager.ClaimGetUI(UIType.SaveSlot) as UI_SaveLoadScreen;
-        saveScreen.saveSlot.IsSave = true;
-        OpenScreen();
-    }
-    public void OpenLoadScreen()
-    {
-        UI_SaveLoadScreen saveScreen = UIManager.ClaimGetUI(UIType.SaveSlot) as UI_SaveLoadScreen;
-        saveScreen.saveSlot.IsSave = false;
-        OpenScreen();
-    }
     public void OpenSandbox()
     {
         GameManager.SceneLoad.LoadSandbox("StageScene", sandboxData);

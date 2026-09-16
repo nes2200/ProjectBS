@@ -91,6 +91,27 @@ public class DBManager : ManagerBase
         return currentReference;
     }
 
+    public async Task<string> SaveCustomMapAsync(CustomMapData customMap)
+    {
+        if (rootDB is null || authentication is null)
+            throw new InvalidOperationException("Firebase 초기화가 완료되지 않음");
+
+        FirebaseUser creator = authentication.CurrentUser;
+        if (creator is null)
+            throw new InvalidOperationException("Firebase 로그인이 완료되지 않음");
+        if (customMap is null || customMap.data is null)
+            throw new ArgumentException("저장할 맵 데이터 없음", nameof(customMap));
+        if (string.IsNullOrWhiteSpace(customMap.mapName))
+            throw new ArgumentException("맵 이름 없음", nameof(customMap));
+
+        customMap.creatorUID = creator.UserId;
+        string json = JsonUtility.ToJson(customMap);
+        DatabaseReference mapReference = GetFinalDirectory(rootDB, "customMaps").Push();
+
+        // 서버 쓰기가 완료되어야 호출한 UI에 성공을 알린다.
+        await mapReference.SetRawJsonValueAsync(json);
+        return mapReference.Key;
+    }
     public void WriteData(object wantData, params string[] directory)
     {
         if (rootDB is null || wantData is null) return;

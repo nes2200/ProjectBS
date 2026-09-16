@@ -112,6 +112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster_Wolf
       objectReference: {fileID: 0}
+    - target: {fileID: 3599557065128697381, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: prefabKey
+      value: Monster_Wolf
+      objectReference: {fileID: 0}
     - target: {fileID: 6738698059090476509, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: m_Height
       value: 3.2

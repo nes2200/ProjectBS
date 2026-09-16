@@ -104,7 +104,7 @@ public class StageLoadManager : ManagerBase
             return;
         }
         stageManager.SetFieldMode(mode);
-        stageManager.InitializeSelectableUnits(selectableUnits);
+        stageManager.InitializeSelectableUnits(null);
         stageManager.InitializeCostLimits(loadData.costLimits);
         if (!stageManager.Floor || !stageManager.Probs || !stageManager.TeamA || !stageManager.TeamB)
         {

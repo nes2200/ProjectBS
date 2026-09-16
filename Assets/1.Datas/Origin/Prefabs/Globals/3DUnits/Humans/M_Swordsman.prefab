@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 911117880053030021, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: prefabKey
+      value: M_Swordsman
+      objectReference: {fileID: 0}
     - target: {fileID: 933777332956510732, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Layer
       value: 6

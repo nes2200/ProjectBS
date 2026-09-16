@@ -158,7 +158,7 @@ public class SceneScannerWindow : EditorWindow
             return;
         }
 
-        SceneSaveData saveData = SceneScanner.Capture(EditorSceneManager.GetActiveScene(), authoring, GetEditorPrefabName);
+        SceneSaveData saveData = SceneScanner.Capture(EditorSceneManager.GetActiveScene(), authoring, GetPrefabKey);
 
         string jsonResult = JsonConvert.SerializeObject(saveData, Formatting.Indented);
         string directoryPath = Path.Combine(Application.dataPath, subPath);
@@ -570,11 +570,9 @@ public class SceneScannerWindow : EditorWindow
         return removedCount;
     }
 
-    private static string GetEditorPrefabName(GameObject obj)
+    private static string GetPrefabKey(GameObject obj)
     {
-        GameObject originalPrefab = PrefabUtility.GetCorrespondingObjectFromSource(obj);
-
-        return originalPrefab ? originalPrefab.name : obj.name;
+        return obj.TryGetComponent<PrefabIdentity>(out var identity) ? identity.PrefabKey : null;
     }
 }
 #endif

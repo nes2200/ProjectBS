@@ -1460,7 +1460,6 @@ GameObject:
   - component: {fileID: 287018146016603148}
   - component: {fileID: 277027817782717270}
   - component: {fileID: 4753885576549399745}
-  - component: {fileID: 1803519047612908621}
   m_Layer: 5
   m_Name: SaveMapButton
   m_TagString: Untagged
@@ -1570,9 +1569,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1803519047612908621}
-        m_TargetAssemblyTypeName: UI_Button_OpenUI, Assembly-CSharp
-        m_MethodName: Open
+      - m_Target: {fileID: -4650499336144950661}
+        m_TargetAssemblyTypeName: UI_SandboxScreen, Assembly-CSharp
+        m_MethodName: OpenSaveMapWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1582,20 +1581,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1803519047612908621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8765202898032654649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f16dd8e0ff60347b2fe511dcda18d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenUI
-  wantType: 19
-  wantToggle: 0
 --- !u!1001 &901227427905140490
 PrefabInstance:
   m_ObjectHideFlags: 0

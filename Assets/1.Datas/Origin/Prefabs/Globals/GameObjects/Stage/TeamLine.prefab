@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 362189101307134743}
   - component: {fileID: 446677680873475217}
   - component: {fileID: 6970137811458292558}
+  - component: {fileID: 6416839687635089523}
   m_Layer: 0
   m_Name: TeamLine
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MonoBehaviour:
   lineHalfWidth: 0.05
   lineLength: 120
   decal: {fileID: 446677680873475217}
+--- !u!114 &6416839687635089523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3631050581406039184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8acf24546c0964184051ec8f96ef92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PrefabIdentity
+  prefabKey: TeamLine

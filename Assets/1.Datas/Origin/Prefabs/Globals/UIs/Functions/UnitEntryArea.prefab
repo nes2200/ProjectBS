@@ -182,6 +182,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31d1f9ce32ced54c85fe7770c0a0133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_UnitEntryArea
+  togglePrefab: {fileID: 5254257954885277324, guid: ebe1fccaaeeb82a4a90b0bece78a2f83, type: 3}
+  toggleParent: {fileID: 4567915189585673655}
+  allUnits:
+  - {fileID: 2919986945472780407, guid: fc7d641ceed13ca41b83634c39d5d77e, type: 3}
+  - {fileID: 201234668364554593, guid: 11a7924000240fd4cbcb1fb37955e63d, type: 3}
+  - {fileID: 3840824210367800436, guid: 30cf650d6d498c54498875a3390dcc36, type: 3}
 --- !u!1 &4697383583707732169
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,4 +42,10 @@ public class UI_SandboxScreen : UI_BattlefieldScreen
         starController.RefreshState(stageManager.GetCurrentCost());
         return true;
     }
+
+    public void OpenSaveMapWindow()
+    {
+        UI_SaveMapWindow window = UIManager.ClaimGetUI(UIType.SaveMapWindow) as UI_SaveMapWindow;
+        window.OpenForSave(stageManager.GetAuthoring());
+    }
 }

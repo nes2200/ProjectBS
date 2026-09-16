@@ -6,9 +6,6 @@ public class UI_UnitEntryArea : MonoBehaviour
     [SerializeField] UI_Toggle_UnitEntry togglePrefab;
     [SerializeField] Transform toggleParent;
 
-    //등록 여부와 관계없이 표시할 아군 전체 목록
-    [SerializeField] List<GameObject> allUnits = new();
-
     readonly List<UI_Toggle_UnitEntry> createdToggles = new();
 
     public void Rebuild(StageManager manager)
@@ -19,7 +16,7 @@ public class UI_UnitEntryArea : MonoBehaviour
 
         HashSet<GameObject> added = new();
 
-        foreach(GameObject prefab in allUnits)
+        foreach(GameObject prefab in GameManager.StageLoad.SelectableUnits)
         {
             if (!prefab || !added.Add(prefab)) continue;
 

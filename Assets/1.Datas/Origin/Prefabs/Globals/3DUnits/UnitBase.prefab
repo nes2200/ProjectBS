@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: -5608401926662398788}
   - component: {fileID: -8082197010707355841}
   - component: {fileID: 2997455962677522948}
+  - component: {fileID: 3599557065128697381}
   m_Layer: 7
   m_Name: UnitBase
   m_TagString: Untagged
@@ -308,6 +309,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87b210ba3818674681d9856fa241793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HostileAIController
+--- !u!114 &3599557065128697381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226144352791122500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8acf24546c0964184051ec8f96ef92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PrefabIdentity
+  prefabKey: 
 --- !u!1 &3035384091999026604
 GameObject:
   m_ObjectHideFlags: 0

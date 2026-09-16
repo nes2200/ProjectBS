@@ -8,6 +8,7 @@ public class UI_Toggle_UnitEntry : MonoBehaviour
     [SerializeField] Toggle toggle;
     [SerializeField] TextMeshProUGUI unitNameText;
     [SerializeField] TextMeshProUGUI unitCostText;
+    [SerializeField] Image checkImage;
 
     GameObject unitPrefab;
     StageManager stageManager;
@@ -27,6 +28,7 @@ public class UI_Toggle_UnitEntry : MonoBehaviour
 
         unitNameText.text = character.Status.unitName;
         unitCostText.text = character.Status.cost.ToString();
+        checkImage.enabled = false;
 
         toggle.interactable = true;
         toggle.SetIsOnWithoutNotify(stageManager.IsSelectableUnit(prefab));
@@ -38,6 +40,7 @@ public class UI_Toggle_UnitEntry : MonoBehaviour
         if (!stageManager || !unitPrefab) return;
 
         stageManager.SetSelectableUnit(unitPrefab, selected);
+        checkImage.enabled = selected;
     }
 
     private void OnDestroy()

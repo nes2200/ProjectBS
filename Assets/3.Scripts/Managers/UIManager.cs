@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public enum UIType
 {
     None, 
-    Loading, Title, Sandbox, SaveSlot, Option, ChapterSelect, StageSelect, Stage,
+    Loading, Title, Sandbox, Load, Option, ChapterSelect, StageSelect, Stage,
     GameQuit, BattleResult, TargetHoverInfo, Inventory,  Movable, Menu, Info, ItemCursorSlot, SandboxSelect, CostChangeWindow,
     SaveMapWindow,
     _Length
@@ -33,7 +33,7 @@ public class UIManager : ManagerBase
     {
         new(UIType.Title, "TitleScreen"),
         new(UIType.Option, "OptionScreen"),
-        new(UIType.SaveSlot, "SaveLoadScreen"),
+        new(UIType.Load, "LoadScreen"),
         new(UIType.Sandbox, "SandboxScreen"),
         new(UIType.Stage, "StageScreen"),
         new(UIType.ChapterSelect, "ChapterSelectScreen"),

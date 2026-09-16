@@ -36,6 +36,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 911117880053030021, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: prefabKey
+      value: M_Archer
+      objectReference: {fileID: 0}
     - target: {fileID: 1206879375121625644, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_IsActive
       value: 0

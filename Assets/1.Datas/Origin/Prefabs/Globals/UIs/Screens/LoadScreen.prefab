@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 2228340115896959566}
   - component: {fileID: -5625467597339720513}
   m_Layer: 5
-  m_Name: SaveLoadScreen
+  m_Name: LoadScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
   wantType: 2
   changeType: 1
+  sandboxData: {fileID: 0}
 --- !u!1 &7831725738831062924
 GameObject:
   m_ObjectHideFlags: 0

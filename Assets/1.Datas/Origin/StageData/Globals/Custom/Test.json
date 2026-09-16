@@ -1,0 +1,102 @@
+{
+  "objects": [
+    {
+      "name": "Terrain",
+      "prefabName": "Terrain",
+      "parentName": "Floor",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 48.037,
+        "y": 0.055,
+        "z": 34.167
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 1.232,
+        "y": 0.056,
+        "z": -9.25
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "TeamLine",
+      "prefabName": "TeamLine",
+      "parentName": "Terrain",
+      "position": {
+        "x": 0.0,
+        "y": 78.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.707,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 1.749,
+        "y": 0.056,
+        "z": -2.331
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    }
+  ],
+  "selectableUnits": [
+    {
+      "unitPrefabName": "M_Knight"
+    },
+    {
+      "unitPrefabName": "M_Swordsman"
+    }
+  ],
+  "selectableEnemies": [],
+  "costLimits": [
+    20,
+    30,
+    40
+  ]
+}

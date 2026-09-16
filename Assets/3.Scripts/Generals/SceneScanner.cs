@@ -26,7 +26,7 @@ public static class SceneScanner
 
             if (!isSpecialObject && !isContainerChild) continue;
 
-            string prefabName = getPrefabName(obj);
+            string prefabName = GetPrefabKey(obj);
 
             if(string.IsNullOrEmpty(prefabName)) throw new InvalidOperationException($"프리팹 이름을 찾을 수 없음: {obj.name}");
 
@@ -55,12 +55,18 @@ public static class SceneScanner
         foreach(GameObject prefab in prefabs)
         {
             if (!prefab) continue;
-            if (!savedNames.Add(prefab.name)) continue;
+            string prefabKey = GetPrefabKey(prefab);
+            if (!savedNames.Add(prefabKey)) continue;
 
             destination.Add(new StageUnitEntry
             {
-                unitPrefabName = prefab.name
+                unitPrefabName = prefabKey
             });
         }
+    }
+
+    private static string GetPrefabKey(GameObject obj)
+    {
+        return obj.TryGetComponent<PrefabIdentity>(out PrefabIdentity identity) ? identity.PrefabKey : null;
     }
 }

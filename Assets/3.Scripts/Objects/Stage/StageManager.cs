@@ -144,6 +144,8 @@ public class StageManager : MonoBehaviour
 
     public int GetCurrentCost() => costTracker.GetCurrentCost();
 
+    public StageDataAuthoring GetAuthoring() => stageDataAuthoring;
+
     public bool IsCostEnoughToSpawn(int unitCost)
     {
         return costTracker.IsCostEnoughToSpawn(unitCost);
