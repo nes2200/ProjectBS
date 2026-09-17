@@ -69,11 +69,28 @@ public class StageManager : MonoBehaviour
         fieldMode = newMode;
     }
 
-    public void StartBattle()
+    public bool StartBattle()
     {
+        bool hasPlayerUnit = false;
+
+        foreach(var unit in characterRegistry.Characters)
+        {
+            if(unit && unit.Team == TeamID.TeamA)
+            {
+                hasPlayerUnit = true;
+                break;
+            }
+        }
+        if (!hasPlayerUnit)
+        {
+            UIManager.ClaimPopUp("경고", "유닛을 최소 한마리 소환해 주세요", "확인");
+            return false;
+        }
+
         GameManager.StartBattle();
         OnBattleStart?.Invoke();
         ChangeState(StageState.Battle);
+        return true;
     }
     public void EndBattle(bool isPlayerLoose)
     {

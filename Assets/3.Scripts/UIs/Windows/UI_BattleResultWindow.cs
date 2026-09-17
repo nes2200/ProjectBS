@@ -41,4 +41,10 @@ public class UI_BattleResultWindow : OpenableUIBase
             stars[i].CostLimitOverCheck(costLimitOverResult[i]);
         }
     }
+
+    public void Confirm()
+    {
+        UIType target = GameManager.SceneLoad.IsCustomStage ? UIType.Load : UIType.StageSelect;
+        UIManager.ClaimOpenScreen(target, ScreenChangeType.SlideChanger);
+    }
 }

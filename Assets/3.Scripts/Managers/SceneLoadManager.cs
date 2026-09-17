@@ -9,6 +9,7 @@ public class SceneLoadManager : ManagerBase
     private TextAsset currentStageData;
     private UIType currentScreen;
     private bool isLoading;
+    public bool IsCustomStage { get; private set; }
 
     protected override IEnumerator Onconnected(GameManager newManager)
     {
@@ -20,7 +21,7 @@ public class SceneLoadManager : ManagerBase
 
     }
 
-    public void LoadSceneAndSetup(string sceneName, TextAsset stageData)
+    public void LoadSceneAndSetup(string sceneName, TextAsset stageData, bool isCustomStage = false)
     {
         if (isLoading) return;
 
@@ -33,7 +34,8 @@ public class SceneLoadManager : ManagerBase
         currentStageSceneName = sceneName;
         currentStageData = stageData;
         currentScreen = UIType.Stage;
-
+        
+        IsCustomStage = isCustomStage;
         isLoading = true;
         StartCoroutine(CoReloadSceneAndSetup(sceneName, stageData, UIType.Stage));
     }

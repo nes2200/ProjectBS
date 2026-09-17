@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UI_MovableScreen : UI_ScreenBase
@@ -113,6 +114,22 @@ public class UI_MovableScreen : UI_ScreenBase
             }
         }
     }
+
+    public bool TryClosePopup()
+    {
+        for(int i = popupList.Count - 1; i >= 0; i--)
+        {
+            UIBase popup = popupList[i];
+            if (!popup || !popup.gameObject.activeInHierarchy) continue;
+
+            popupList.RemoveAt(i);
+            UnsetChild(popup.gameObject);
+            ObjectManager.DestroyObject(popup.gameObject);
+            return true;
+        }
+        return false;
+    }
+
     public Vector3 GetNextPopupPosition()
     {
         //팝업 포지션 계산

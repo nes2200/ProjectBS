@@ -1026,10 +1026,9 @@ MonoBehaviour:
     uiType: 16
     isOpen: 0
     isOverlay: 1
-  closeWithScreen: 05000000
+  closeWithScreen: 050000000a000000
   starController: {fileID: 4095887824672729739}
   starPrefab: {fileID: 5357776831520545780, guid: c2ae4760d40ecc14a85d4df0fd4c6484, type: 3}
-  costLimits: 320000003c00000046000000
   hpBarGroup: {fileID: 784913772255004051}
   startButton: {fileID: 1284430096387589964}
   SelectArea: {fileID: 6336926461847107060}

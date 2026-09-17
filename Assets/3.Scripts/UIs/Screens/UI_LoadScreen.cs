@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-public class UI_SaveLoadScreen : UI_ScreenBase
+public class UI_LoadScreen : UI_ScreenBase
 {
-    public UI_SaveSlot saveSlot;
+    [SerializeField] UI_FileViewer fileViewer;
 
     void BackToTitle(bool value) 
     {
@@ -12,11 +12,13 @@ public class UI_SaveLoadScreen : UI_ScreenBase
 
     public override void Open()
     {
-        gameObject.SetActive(true);
-        saveSlot.ChangeText();
+        base.Open();
 
         InputManager.OnCancel -= BackToTitle;
         InputManager.OnCancel += BackToTitle;
+
+        fileViewer.Clear();
+        fileViewer.ReadLocalFiles();
     }
     public override void Close()
     {

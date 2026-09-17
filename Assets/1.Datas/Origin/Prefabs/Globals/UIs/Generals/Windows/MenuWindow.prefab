@@ -1108,6 +1108,7 @@ GameObject:
   - component: {fileID: 4574692044141781173}
   - component: {fileID: 3803797041327962943}
   - component: {fileID: -8411582557679578653}
+  - component: {fileID: -266542514013069787}
   m_Layer: 5
   m_Name: MenuWindow
   m_TagString: Untagged
@@ -1168,6 +1169,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b6faea6ffcb8f4ebdf387a6d3f786b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_MenuWindow
+--- !u!114 &-266542514013069787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4247759779004277987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df21804f49d3ab84dac49d0c3897cd8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraInputBlocker
 --- !u!1 &5132281456111509198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,6 +1406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
   wantType: 5
   changeType: 2
+  sandboxData: {fileID: 0}
 --- !u!1 &8504176889320771873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,6 +1555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
   wantType: 2
   changeType: 2
+  sandboxData: {fileID: 0}
 --- !u!1 &8507435277948803336
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,6 +67,16 @@ public class UI_BattlefieldScreen : UI_ScreenBase
 
     public void ToggleMenu(bool value)
     {
+        if (!value) return;
+
+        var movable = UIManager.ClaimGetUI(UIType.Movable) as UI_MovableScreen;
+        if (movable != null && movable.TryClosePopup()) return;
+        if (UIManager.ClaimCloseUI(
+            UIType.GameQuit, UIType.SaveMapWindow, UIType.CostChangeWindow, UIType.Inventory, UIType.BattleResult))
+        {
+            return;
+        }
+
         UIManager.ClaimToggleUI(UIType.Menu);
 
         bool isMenuOpen = UIManager.ClaimCheckOpen(UIType.Menu, out _);

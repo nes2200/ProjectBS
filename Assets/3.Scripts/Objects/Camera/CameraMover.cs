@@ -44,6 +44,8 @@ public class CameraMover : MonoBehaviour
 
     void CameraTransformUpdate(float deltaTime)
     {
+        if (CameraInputBlocker.IsBlocked) return;
+
         Vector3 previousPosition = transform.position;
         Quaternion previousRotation = transform.localRotation;
         float previousFov = mainCamera.fieldOfView;
@@ -90,7 +92,8 @@ public class CameraMover : MonoBehaviour
     }
     private void ZoomUpdate(float deltaTime)
     {
-        if(zoomDirection == Vector2.zero) return;
+        if (CameraInputBlocker.IsBlocked) return;
+        if (zoomDirection == Vector2.zero) return;
 
         float targetFov = mainCamera.fieldOfView - (zoomDirection.y * zoomSpeed);
         targetFov = Mathf.Clamp(targetFov, minFov, maxFov);

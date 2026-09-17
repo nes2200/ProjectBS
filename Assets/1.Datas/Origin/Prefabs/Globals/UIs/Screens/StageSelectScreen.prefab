@@ -526,8 +526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7667f2eaf22cee64a986410a61e060dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
-  wantType: 6
+  wantType: 2
   changeType: 1
+  sandboxData: {fileID: 0}
 --- !u!1 &7977435539571695384
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +594,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCC55\uD130 \uC120\uD0DD\uC73C\uB85C"
+  m_text: "\uD0C0\uC774\uD2C0\uB85C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8e0e9f844e438b142bb154f0fb10701d, type: 2}
   m_sharedMaterial: {fileID: 7730239384480465101, guid: 8e0e9f844e438b142bb154f0fb10701d, type: 2}

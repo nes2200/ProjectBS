@@ -1058,7 +1058,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5013216269517584146}
         m_TargetAssemblyTypeName: UI_Button_OpenScreen, Assembly-CSharp
-        m_MethodName: OpenSaveScreen
+        m_MethodName: OpenScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

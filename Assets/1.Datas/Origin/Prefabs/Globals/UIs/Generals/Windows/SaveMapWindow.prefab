@@ -1109,6 +1109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3825866227862529987}
   - component: {fileID: 6358318722317868258}
+  - component: {fileID: -1387956691905599262}
   m_Layer: 5
   m_Name: SaveMapWindow
   m_TagString: Untagged
@@ -1150,6 +1151,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SaveMapWindow
   inputField: {fileID: 8773540939793909141}
+--- !u!114 &-1387956691905599262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698585612457525922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df21804f49d3ab84dac49d0c3897cd8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraInputBlocker
 --- !u!1 &8452114823007196202
 GameObject:
   m_ObjectHideFlags: 0

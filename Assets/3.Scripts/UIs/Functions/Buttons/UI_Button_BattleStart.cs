@@ -11,10 +11,9 @@ public class UI_Button_BattleStart : MonoBehaviour
 
     public void BattleStart()
     {
-        if(stage != null)
+        if(stage != null && stage.StartBattle())
         {
-            stage.StartBattle();
+            gameObject.SetActive(false);
         }
-        gameObject.SetActive(false);
     }
 }

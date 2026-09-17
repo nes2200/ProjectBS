@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 4139468676706236510}
   - component: {fileID: 3991133127708272171}
   - component: {fileID: 5845761737022825584}
+  - component: {fileID: 4066878126102392615}
   m_Layer: 5
   m_Name: BattleResultWindow
   m_TagString: Untagged
@@ -117,6 +118,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4066878126102392615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578699299721098413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df21804f49d3ab84dac49d0c3897cd8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraInputBlocker
 --- !u!1 &4622036314553907594
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,8 +279,6 @@ GameObject:
   - component: {fileID: 7976964410461428900}
   - component: {fileID: 7078646156651119427}
   - component: {fileID: 2984395103440769981}
-  - component: {fileID: 3489844942465240604}
-  - component: {fileID: 4592709844315419074}
   m_Layer: 5
   m_Name: ConfirmButton
   m_TagString: Untagged
@@ -377,9 +388,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3489844942465240604}
-        m_TargetAssemblyTypeName: UI_Button_OpenUI, Assembly-CSharp
-        m_MethodName: Close
+      - m_Target: {fileID: 3991133127708272171}
+        m_TargetAssemblyTypeName: UI_BattleResultWindow, Assembly-CSharp
+        m_MethodName: Confirm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -389,46 +400,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4592709844315419074}
-        m_TargetAssemblyTypeName: UI_Button_OpenScreen, Assembly-CSharp
-        m_MethodName: OpenScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &3489844942465240604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6196450557217755477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f16dd8e0ff60347b2fe511dcda18d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenUI
-  wantType: 10
-  wantToggle: 0
---- !u!114 &4592709844315419074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6196450557217755477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7667f2eaf22cee64a986410a61e060dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
-  wantType: 7
-  changeType: 2
 --- !u!1 &6594548408191983422
 GameObject:
   m_ObjectHideFlags: 0

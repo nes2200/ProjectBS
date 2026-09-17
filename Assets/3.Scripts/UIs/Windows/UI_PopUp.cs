@@ -27,6 +27,7 @@ public class UI_PopUp : UIBase, ISystemMessagePossible, IConfirmable
     {
         confirmAction?.Invoke();
     }
+
     public void SetConfirmAction(Action newAction)
     {
         confirmAction -= newAction;

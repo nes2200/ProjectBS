@@ -10,7 +10,7 @@ public enum UIType
     None, 
     Loading, Title, Sandbox, Load, Option, ChapterSelect, StageSelect, Stage,
     GameQuit, BattleResult, TargetHoverInfo, Inventory,  Movable, Menu, Info, ItemCursorSlot, SandboxSelect, CostChangeWindow,
-    SaveMapWindow,
+    SaveMapWindow, Download,
     _Length
 }
 
@@ -39,6 +39,7 @@ public class UIManager : ManagerBase
         new(UIType.ChapterSelect, "ChapterSelectScreen"),
         new(UIType.StageSelect, "StageSelectScreen"),
         new(UIType.SandboxSelect, "SandboxSelectScreen"),
+        new(UIType.Download, "DownloadScreen"),
     };
 
     Canvas _mainCanvas;
