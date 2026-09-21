@@ -48,6 +48,9 @@ public class UI_FileViewer : MonoBehaviour
     }
     public GameObject AddButton()
     {
-        return Instantiate(buttonPrefab, contentRoot, false);
+        GameObject obj = Instantiate(buttonPrefab, contentRoot, false);
+        RectTransform trans = obj.GetComponent<RectTransform>();
+        trans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 90f);
+        return obj;
     }
 }
