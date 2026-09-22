@@ -10,7 +10,7 @@ public enum UIType
     None, 
     Loading, Title, Sandbox, Load, Option, ChapterSelect, StageSelect, Stage,
     GameQuit, BattleResult, TargetHoverInfo, Inventory,  Movable, Menu, Info, ItemCursorSlot, SandboxSelect, CostChangeWindow,
-    SaveMapWindow, Download,
+    SaveMapWindow, Download, LogInWindow, RegisterWindow,   
     _Length
 }
 

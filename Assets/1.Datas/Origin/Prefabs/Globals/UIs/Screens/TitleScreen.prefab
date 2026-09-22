@@ -775,6 +775,14 @@ MonoBehaviour:
     uiType: 9
     isOpen: 0
     isOverlay: 0
+  - prefabName: LogInWindow
+    uiType: 21
+    isOpen: 0
+    isOverlay: 0
+  - prefabName: RegisterWindow
+    uiType: 22
+    isOpen: 0
+    isOverlay: 0
   closeWithScreen: 09000000
 --- !u!95 &5002377203322431696
 Animator:
@@ -1731,7 +1739,7 @@ GameObject:
   - component: {fileID: 3436709924694966150}
   - component: {fileID: 2219492839911073845}
   - component: {fileID: 2509841253248292865}
-  - component: {fileID: 72537929771981129}
+  - component: {fileID: 7864862130735542236}
   m_Layer: 5
   m_Name: LogInButton
   m_TagString: Untagged
@@ -1841,9 +1849,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 72537929771981129}
-        m_TargetAssemblyTypeName: UI_Button_OpenScreen, Assembly-CSharp
-        m_MethodName: OpenScreen
+      - m_Target: {fileID: 7864862130735542236}
+        m_TargetAssemblyTypeName: UI_Button_OpenUI, Assembly-CSharp
+        m_MethodName: Open
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1853,7 +1861,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &72537929771981129
+--- !u!114 &7864862130735542236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1862,12 +1870,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7747780750741436487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7667f2eaf22cee64a986410a61e060dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 85f16dd8e0ff60347b2fe511dcda18d6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenScreen
-  wantType: 5
-  changeType: 1
-  sandboxData: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenUI
+  wantType: 21
+  wantToggle: 0
 --- !u!1 &7877113574310625895
 GameObject:
   m_ObjectHideFlags: 0

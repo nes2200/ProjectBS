@@ -43,7 +43,8 @@ public class DBManager : ManagerBase
             //데이터 베이스 참조(Reference)
             rootDB = FirebaseDatabase.DefaultInstance.RootReference;
 
-            GuestLogin();
+            // 회원가입/로그인 화면에서 인증을 진행하므로 시작 시 익명 로그인을 하지 않는다.
+            // GuestLogin();
          
             Debug.Log("Firebase Initialize");
         }

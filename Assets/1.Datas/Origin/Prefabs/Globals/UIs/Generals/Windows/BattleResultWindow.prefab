@@ -886,7 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f16dd8e0ff60347b2fe511dcda18d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_Button_OpenUI
-  wantType: 11
+  wantType: 10
   wantToggle: 0
 --- !u!1001 &2198012501619644201
 PrefabInstance:

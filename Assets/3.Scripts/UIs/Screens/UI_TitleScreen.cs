@@ -25,11 +25,20 @@ public class UI_TitleScreen : UI_ScreenBase
         InputManager.OnCancel -= ToggleCloseConfirm;
         base.Close();
     }
-    //private void OnDisable()
-    //{
-    //    InputManager.OnCancel -= ToggleCloseConfirm;
-    //}
 
+    void ToggleCloseConfirm(bool value) 
+    {
+        if (UIManager.ClaimCheckOpen(UIType.RegisterWindow, out IOpenable register))
+        {
+            register.Close();
+            return;
+        }
+        if (UIManager.ClaimCheckOpen(UIType.LogInWindow, out IOpenable login))
+        {
+            login.Close();
+            return;
+        }
 
-    void ToggleCloseConfirm(bool value) => UIManager.ClaimToggleUI(UIType.GameQuit);
+        UIManager.ClaimToggleUI(UIType.GameQuit); 
+    }
 }
