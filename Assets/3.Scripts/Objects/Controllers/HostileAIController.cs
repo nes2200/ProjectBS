@@ -65,7 +65,6 @@ public class HostileAIController : AIController
         targetCharacter = newTarget.GetComponent<CharacterBase>();
 
         if (!targetCharacter) return;
-
       
         targetHPModule = targetCharacter.GetModule<HitPointModule>();
         targetRadius = targetCharacter.Status.colliderRadius;
@@ -172,7 +171,6 @@ public class HostileAIController : AIController
             StopAndTryAttack();
             return true;
         }
-
 
         return false;
     }

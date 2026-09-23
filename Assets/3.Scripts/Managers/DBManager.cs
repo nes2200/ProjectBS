@@ -14,6 +14,13 @@ public class DBManager : ManagerBase
     private FirebaseUser user;
     private DatabaseReference rootDB;
 
+    private const string EmailSuffix = "@projectbs.test";
+    public bool IsFirebaseReady => authentication != null;
+
+    public event Action<bool> OnAuthStateChanged;
+    public bool IsLoggedIn => authentication != null && authentication.CurrentUser != null;
+
+
     protected override IEnumerator Onconnected(GameManager newManager)
     {
         //              의존성 검사         비동기 
@@ -23,7 +30,7 @@ public class DBManager : ManagerBase
 
     protected override void OnDisconnected()
     {
-       
+        if (authentication != null) authentication.StateChanged -= HandleAuthStateChanged;
     }
 
     void InitializeFirebase(Task<DependencyStatus> task)
@@ -37,6 +44,13 @@ public class DBManager : ManagerBase
         {
             //인증용 인스턴스 가져오기
             authentication = FirebaseAuth.DefaultInstance;
+
+            //로그인 확인용 이벤트
+            authentication.StateChanged -= HandleAuthStateChanged;
+            authentication.StateChanged += HandleAuthStateChanged;
+
+            HandleAuthStateChanged(this, EventArgs.Empty);
+
             //인증을 하기 위해 필요한 "유저" 가져오기
             user = authentication.CurrentUser;
             //데이터 베이스에 가려면 데이터 베이스가 어디에 있는지 찾아갈 수 있어야 한다
@@ -68,6 +82,12 @@ public class DBManager : ManagerBase
         await authentication.SignInAnonymouslyAsync().ContinueWithOnMainThread(OnLoginResult);
     }
 
+    private void HandleAuthStateChanged(object sender, EventArgs eventArgs)
+    {
+        user = authentication?.CurrentUser;
+        OnAuthStateChanged?.Invoke(user != null);
+    }
+
     private void OnLoginResult(Task<AuthResult> task)
     {
         if(task.IsCanceled || task.IsFaulted)
@@ -78,6 +98,32 @@ public class DBManager : ManagerBase
 
         user = task.Result.User;
         Debug.Log($"Sign in Succeed : {user.UserId}");
+    }
+
+    public async Task<FirebaseUser> RegisterAsync(string id, string password)
+    {
+        if(authentication is null) throw new InvalidOperationException("Firebase 초기화가 완료되지 않음");
+        string email = id.Trim().ToLowerInvariant() + EmailSuffix;
+
+        AuthResult result = await authentication.CreateUserWithEmailAndPasswordAsync(email, password);
+        user = result.User;
+        return user;
+    }
+
+    public async Task<FirebaseUser> LoginAsync(string id, string password)
+    {
+        if (authentication is null) throw new InvalidOperationException("Firebase 초기화가 완료되지 않음");
+        string email = id.Trim().ToLowerInvariant() + EmailSuffix;
+
+        AuthResult result = await authentication.SignInWithEmailAndPasswordAsync(email, password);
+        user = result.User;
+        return user;
+    }
+
+    public void Logout()
+    {
+        if (authentication is null) return;
+        authentication.SignOut();
     }
 
     public DatabaseReference GetFinalDirectory(DatabaseReference root, params string[] directory)

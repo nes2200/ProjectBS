@@ -1,4 +1,7 @@
 using TMPro;
+using Firebase;
+using Firebase.Auth;
+using System;
 using UnityEngine;
 
 public class UI_RegisterWindow : OpenableUIBase
@@ -17,6 +20,11 @@ public class UI_RegisterWindow : OpenableUIBase
     public bool IDValid => idValid;
     bool passwordValid;
     public bool PasswordValid => passwordValid;
+
+    bool isRegistering;
+
+    bool isPasswordVisible;
+
 
     public override void Registration(UIManager manager)
     {
@@ -80,9 +88,9 @@ public class UI_RegisterWindow : OpenableUIBase
 
     private void CheckPassword(string value)
     {
-        if (!IsLongEnough(value, 2))
+        if (!IsLongEnough(value, 6))
         {
-            passwordCheckText.text = "비밀번호는 2자 이상이어야 합니다";
+            passwordCheckText.text = "비밀번호는 6자 이상이어야 합니다";
             passwordCheckText.color = Color.red;
             passwordValid = false;
 
@@ -140,13 +148,70 @@ public class UI_RegisterWindow : OpenableUIBase
         return true;
     }
     
-    public void Register()
+    public async void Register()
     {
+        if (isRegistering) return;
+
         if(!idValid || !passwordValid)
         {
-            UIManager.ClaimPopUp("가입 불가", "아이디/비밀번호를 다시 확인해 주세요", "확인");
+            UIManager.ClaimErrorMessage("아이디/비밀번호를 다시 확인해 주세요");
             return;
         }
-        UIManager.ClaimPopUp("가입", "가입 완료", "뻥임");
+
+        isRegistering = true;
+
+        try
+        {
+            FirebaseUser newUser = await GameManager.DB.RegisterAsync(idField.text, passwordField.text);
+            Debug.Log($"가입 성공 : {newUser.UserId}");
+            UIManager.ClaimPopUp("가입 완료", $"{idField.text} 계정이 생성되었습니다", "확인");
+            Close();
+            UIManager.ClaimCloseUI(UIType.LogInWindow);
+        }
+        catch(FirebaseException exception)
+        {
+            AuthError error = (AuthError)exception.ErrorCode;
+
+            switch (error)
+            {
+                case AuthError.EmailAlreadyInUse:
+                    UIManager.ClaimErrorMessage("사용중인 아이디입니다");
+                    break;
+                case AuthError.WeakPassword:
+                    UIManager.ClaimErrorMessage("비밀번호가 너무 약합니다");
+                    break;
+                case AuthError.InvalidEmail:
+                    UIManager.ClaimErrorMessage("사용할 수 없는 아이디입니다");
+                    break;
+                default:
+                    Debug.LogError(exception);
+                    UIManager.ClaimErrorMessage("회원가입 중 오류가 발생했습니다");
+                    break;
+            }
+        }
+        catch(Exception exception)
+        {
+            UIManager.ClaimErrorMessage($"{exception.Message}");
+        }
+        finally
+        {
+            isRegistering = false;
+        }
+    }
+
+    public void TogglePasswordVisibility()
+    {
+        SetPasswordVisible(!isPasswordVisible);
+    }
+
+    private void SetPasswordVisible(bool visible)
+    {
+        isPasswordVisible = visible;
+
+        passwordField.contentType = visible ? TMP_InputField.ContentType.Standard : TMP_InputField.ContentType.Password;
+        pwConfirmField.contentType = visible ? TMP_InputField.ContentType.Standard : TMP_InputField.ContentType.Password;
+
+        passwordField.ForceLabelUpdate();
+        pwConfirmField.ForceLabelUpdate();
     }
 }
