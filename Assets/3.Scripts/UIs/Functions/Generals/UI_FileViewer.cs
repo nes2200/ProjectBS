@@ -1,21 +1,29 @@
 using System;
 using System.IO;
+using TMPro;
 using UnityEngine;
 
 public class UI_FileViewer : MonoBehaviour
 {
     [SerializeField] GameObject buttonPrefab;
     [SerializeField] Transform contentRoot;
-    
+    [SerializeField] GameObject innerTextObj;
+    [SerializeField] TextMeshProUGUI innerText;
 
     public void Clear()
     {
         //화면을 다시 열때 이전 버튼 제거
-        foreach (Transform child in contentRoot)
+        for (int i = contentRoot.childCount - 1; i >= 0; i--)
         {
-            child.gameObject.SetActive(false);
-            Destroy(child.gameObject);
+            GameObject child = contentRoot.GetChild(i).gameObject;
+
+            if (child == innerTextObj)
+                continue;
+
+            Destroy(child);
         }
+
+        innerTextObj.SetActive(false);
     }
 
     public void ReadLocalFiles()
@@ -25,7 +33,11 @@ public class UI_FileViewer : MonoBehaviour
 #else
         string directory = Path.Combine(Application.persistentDataPath, "StageData", "Custom");
 #endif
-        if (!Directory.Exists(directory)) return;
+        if (!Directory.Exists(directory)) 
+        {
+            ChangeInnerText("로컬 파일 읽을 수 없음");
+            return;
+        }
         BuildButtons(directory);
     }
 
@@ -52,5 +64,11 @@ public class UI_FileViewer : MonoBehaviour
         RectTransform trans = obj.GetComponent<RectTransform>();
         trans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 90f);
         return obj;
+    }
+
+    public void ChangeInnerText(string text)
+    {
+        innerTextObj.SetActive(true);
+        innerText.text = text;
     }
 }

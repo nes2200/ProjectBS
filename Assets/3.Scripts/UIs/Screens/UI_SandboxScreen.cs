@@ -45,7 +45,17 @@ public class UI_SandboxScreen : UI_BattlefieldScreen
 
     public void OpenSaveMapWindow()
     {
-        UI_SaveMapWindow window = UIManager.ClaimGetUI(UIType.SaveMapWindow) as UI_SaveMapWindow;
-        window.OpenForSave(stageManager.GetAuthoring());
+        StageDataAuthoring authoring = stageManager.GetAuthoring();
+
+        if (GameManager.SceneLoad.IsEditingUploadedMap)
+        {
+            UI_UpdateMapWindow window = UIManager.ClaimGetUI(UIType.UpdateMapWindow) as UI_UpdateMapWindow;
+            window.OpenForUpdate(authoring, GameManager.SceneLoad.EditingMapID, GameManager.SceneLoad.EditingMapName);
+        }
+        else
+        {
+            UI_SaveMapWindow window = UIManager.ClaimGetUI(UIType.SaveMapWindow) as UI_SaveMapWindow;
+            window.OpenForSave(authoring);
+        }
     }
 }

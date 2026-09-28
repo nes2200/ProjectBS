@@ -20,8 +20,27 @@ public class StageLoadManager : ManagerBase
 
     public event Action OnSelectableCharactersLoaded;
 
+    //샌드박스용 전체 유닛 리스트. 나중에 커지면 분리 예정.
+    private readonly List<GameObject> sandboxUnits = new();
+    private readonly List<GameObject> sandboxEnemies = new();
+
+    public IReadOnlyList<GameObject> SandboxUnits => sandboxUnits;
+    public IReadOnlyList<GameObject> SandboxEnemies => sandboxEnemies;
+
     protected override IEnumerator Onconnected(GameManager newManager)
     {
+        //샌드박스용 목록 초기화
+        if(DataManager.TryLoadDataFile<TextAsset>("Sandbox", out TextAsset sandboxData))
+        {
+            SceneSaveData catalog = JsonConvert.DeserializeObject<SceneSaveData>(sandboxData.text);
+            LoadSelectableUnits(catalog.selectableUnits, sandboxUnits);
+            LoadSelectableUnits(catalog.selectableEnemies, sandboxEnemies);
+        }
+        else
+        {
+            Debug.LogError("[StageLoadManager] Sandbox 데이터를 찾지 못함");
+        }
+
         yield return null;
     }
 
@@ -104,7 +123,7 @@ public class StageLoadManager : ManagerBase
             return;
         }
         stageManager.SetFieldMode(mode);
-        stageManager.InitializeSelectableUnits(null);
+        stageManager.InitializeSelectableUnits(selectableUnits);
         stageManager.InitializeCostLimits(loadData.costLimits);
         if (!stageManager.Floor || !stageManager.Probs || !stageManager.TeamA || !stageManager.TeamB)
         {
@@ -324,6 +343,12 @@ public class StageLoadManager : ManagerBase
 
     private void LoadSelectableUnits(IReadOnlyList<StageUnitEntry> entries, List<GameObject> result)
     {
+        if (result == null)
+        {
+            Debug.LogError("[StageLoadManager] 결과 목록이 초기화되지 않음");
+            return;
+        }
+
         result.Clear();
 
         if (entries == null) return;

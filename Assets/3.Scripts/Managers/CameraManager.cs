@@ -35,7 +35,7 @@ public class CameraManager : ManagerBase
 
     protected override void OnDisconnected()
     {
-
+        RemoveCameraController();
     }
 
     public void SetMainCamera(Camera wantCamera)
@@ -69,8 +69,6 @@ public class CameraManager : ManagerBase
         if (!_controller) return;
 
         Controller.UnsetCameraController();
-        Destroy(_controller);
-        _controller = null;
     }
 
     public void SetCameraDefaultPosition()

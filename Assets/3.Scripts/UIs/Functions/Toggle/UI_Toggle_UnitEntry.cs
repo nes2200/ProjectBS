@@ -28,10 +28,13 @@ public class UI_Toggle_UnitEntry : MonoBehaviour
 
         unitNameText.text = character.Status.unitName;
         unitCostText.text = character.Status.cost.ToString();
-        checkImage.enabled = false;
+
+        bool selected = stageManager.IsSelectableUnit(prefab);
 
         toggle.interactable = true;
-        toggle.SetIsOnWithoutNotify(stageManager.IsSelectableUnit(prefab));
+        toggle.SetIsOnWithoutNotify(selected);
+        checkImage.enabled = selected;
+
         toggle.onValueChanged.AddListener(OnValueChanged);
     }
 

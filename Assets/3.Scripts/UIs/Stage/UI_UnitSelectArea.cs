@@ -33,7 +33,7 @@ public class UI_UnitSelectArea : MonoBehaviour
         ClearButtons();
 
         IReadOnlyList<GameObject> prefabs = areaType == SelectAreaType.Unit ?
-            GameManager.StageLoad.SelectableUnits : GameManager.StageLoad.SelectableEnemies;
+            GameManager.StageLoad.SandboxUnits : GameManager.StageLoad.SandboxEnemies;
         TeamID team = areaType == SelectAreaType.Unit ? TeamID.TeamA : TeamID.TeamB;
 
         foreach(GameObject prefab in prefabs)

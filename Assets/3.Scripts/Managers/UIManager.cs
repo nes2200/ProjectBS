@@ -10,7 +10,7 @@ public enum UIType
     None, 
     Loading, Title, Sandbox, Load, Option, ChapterSelect, StageSelect, Stage,
     GameQuit, BattleResult, TargetHoverInfo, Inventory,  Movable, Menu, Info, ItemCursorSlot, SandboxSelect, CostChangeWindow,
-    SaveMapWindow, Download, LogInWindow, RegisterWindow,   
+    SaveMapWindow, Download, LogInWindow, RegisterWindow, UpdateMapWindow,
     _Length
 }
 
@@ -349,8 +349,6 @@ public class UIManager : ManagerBase
             GameManager.Input.SetInputState(true);
         });
         currentScreenChanger = null;
-
-        //EventSystem.current.enabled = true;
     }
     public static void ClaimScreenChangeEffectEnd()                 => GameManager.UI?.ScreenChangeEffectEnd();
 

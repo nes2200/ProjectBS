@@ -11,6 +11,11 @@ public class SceneLoadManager : ManagerBase
     private bool isLoading;
     public bool IsCustomStage { get; private set; }
 
+    //맵 수정시 필요
+    public string EditingMapID { get; private set; }
+    public string EditingMapName { get; private set; }
+    public bool IsEditingUploadedMap => !string.IsNullOrEmpty(EditingMapID);
+
     protected override IEnumerator Onconnected(GameManager newManager)
     {
         yield return null;
@@ -40,15 +45,14 @@ public class SceneLoadManager : ManagerBase
         StartCoroutine(CoReloadSceneAndSetup(sceneName, stageData, UIType.Stage));
     }
 
-    public void LoadSandbox(string sceneName, TextAsset sandboxData)
+    public void LoadSandbox(string sceneName, TextAsset sandboxData, string mapID = null, string mapName = null)
     {
         if (isLoading) return;
 
-        if(string.IsNullOrEmpty(sceneName) || sandboxData is null)
-        {
-            Debug.LogError("[SceneLoadManager] 샌드박스 씬 이름이 비어 있습니다.");
-            return;
-        }
+        if (string.IsNullOrEmpty(sceneName) || !sandboxData) return;
+
+        EditingMapID = mapID;
+        EditingMapName = mapName;
 
         currentStageSceneName = sceneName;
         currentStageData = sandboxData;
@@ -68,15 +72,17 @@ public class SceneLoadManager : ManagerBase
             return;
         }
 
-        UIManager.ClaimCloseUI(UIType.Stage);
-
         isLoading = true;
         StartCoroutine(CoReloadSceneAndSetup(currentStageSceneName, currentStageData, currentScreen));
     }
 
     private IEnumerator CoReloadSceneAndSetup(string sceneName, TextAsset stageData, UIType targetScreen)
     {
-        UIManager.ClaimOpenScreen(targetScreen, ScreenChangeType.SlideChanger);
+        bool coverFinished = false;
+
+        UIManager.ClaimScreenChangeEffectStart(ScreenChangeType.SlideChanger, () => coverFinished = true);
+
+        yield return new WaitUntil(() => coverFinished); 
 
         //해당 씬 로드 확인
         Scene targetScene = SceneManager.GetSceneByName(sceneName);
@@ -88,16 +94,13 @@ public class SceneLoadManager : ManagerBase
             //언로드 완료까지 대기
             while(unloadOperation != null && !unloadOperation.isDone)
             {
-                yield return null;
+                yield return unloadOperation;
             }
         }
 
         //새 씬을 비동기로 불러오기
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        while (!loadOperation.isDone)
-        {
-            yield return null;
-        }
+        yield return loadOperation;
 
         //로드하려는 씬은 게임 오브젝트들이 올라가있는 씬이기에 액티브 씬으로 지정해주기
         Scene newScene = SceneManager.GetSceneByName(sceneName);
@@ -107,7 +110,12 @@ public class SceneLoadManager : ManagerBase
         BattleFieldMode mode = targetScreen == UIType.Sandbox ? BattleFieldMode.Sandbox : BattleFieldMode.Stage;
         GameManager.StageLoad.LoadStage(stageData, newScene, mode);
 
-        isLoading = false;
+        UIManager.ClaimOpenScreen(targetScreen);
+
+        //ui 활성화 되게 한프레임 대기
         yield return null;
+
+        UIManager.ClaimScreenChangeEffectEnd();
+        isLoading = false;
     }
 }

@@ -37,9 +37,7 @@ public class CameraController : MonoBehaviour
     {
         _manager = null;
 
-        CameraMover.RemoveCameraMover();
-        Destroy(CameraMover);
-        _cameraMover = null;
+        if(_cameraMover) _cameraMover.RemoveCameraMover();
 
         InputManager.OnCameraMove -= CameraMove;
         InputManager.OnMouseRightButton -= CameraRotatingCheck;

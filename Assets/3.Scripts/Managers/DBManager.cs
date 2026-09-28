@@ -20,6 +20,8 @@ public class DBManager : ManagerBase
     public event Action<bool> OnAuthStateChanged;
     public bool IsLoggedIn => authentication != null && authentication.CurrentUser != null;
 
+    public string CurrentUserID => authentication?.CurrentUser?.UserId;
+
 
     protected override IEnumerator Onconnected(GameManager newManager)
     {
@@ -107,6 +109,10 @@ public class DBManager : ManagerBase
 
         AuthResult result = await authentication.CreateUserWithEmailAndPasswordAsync(email, password);
         user = result.User;
+
+        DatabaseReference userReference = GetFinalDirectory(rootDB, "userDB", user.UserId);
+        await userReference.Child("createdDate").SetValueAsync(ServerValue.Timestamp);
+
         return user;
     }
 
@@ -151,14 +157,47 @@ public class DBManager : ManagerBase
         if (string.IsNullOrWhiteSpace(customMap.mapName))
             throw new ArgumentException("맵 이름 없음", nameof(customMap));
 
+        //서버에 저장
         customMap.creatorUID = creator.UserId;
         string json = JsonUtility.ToJson(customMap);
         DatabaseReference mapReference = GetFinalDirectory(rootDB, "customMaps").Push();
 
         // 서버 쓰기가 완료되어야 호출한 UI에 성공을 알린다.
         await mapReference.SetRawJsonValueAsync(json);
+
+        //유저DB의 내 정보에 해당 맵 키를 저장
+        DatabaseReference userMapReference = GetFinalDirectory(rootDB, "userDB", creator.UserId, "maps", mapReference.Key);
+        await userMapReference.SetValueAsync(customMap.mapName);
+
         return mapReference.Key;
     }
+    public async Task UpdateCustomMapAsync(string mapID, CustomMapData updatedMap, bool isNameChanged)
+    {
+        if (string.IsNullOrEmpty(mapID)) throw new ArgumentException("맵 ID가 없음");
+
+        FirebaseUser currentUser = authentication.CurrentUser;
+        if (currentUser == null) throw new InvalidOperationException("로그인이 필요함");
+
+        CustomMapData existing = await ReadDataAsync<CustomMapData>("customMaps", mapID);
+        if (existing == null) throw new InvalidOperationException("수정할 맵을 찾지 못함");
+
+        if (existing.creatorUID != currentUser.UserId) throw new UnauthorizedAccessException("자신이 올린 맵만 수정 가능");
+
+        updatedMap.creatorUID = currentUser.UserId;
+        updatedMap.formatVersion = existing.formatVersion;
+
+        DatabaseReference mapReference = GetFinalDirectory(rootDB, "customMaps", mapID);
+
+        await mapReference.SetRawJsonValueAsync(JsonUtility.ToJson(updatedMap));
+
+        if (isNameChanged)
+        {
+            DatabaseReference mapNameReference = GetFinalDirectory(rootDB, "userDB", currentUser.UserId, "maps", mapID);
+
+            await mapNameReference.SetValueAsync(updatedMap.mapName);
+        }
+    }
+
     public void WriteData(object wantData, params string[] directory)
     {
         if (rootDB is null || wantData is null) return;
@@ -191,6 +230,13 @@ public class DBManager : ManagerBase
         Task<DataSnapshot> readTask = GetFinalDirectory(rootDB, directory).GetValueAsync();
         yield return readTask.WaitForTask();
         OnReadData?.Invoke(readTask);
+    }
+
+    public async Task<DataSnapshot> ReadSnapshotAsync(params string[] directory)
+    {
+        if (rootDB is null) throw new InvalidOperationException("Firebase가 초기화 되지 않음");
+
+        return await GetFinalDirectory(rootDB, directory).GetValueAsync();
     }
 
     //기다릴 수 있는 형태의 함수 => 코루틴, 비동기

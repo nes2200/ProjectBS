@@ -1303,6 +1303,10 @@ MonoBehaviour:
     uiType: 19
     isOpen: 0
     isOverlay: 0
+  - prefabName: UpdateMapWindow
+    uiType: 23
+    isOpen: 0
+    isOverlay: 0
   closeWithScreen: 
   starController: {fileID: 4095887824672729739}
   starPrefab: {fileID: 5357776831520545780, guid: c2ae4760d40ecc14a85d4df0fd4c6484, type: 3}

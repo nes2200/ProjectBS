@@ -12,11 +12,11 @@ public class UI_UnitEntryArea : MonoBehaviour
     {
         ClearToggles();
 
-        if (!manager || !manager.IsSandbox) return;
+        if (!manager || !manager.IsSandbox || GameManager.StageLoad?.SandboxUnits == null) return;
 
         HashSet<GameObject> added = new();
 
-        foreach(GameObject prefab in GameManager.StageLoad.SelectableUnits)
+        foreach (GameObject prefab in GameManager.StageLoad.SandboxUnits)
         {
             if (!prefab || !added.Add(prefab)) continue;
 
