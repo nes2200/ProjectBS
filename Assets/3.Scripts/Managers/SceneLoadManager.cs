@@ -23,7 +23,7 @@ public class SceneLoadManager : ManagerBase
 
     protected override void OnDisconnected()
     {
-
+        
     }
 
     public void LoadSceneAndSetup(string sceneName, TextAsset stageData, bool isCustomStage = false)
@@ -108,7 +108,9 @@ public class SceneLoadManager : ManagerBase
 
         //로드한 씬에서 스테이지 업데이트하기
         BattleFieldMode mode = targetScreen == UIType.Sandbox ? BattleFieldMode.Sandbox : BattleFieldMode.Stage;
-        GameManager.StageLoad.LoadStage(stageData, newScene, mode);
+        bool restoreSelectableUnits = mode != BattleFieldMode.Sandbox || IsEditingUploadedMap;
+
+        GameManager.StageLoad.LoadStage(stageData, newScene, mode, restoreSelectableUnits);
 
         UIManager.ClaimOpenScreen(targetScreen);
 

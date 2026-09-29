@@ -3,7 +3,7 @@ using UnityEngine;
 
 public struct AttackInfo
 {
-    public GameObject target;
+    public CharacterBase target;
     public ControllerBase instigator;
     public int damageAmount;
 }
@@ -18,15 +18,16 @@ public class AttackModule : CharacterModule
     float attackCooldownCurrent;
 
     //공격 진행
-    float hitNormalizedTime;
-    bool hasAppliedAttack = false;
+    bool hasExecuteAttack = false;
     AttackInfo currentAttackInfo;
     bool isAttacking = false;
     public bool IsAttacking => isAttacking;
 
-
     //애니메이션 모듈
     AnimationModule animModule;
+
+    //근거리 원거리 나누는 용도
+    [SerializeField] AttackExecutor attackExecutor;
 
     public override Type RegistrationType => typeof(AttackModule);
 
@@ -34,7 +35,6 @@ public class AttackModule : CharacterModule
     {
         base.OnRegistration(newOwner);
         animModule = Owner.GetModule<AnimationModule>();
-        hitNormalizedTime = Owner.Status.hitNormalizedTime;
     }
     public override void OnUnregistration(CharacterBase oldOwner)
     {
@@ -44,7 +44,7 @@ public class AttackModule : CharacterModule
 
         isAttacking = false;
         isAttackCooldown = false;
-        hasAppliedAttack = false;
+        hasExecuteAttack = false;
         attackCooldownCurrent = 0f;
 
         currentAttackInfo = default;
@@ -53,14 +53,16 @@ public class AttackModule : CharacterModule
 
     public void AttackTarget(in AttackInfo attackInfo)
     {
-        if (isAttackCooldown || isAttacking) return;
+        if (isAttackCooldown || isAttacking || !attackExecutor) return;
 
         isAttacking = true;
+        attackExecutor.Prepare();
+
         animModule.SetBool("IsAttacking", true);
         animModule.TriggerAnimation("Attack");
 
         currentAttackInfo = attackInfo;
-        hasAppliedAttack = false;
+        hasExecuteAttack = false;
 
         GameManager.OnUpdateCharacter -= UpdateAttack;
         GameManager.OnUpdateCharacter += UpdateAttack;
@@ -74,29 +76,16 @@ public class AttackModule : CharacterModule
             isAttacking = false;
             return;
         }
-        if (!isAttacking || hasAppliedAttack) return;
+        if (!isAttacking || hasExecuteAttack) return;
 
-        if (!animModule.TryGetNormalizedTime(out float normalizedProgress)) return;
+        if (!animModule.TryGetNormalizedTime(out float normalizedProgress, attackExecutor.ExecutionStateTag)) return;
 
-        if (normalizedProgress < hitNormalizedTime) return;
+        if (normalizedProgress < attackExecutor.ExecuteNormalizedTime) return;
         
-        hasAppliedAttack = true;
+        hasExecuteAttack = true;
         GameManager.OnUpdateCharacter -= UpdateAttack;
 
-        ApplyAttack(currentAttackInfo);
-    }
-
-    void ApplyAttack(AttackInfo attackInfo)
-    {
-        //적 체력 감소
-        HitPointModule targetHPModule = attackInfo.target.GetComponent<HitPointModule>();
-        if (!targetHPModule) return;
-        targetHPModule.TakeDamage(new DamageStruct
-        {
-            from = Owner.gameObject,
-            instigator = attackInfo.instigator,
-            damageAmount = attackInfo.damageAmount
-        });
+        attackExecutor.Execute(currentAttackInfo);
     }
 
     public void OnAttackAnimationEnd()

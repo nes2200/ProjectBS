@@ -12,7 +12,6 @@ public class UnitStatus : ScriptableObject
     public int damage;
     public float attackSpeed;
     public float moveSpeed;
-    [SerializeField, Range(0f, 1f)] public float hitNormalizedTime;
 
     [Header("자동으로 계산될 값")]
     public float colliderRadius;

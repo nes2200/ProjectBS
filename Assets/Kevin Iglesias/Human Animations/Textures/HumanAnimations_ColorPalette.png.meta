@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 56091f1c9140303428503f373172e22d
+guid: 2c8e7f499d401414b8215275b03a4c66
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -138,3 +138,10 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 335880
+  packageName: Human Archer Animations FREE
+  packageVersion: 1.0
+  assetPath: Assets/Kevin Iglesias/Human Animations/Textures/HumanAnimations_ColorPalette.png
+  uploadId: 825246

@@ -148,7 +148,7 @@ public class HostileAIController : AIController
         {
             atkModule.AttackTarget(new AttackInfo
             {
-                target = FocusTarget,
+                target = targetCharacter,
                 instigator = this,
                 damageAmount = Character.Status.damage
             });

@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: M_Knight_Status
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
   unitName: "\uAE30\uC0AC"
-  cost: 8
-  maxHP: 30
+  cost: 10
+  maxHP: 35
   damage: 10
   attackSpeed: 2.5
   moveSpeed: 2
-  hitNormalizedTime: 0.35
   colliderRadius: 0.4

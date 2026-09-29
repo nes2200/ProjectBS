@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
   unitName: "\uAD81\uC218"
   cost: 8
-  maxHP: 30
-  damage: 5
+  maxHP: 20
+  damage: 7
   attackSpeed: 2
   moveSpeed: 2
-  hitNormalizedTime: 0.33
   colliderRadius: 0.4

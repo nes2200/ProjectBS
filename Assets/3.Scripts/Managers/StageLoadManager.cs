@@ -20,6 +20,8 @@ public class StageLoadManager : ManagerBase
 
     public event Action OnSelectableCharactersLoaded;
 
+    public BattleFieldMode CurrentMode { get; private set; }
+
     //샌드박스용 전체 유닛 리스트. 나중에 커지면 분리 예정.
     private readonly List<GameObject> sandboxUnits = new();
     private readonly List<GameObject> sandboxEnemies = new();
@@ -51,14 +53,14 @@ public class StageLoadManager : ManagerBase
         OnSelectableCharactersLoaded = null;
     }
 
-    public void LoadStage(TextAsset stageData, Scene stageScene, BattleFieldMode mode = BattleFieldMode.Stage)
+    public void LoadStage(TextAsset stageData, Scene stageScene, BattleFieldMode mode = BattleFieldMode.Stage, bool restoreSelectableUnits = true)
     {
-        ExecuteLoad(stageData, stageScene, mode);
+        ExecuteLoad(stageData, stageScene, mode, restoreSelectableUnits);
         //카메라 위치 초기화
         GameManager.Camera.SetCameraDefaultPosition();
     }
 
-    private void ExecuteLoad(TextAsset stageData, Scene stageScene, BattleFieldMode mode)
+    private void ExecuteLoad(TextAsset stageData, Scene stageScene, BattleFieldMode mode, bool restoreSelectableUnits)
     {
         //씬 유효성 검사
         if(!stageScene.IsValid() || !stageScene.isLoaded)
@@ -111,6 +113,8 @@ public class StageLoadManager : ManagerBase
             return;
         }
 
+        CurrentMode = mode;
+
         LoadSelectableUnits(loadData.selectableUnits, selectableUnits);
         LoadSelectableUnits(loadData.selectableEnemies, selectableEnemies); 
         OnSelectableCharactersLoaded?.Invoke();
@@ -123,7 +127,7 @@ public class StageLoadManager : ManagerBase
             return;
         }
         stageManager.SetFieldMode(mode);
-        stageManager.InitializeSelectableUnits(selectableUnits);
+        stageManager.InitializeSelectableUnits(restoreSelectableUnits ? selectableUnits : null);
         stageManager.InitializeCostLimits(loadData.costLimits);
         if (!stageManager.Floor || !stageManager.Probs || !stageManager.TeamA || !stageManager.TeamB)
         {

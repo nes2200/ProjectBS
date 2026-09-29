@@ -4,12 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.AI.Navigation;
 using UnityEditor;
-using UnityEditor.Overlays;
-using UnityEditor.PackageManager;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class SceneScannerWindow : EditorWindow
 {

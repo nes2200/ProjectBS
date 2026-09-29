@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: prefabKey
       value: Monster_WolfPup
       objectReference: {fileID: 0}
+    - target: {fileID: 3965736155650930506, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: attackExecutor
+      value: 
+      objectReference: {fileID: 1874172997757010189}
     - target: {fileID: 6738698059090476509, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: m_Height
       value: 1.42
@@ -119,6 +123,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 747892062123975982}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2226144352791122500, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1874172997757010189}
     - targetCorrespondingSourceObject: {fileID: 3035384091999026604, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4842454196070131378}
@@ -128,6 +135,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1084870234061844977, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
   m_PrefabInstance: {fileID: 4880499043320390884}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6728340988670359200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2226144352791122500, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+  m_PrefabInstance: {fileID: 4880499043320390884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1874172997757010189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728340988670359200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fa20ad41a4c99438460984b172bf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
 --- !u!1 &7612453063173331272 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3035384091999026604, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}

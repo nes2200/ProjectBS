@@ -116,6 +116,10 @@ PrefabInstance:
       propertyPath: prefabKey
       value: Monster_Wolf
       objectReference: {fileID: 0}
+    - target: {fileID: 3965736155650930506, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: attackExecutor
+      value: 
+      objectReference: {fileID: 2819386856123330442}
     - target: {fileID: 6738698059090476509, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: m_Height
       value: 3.2
@@ -147,6 +151,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 40329667530761663}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2226144352791122500, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2819386856123330442}
     - targetCorrespondingSourceObject: {fileID: 3035384091999026604, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1833796404643327721}
@@ -156,6 +163,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1084870234061844977, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
   m_PrefabInstance: {fileID: 532185871060179895}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1839278737806150131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2226144352791122500, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+  m_PrefabInstance: {fileID: 532185871060179895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2819386856123330442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839278737806150131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fa20ad41a4c99438460984b172bf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
 --- !u!95 &2155545320631188112 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1911986083768049959, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}

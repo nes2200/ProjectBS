@@ -32,8 +32,8 @@ public class UI_UnitSelectArea : MonoBehaviour
     {
         ClearButtons();
 
-        IReadOnlyList<GameObject> prefabs = areaType == SelectAreaType.Unit ?
-            GameManager.StageLoad.SandboxUnits : GameManager.StageLoad.SandboxEnemies;
+        IReadOnlyList<GameObject> prefabs = GetCurrentPrefabs();
+        if (prefabs == null) return;
         TeamID team = areaType == SelectAreaType.Unit ? TeamID.TeamA : TeamID.TeamB;
 
         foreach(GameObject prefab in prefabs)
@@ -60,6 +60,17 @@ public class UI_UnitSelectArea : MonoBehaviour
 
     IReadOnlyList<GameObject> GetCurrentPrefabs()
     {
+        bool isSandbox = GameManager.StageLoad.CurrentMode == BattleFieldMode.Sandbox;
+
+        if (isSandbox)
+        {
+            return areaType switch
+            {
+                SelectAreaType.Unit => GameManager.StageLoad.SandboxUnits,
+                SelectAreaType.Enemy => GameManager.StageLoad.SandboxEnemies,
+                _ => null
+            };
+        }
         return areaType switch
         {
             SelectAreaType.Unit => GameManager.StageLoad.SelectableUnits,

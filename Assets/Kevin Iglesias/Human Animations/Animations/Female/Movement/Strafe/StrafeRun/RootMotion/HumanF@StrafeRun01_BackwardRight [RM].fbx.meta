@@ -16,6 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: Rig/B-root
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -31,8 +33,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: 'HumanF@StrafeRun01_BackwardRight [RM]'
-      takeName: 'HumanF@StrafeRun01_BackwardRight [RM]'
+      name: HumanF@StrafeRun01_BackwardRight [RM]
+      takeName: HumanF@StrafeRun01_BackwardRight [RM]
       internalID: -7322588144437178886
       firstFrame: 0
       lastFrame: 18
@@ -947,7 +949,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: Rig/B-root
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
@@ -966,9 +968,9 @@ ModelImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 151650
-  packageName: Human Melee Animations
-  packageVersion: 2.1
+  productId: 335880
+  packageName: Human Archer Animations FREE
+  packageVersion: 1.0
   assetPath: Assets/Kevin Iglesias/Human Animations/Animations/Female/Movement/Strafe/StrafeRun/RootMotion/HumanF@StrafeRun01_BackwardRight
     [RM].fbx
-  uploadId: 937378
+  uploadId: 825246

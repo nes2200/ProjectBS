@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 745876748973913578, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: executor
+      value: 
+      objectReference: {fileID: 7501783703962071877}
+    - target: {fileID: 745876748973913578, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: attackExecutor
+      value: 
+      objectReference: {fileID: 7501783703962071877}
     - target: {fileID: 780860280071909585, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1079,13 +1087,34 @@ PrefabInstance:
     - {fileID: 1730914488587196863, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
     - {fileID: 6811358094425327879, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2572708262289101028, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7501783703962071877}
   m_SourcePrefab: {fileID: 100100000, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
 --- !u!1 &1346472798192650055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1846011643367346132, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
   m_PrefabInstance: {fileID: 806698690597783699}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2919986945472780407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2572708262289101028, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+  m_PrefabInstance: {fileID: 806698690597783699}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7501783703962071877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2919986945472780407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fa20ad41a4c99438460984b172bf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
+  executeNormalizedTime: 0.33
 --- !u!1 &3045918759686313531 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2410761527018102440, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}

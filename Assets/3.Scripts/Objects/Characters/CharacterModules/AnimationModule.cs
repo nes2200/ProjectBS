@@ -132,7 +132,7 @@ public class AnimationModule : CharacterModule
         }
     }
 
-    public bool TryGetNormalizedTime(out float normalizedTime, int layerIndex = 0)
+    public bool TryGetNormalizedTime(out float normalizedTime, string requiredTag, int layerIndex = 0)
     {
         if(!anim || !anim.isActiveAndEnabled)
         {
@@ -151,7 +151,7 @@ public class AnimationModule : CharacterModule
             stateInfo = anim.GetCurrentAnimatorStateInfo(layerIndex);
         }
 
-        if (!stateInfo.IsTag("Attack"))
+        if (!stateInfo.IsTag(requiredTag))
         {
             normalizedTime = 0f;
             return false;

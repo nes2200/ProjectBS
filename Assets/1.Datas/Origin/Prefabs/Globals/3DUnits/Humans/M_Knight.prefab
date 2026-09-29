@@ -72,6 +72,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 745876748973913578, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: executor
+      value: 
+      objectReference: {fileID: 4404320135275976615}
+    - target: {fileID: 745876748973913578, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: atkExecutor
+      value: 
+      objectReference: {fileID: 4404320135275976615}
+    - target: {fileID: 745876748973913578, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: attackExecutor
+      value: 
+      objectReference: {fileID: 4404320135275976615}
     - target: {fileID: 780860280071909585, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -787,13 +799,34 @@ PrefabInstance:
     - {fileID: 1730914488587196863, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
     - {fileID: 6811358094425327879, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2572708262289101028, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4404320135275976615}
   m_SourcePrefab: {fileID: 100100000, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
 --- !u!1 &38914805380483088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2446780174207662485, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
   m_PrefabInstance: {fileID: 2413636199901606277}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &201234668364554593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2572708262289101028, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+  m_PrefabInstance: {fileID: 2413636199901606277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4404320135275976615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201234668364554593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fa20ad41a4c99438460984b172bf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
+  executeNormalizedTime: 0.35
 --- !u!1 &585682654976795333 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2980879447606383424, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
