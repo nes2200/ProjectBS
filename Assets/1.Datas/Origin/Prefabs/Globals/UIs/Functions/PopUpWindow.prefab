@@ -257,7 +257,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5362221542208209247}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3455126712347834177}
+        m_TargetAssemblyTypeName: UI_PopUp, Assembly-CSharp
+        m_MethodName: Confirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7944151787039318292
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +498,34 @@ PrefabInstance:
     - target: {fileID: 2254539444071331327, guid: e8b3a87b7a9145b4abac0134e4ca85c9, type: 3}
       propertyPath: m_Name
       value: PopUpWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150139408142382373, guid: e8b3a87b7a9145b4abac0134e4ca85c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150139408142382373, guid: e8b3a87b7a9145b4abac0134e4ca85c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150139408142382373, guid: e8b3a87b7a9145b4abac0134e4ca85c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3455126712347834177}
+    - target: {fileID: 3150139408142382373, guid: e8b3a87b7a9145b4abac0134e4ca85c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150139408142382373, guid: e8b3a87b7a9145b4abac0134e4ca85c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Confirm
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150139408142382373, guid: e8b3a87b7a9145b4abac0134e4ca85c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI_PopUp, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150139408142382373, guid: e8b3a87b7a9145b4abac0134e4ca85c9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

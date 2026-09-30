@@ -114,6 +114,10 @@ public class StageLoadManager : ManagerBase
         }
 
         CurrentMode = mode;
+        if(mode == BattleFieldMode.Stage && ContainsUnit(loadData.selectableUnits, "M_Archer"))
+        {
+            GameManager.ObjectM.PreparePool("ArrowBasic", 20);
+        }
 
         LoadSelectableUnits(loadData.selectableUnits, selectableUnits);
         LoadSelectableUnits(loadData.selectableEnemies, selectableEnemies); 
@@ -372,4 +376,15 @@ public class StageLoadManager : ManagerBase
         }
     }
     
+    private bool ContainsUnit(IReadOnlyList<StageUnitEntry> entries, string prefabName)
+    {
+        if (entries == null) return false;
+
+        foreach(StageUnitEntry entry in entries)
+        {
+            if (entry?.unitPrefabName == prefabName) return true;
+        }
+        return false;
+    }
+
 }

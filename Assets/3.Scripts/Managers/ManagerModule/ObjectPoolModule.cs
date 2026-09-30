@@ -22,15 +22,24 @@ public class ObjectPoolModule
 
     public void Initialize()
     {
+        //초기 요구량이 0일 경우 생성 안함
+        if (Setting.countInitial == 0) return;
+
+        EnsureInitialized();
+        PrepareObjects(Setting.countInitial);
+    }
+    //나중에 풀을 만들고 싶을때 쓰기 위해 분리
+    private void EnsureInitialized()
+    {
+        if (rootTransform) return;
+
+        // 이전 스테이지가 언로드되면 큐에는 파괴된 참조가 남을 수 있음
+        prepareQueue.Clear();
+
         rootTransform = new GameObject(Setting.poolName).transform;
 
         //풀링하려고 하는 원본 프리팹에 "PooledObject"라고 하는게 안들어있으면 추가해 줄 필요가 있다
         Setting.target?.TryAddComponent<PooledObject>();
-        
-
-        //게임 하면서 미니언 30개 쓸꺼니까 그만큼 준비해야지
-        PrepareObjects(Setting.countInitial);
-        
     }
 
     GameObject PrepareObject()
@@ -67,6 +76,17 @@ public class ObjectPoolModule
             GameObject result = CreateFromPrefab();
             EnqueueObject(result);
         }
+    }
+
+
+    public void PrepareAtLeast(uint count)
+    {
+        EnsureInitialized();
+
+        uint currentCount = (uint)prepareQueue.Count;
+        if (currentCount >= count) return;
+
+        PrepareObjects(count - currentCount);
     }
 
     public GameObject CreateFromPrefab()
@@ -136,18 +156,6 @@ public class ObjectPoolModule
                     asRectTransform.offsetMin = originRectTransform.offsetMin;
                     asRectTransform.offsetMax = originRectTransform.offsetMax;
                 }
-                //if(stretchX)
-                //{
-                //    asRectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, originRectTransform.offsetMin.x, 0);
-                //    asRectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, -originRectTransform.offsetMax.x, 0);
-                //    //                                                   오른쪽에서 +방향으로 가면 오른쪽이나까 -방향으로 가야함
-                //}
-                //if (stretchY)
-                //{
-                //    asRectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, originRectTransform.offsetMin.y, 0);
-                //    asRectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, -originRectTransform.offsetMax.y, 0);
-
-                //}
                 else
                 {
                     //3.앵커를 기준으로 만든 "위치값"을 가져와야 함

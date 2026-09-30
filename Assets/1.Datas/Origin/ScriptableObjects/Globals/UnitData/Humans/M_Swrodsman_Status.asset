@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a8306574de8154fbe56055f3f3dccf, type: 3}
   m_Name: M_Swrodsman_Status
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
-  unitName: "\uAC80\uC0AC"
+  icon: {fileID: -7467361549438300848, guid: b08acaf844aa34043b0040f9d0b4a0dc, type: 3}
+  displayName: "\uAC80\uC0AC"
+  explain: "\uAC80\uC744 \uB2E4\uB8E8\uB294 \uC790"
   cost: 8
   maxHP: 30
   damage: 5
   attackSpeed: 2
   moveSpeed: 2
-  hitNormalizedTime: 0.33
   colliderRadius: 0.4

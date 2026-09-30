@@ -116,6 +116,18 @@ PrefabInstance:
       propertyPath: prefabKey
       value: Monster_Wolf
       objectReference: {fileID: 0}
+    - target: {fileID: 3836209138201581117, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836209138201581117, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836209138201581117, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.706
+      objectReference: {fileID: 0}
     - target: {fileID: 3965736155650930506, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: attackExecutor
       value: 
@@ -180,6 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fa20ad41a4c99438460984b172bf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
+  executionStateTag: Attack
+  executeNormalizedTime: 0
 --- !u!95 &2155545320631188112 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1911986083768049959, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}

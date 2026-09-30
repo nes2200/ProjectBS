@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a8306574de8154fbe56055f3f3dccf, type: 3}
   m_Name: M_Archer_Status
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
-  unitName: "\uAD81\uC218"
+  icon: {fileID: -5157282206797536612, guid: b5035a7e17665004bb94cfce0b480a97, type: 3}
+  displayName: "\uAD81\uC218"
+  explain: "\uBA40\uB9AC\uC11C \uAE54\uC9DD\uC774\uB294\uB188"
   cost: 8
   maxHP: 20
   damage: 7

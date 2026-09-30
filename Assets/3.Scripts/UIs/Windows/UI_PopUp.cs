@@ -18,9 +18,9 @@ public class UI_PopUp : UIBase, ISystemMessagePossible, IConfirmable
     }
     public override void Unregistration(UIManager manager)
     {
-        base.Unregistration(manager);
         confirmButton.onClick.RemoveListener(Confirm);
         confirmAction = null;
+        base.Unregistration(manager);
     }
 
     public void Confirm()
@@ -40,6 +40,4 @@ public class UI_PopUp : UIBase, ISystemMessagePossible, IConfirmable
         contextText?.SetText(context);
         confirmText?.SetText(confirm);
     }
-
-
 }

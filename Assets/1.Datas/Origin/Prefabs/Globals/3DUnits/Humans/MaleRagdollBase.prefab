@@ -64,6 +64,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaleRagdollBase
       objectReference: {fileID: 0}
+    - target: {fileID: 3836209138201581117, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836209138201581117, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836209138201581117, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -137,6 +149,8 @@ MonoBehaviour:
   facialHair: {fileID: 4740987647896057379}
   hair: {fileID: 7769228918130724726}
   hairForHeadwear: {fileID: 3893859515303853840}
+  headDecorationPercent: 0.4
+  facialHairPercent: 0.25
 --- !u!4 &3629612457775444817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1084870234061844977, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}

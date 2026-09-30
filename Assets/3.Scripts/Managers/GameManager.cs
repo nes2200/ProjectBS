@@ -56,6 +56,10 @@ public class GameManager : MonoBehaviour
     public static event UpdateEvent     OnPhysicsCharacter;
     public static event UpdateEvent     OnPhysicsObject;
 
+    public static event UpdateEvent     OnLateCharacter;
+    public static event UpdateEvent     OnLateObject;
+    public static event UpdateEvent     OnLateCamera;
+
     public static event DestroyEvent    OnDestroyManager;
     public static event DestroyEvent    OnDestroyController;
     public static event DestroyEvent    OnDestroyCharacter;
@@ -334,7 +338,6 @@ public class GameManager : MonoBehaviour
         //카메라를 업데이트
         OnUpdateCamera?.Invoke(deltaTime);
 
-
         //오브젝트를 제거
         InvokeDestroyEvent(ref OnDestroyObject);
         //컨트롤러를 제거
@@ -357,5 +360,18 @@ public class GameManager : MonoBehaviour
 
         OnPhysicsCharacter?.Invoke(deltaTime);
         OnPhysicsObject?.Invoke(deltaTime);
+    }
+    private void LateUpdate()
+    {
+        if (isLoading) return;
+
+        float deltaTime = Time.deltaTime;
+
+        if (_isPlaying && IsBattleStart)
+        {
+            OnLateCharacter?.Invoke(deltaTime);
+            OnLateObject?.Invoke(deltaTime);
+        }
+        OnLateCamera?.Invoke(deltaTime);
     }
 }

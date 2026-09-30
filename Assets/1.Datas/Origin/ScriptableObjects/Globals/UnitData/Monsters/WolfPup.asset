@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a8306574de8154fbe56055f3f3dccf, type: 3}
   m_Name: WolfPup
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
-  unitName: "\uC0C8\uB07C\uB291\uB300"
+  icon: {fileID: 7444046612802208997, guid: 2d8a27f6e37e4054c857854aab01bf70, type: 3}
+  displayName: "\uC0C8\uB07C\uB291\uB300"
+  explain: "\uADC0\uC5FD\uC9C0\uB9CC \uC774\uBE68\uC740 \uB0A0\uCE74\uB86D\uC2B5\uB2C8\uB2E4"
   cost: 10
   maxHP: 15
   damage: 5
   attackSpeed: 1
   moveSpeed: 3
-  hitNormalizedTime: 0.4
   colliderRadius: 0.6

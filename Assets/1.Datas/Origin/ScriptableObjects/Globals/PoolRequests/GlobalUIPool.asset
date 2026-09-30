@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PoolRequest
   settings:
   - poolName: PopUp
-    target: {fileID: 9203591643914306502, guid: 03d8fb06d073e4345892739fb3c2121b, type: 3}
+    target: {fileID: 2876113337424877034, guid: 98b967ccc982a424eb46f0ebb4ea916a, type: 3}
     countInitial: 5
     countAdditional: 3

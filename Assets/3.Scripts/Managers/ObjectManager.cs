@@ -27,7 +27,7 @@ public class ObjectManager : ManagerBase
 
     //해당하는 이름의 대상으로 불러주기 위해서
     //[이름 - 게임오브젝트] 자료구조
-    static Dictionary<string, ObjectPoolModule> poolDictionary = new();
+    static Dictionary<string, ObjectPoolModule> poolDictionary = new(StringComparer.OrdinalIgnoreCase);
 
     protected override IEnumerator Onconnected(GameManager newManager)
     {
@@ -357,8 +357,6 @@ public class ObjectManager : ManagerBase
 
     public void RegistrationPool(string poolName)
     {
-        poolName = poolName.ToLower();
-
         PoolRequest currentRequest = DataManager.LoadDataFile<PoolRequest>(poolName);
         if (currentRequest == null) return;
         if (currentRequest.settings == null) return;
@@ -367,7 +365,7 @@ public class ObjectManager : ManagerBase
         //         학생         다음학생    in     3학년4반
         foreach(PoolSetting currentSetting in currentRequest.settings)
         {
-            string currentName = currentSetting.poolName.ToLower();
+            string currentName = currentSetting.poolName;
             GameObject currentPrefab = currentSetting.target;
             //다음학생이 오늘 안왔대요! => 다음 학생을 불러야 한다
             if (currentPrefab == null) continue;
@@ -397,6 +395,13 @@ public class ObjectManager : ManagerBase
         {
             currentPool?.Initialize();
         }
+    }
+
+    public void PreparePool(string poolName, uint count)
+    {
+        if (string.IsNullOrEmpty(poolName)) return;
+        if (poolDictionary.TryGetValue(poolName, out ObjectPoolModule pool)) pool.PrepareAtLeast(count);
+        
     }
 
     //씬 로드시 해당 씬에 있던 오브젝트들을 다시 한번 등록하기 위한 기능

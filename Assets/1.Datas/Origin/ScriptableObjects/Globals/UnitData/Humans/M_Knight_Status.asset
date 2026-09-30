@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a8306574de8154fbe56055f3f3dccf, type: 3}
   m_Name: M_Knight_Status
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
-  unitName: "\uAE30\uC0AC"
+  icon: {fileID: -6484028887975271816, guid: b946200773ddf424f8e6fff56f6fcf3a, type: 3}
+  displayName: "\uAE30\uC0AC"
+  explain: "\uAE30\uC0AC\uC785\uB2C8\uB2E4"
   cost: 10
   maxHP: 35
   damage: 10

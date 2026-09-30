@@ -4,9 +4,8 @@ using UnityEditor; // 에디터 기능을 쓰기 위해 필요한 도구함
 #endif
 
 [CreateAssetMenu(fileName = "UnitStatus", menuName = "Scriptable Objects/UnitStatus")]
-public class UnitStatus : ScriptableObject
+public class UnitStatus : InfoContainer
 {
-    public string unitName;
     public int cost;
     public int maxHP;
     public int damage;

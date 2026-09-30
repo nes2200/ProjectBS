@@ -8,6 +8,7 @@ public class UI_Toggle_UnitEntry : MonoBehaviour
     [SerializeField] Toggle toggle;
     [SerializeField] TextMeshProUGUI unitNameText;
     [SerializeField] TextMeshProUGUI unitCostText;
+    [SerializeField] Image unitImage;
     [SerializeField] Image checkImage;
 
     GameObject unitPrefab;
@@ -26,8 +27,9 @@ public class UI_Toggle_UnitEntry : MonoBehaviour
             return;
         }
 
-        unitNameText.text = character.Status.unitName;
+        unitNameText.text = character.Status.displayName;
         unitCostText.text = character.Status.cost.ToString();
+        unitImage.sprite = character.Status.icon;
 
         bool selected = stageManager.IsSelectableUnit(prefab);
 

@@ -44,9 +44,11 @@ public class CharacterBase : MonoBehaviour
         _status = newStatus;
     }
 
-    [Header("UI Anchors")]
+    [Header("Unit Anchors")]
     [SerializeField] Transform hpBarAnchor;
+    [SerializeField] Transform aimPosition;
     public Transform HPBarAnchor => hpBarAnchor;
+    public Vector3 AimPosition => aimPosition ? aimPosition.position : transform.position;
 
 
     bool _isAlive = true;
@@ -56,7 +58,7 @@ public class CharacterBase : MonoBehaviour
     TeamID _team;
     public TeamID Team => _team;
 
-    public virtual string DisplayName => Status.unitName;
+    public virtual string DisplayName => Status.displayName;
 
     //모듈 저장하기
     //List : 추가/제거가 쉽다 <-> 메모리 효율이 낮고, 전체 순환이 느리다

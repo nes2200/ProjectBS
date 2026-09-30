@@ -568,4 +568,5 @@ MonoBehaviour:
   toggle: {fileID: 5829726767117072994}
   unitNameText: {fileID: 9051181293398440282}
   unitCostText: {fileID: 1367472316450073561}
+  unitImage: {fileID: 3065305502999536633}
   checkImage: {fileID: 4757615349952889774}
