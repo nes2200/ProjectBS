@@ -5233,6 +5233,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1556335165}
     m_Modifications:
+    - target: {fileID: 124337703263232950, guid: fb3520a40bb850b45b45c25496f4e330, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 124337703263232950, guid: fb3520a40bb850b45b45c25496f4e330, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1550925833221635020, guid: fb3520a40bb850b45b45c25496f4e330, type: 3}
       propertyPath: m_Name
       value: LoadingScreen
@@ -5246,6 +5254,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3134516720968693747, guid: fb3520a40bb850b45b45c25496f4e330, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151808577771925516, guid: fb3520a40bb850b45b45c25496f4e330, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151808577771925516, guid: fb3520a40bb850b45b45c25496f4e330, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -5332,6 +5348,14 @@ PrefabInstance:
     - target: {fileID: 5260399021578241020, guid: fb3520a40bb850b45b45c25496f4e330, type: 3}
       propertyPath: m_text
       value: "\uC870\uD569\uC774 \uC911\uC694\uD569\uB2C8\uB2E4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114745303640743946, guid: fb3520a40bb850b45b45c25496f4e330, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114745303640743946, guid: fb3520a40bb850b45b45c25496f4e330, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

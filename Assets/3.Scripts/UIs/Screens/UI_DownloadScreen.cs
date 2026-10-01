@@ -8,6 +8,14 @@ public class UI_DownloadScreen : UI_ScreenBase
     {
         base.Open();
 
+        fileViewer.Clear();
+
+        if (!GameManager.DB.IsLoggedIn)
+        {
+            fileViewer.ChangeInnerText("로그인이 필요합니다");
+            return;
+        }
+
         GameManager.DB.ReadData(task =>
         {
             if (!this || !gameObject.activeInHierarchy) return;
@@ -17,7 +25,6 @@ public class UI_DownloadScreen : UI_ScreenBase
                 return;
             }
 
-            fileViewer.Clear();
             foreach (var child in task.Result.Children)
             {
                 string mapID = child.Key;

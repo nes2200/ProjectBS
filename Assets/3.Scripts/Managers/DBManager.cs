@@ -15,7 +15,9 @@ public class DBManager : ManagerBase
     private DatabaseReference rootDB;
 
     private const string EmailSuffix = "@projectbs.test";
-    public bool IsFirebaseReady => authentication != null;
+
+    private bool firebaseReady;
+    public bool IsFirebaseReady => firebaseReady && authentication != null && rootDB != null;
 
     public event Action<bool> OnAuthStateChanged;
     public bool IsLoggedIn => authentication != null && authentication.CurrentUser != null;
@@ -37,37 +39,39 @@ public class DBManager : ManagerBase
 
     void InitializeFirebase(Task<DependencyStatus> task)
     {
-        if(task is null)
+        if(task.IsFaulted || task.IsCanceled)
         {
-            Debug.Log($"Firebase Initialize Failed. No {task}");
+            Debug.LogError(task.Exception);
+            return;
         }
 
-        if(task.Result == DependencyStatus.Available)
+        if(task.Result != DependencyStatus.Available)
         {
-            //인증용 인스턴스 가져오기
-            authentication = FirebaseAuth.DefaultInstance;
+            Debug.LogError($"Firebase unavailable: {task.Result}");
+            return;
+        }
 
-            //로그인 확인용 이벤트
-            authentication.StateChanged -= HandleAuthStateChanged;
-            authentication.StateChanged += HandleAuthStateChanged;
+       
+        //인증용 인스턴스 가져오기
+        authentication = FirebaseAuth.DefaultInstance;
 
-            HandleAuthStateChanged(this, EventArgs.Empty);
+        //로그인 확인용 이벤트
+        authentication.StateChanged -= HandleAuthStateChanged;
+        authentication.StateChanged += HandleAuthStateChanged;
 
-            //인증을 하기 위해 필요한 "유저" 가져오기
-            user = authentication.CurrentUser;
-            //데이터 베이스에 가려면 데이터 베이스가 어디에 있는지 찾아갈 수 있어야 한다
-            //데이터 베이스 참조(Reference)
-            rootDB = FirebaseDatabase.DefaultInstance.RootReference;
+        HandleAuthStateChanged(this, EventArgs.Empty);
 
-            // 회원가입/로그인 화면에서 인증을 진행하므로 시작 시 익명 로그인을 하지 않는다.
-            // GuestLogin();
+        //인증을 하기 위해 필요한 "유저" 가져오기
+        user = authentication.CurrentUser;
+        //데이터 베이스에 가려면 데이터 베이스가 어디에 있는지 찾아갈 수 있어야 한다
+        //데이터 베이스 참조(Reference)
+        rootDB = FirebaseDatabase.DefaultInstance.RootReference;
+
+        // 회원가입/로그인 화면에서 인증을 진행하므로 시작 시 익명 로그인을 하지 않는다.
+        // GuestLogin();
          
-            Debug.Log("Firebase Initialize");
-        }
-        else
-        {
-            Debug.LogError($"Fail to Initialize Firebase : {task.Exception}");
-        }
+        Debug.Log("Firebase Initialize");
+       
     }
 
     public async void GuestLogin()
