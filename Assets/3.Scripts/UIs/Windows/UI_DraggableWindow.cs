@@ -15,6 +15,16 @@ public class UI_DraggableWindow : UIBase, IPointerDownHandler
     /// <summary> 이동하려고 했는데 막혀버린 위치 </summary>
     Vector2 shiftedPosition;
 
+    //껐다 켰을 때 위치 초기화용
+    private void OnEnable()
+    {
+        if (rootTransform)
+            rootTransform.localPosition = Vector3.zero;
+
+        currentScreenPosition = Vector2.zero;
+        shiftedPosition = Vector2.zero;
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         OnDragStart?.Invoke(this, eventData.position);

@@ -10,17 +10,17 @@ public class UI_StageSelectScreen : UI_ScreenBase
     public override void Open()
     {
         base.Open();
-        InputManager.OnCancel -= BackToChapter;
-        InputManager.OnCancel += BackToChapter;
+        InputManager.OnCancel -= BackToTitle;
+        InputManager.OnCancel += BackToTitle;
 
     }
     public override void Close()
     {
-        InputManager.OnCancel -= BackToChapter;
+        InputManager.OnCancel -= BackToTitle;
         base.Close();
     }
 
-    void BackToChapter(bool value) => UIManager.ClaimOpenScreen(UIType.ChapterSelect, ScreenChangeType.ScreenChanger);
+    void BackToTitle(bool value) => UIManager.ClaimOpenScreen(UIType.Title, ScreenChangeType.ScreenChanger);
 
     public void SetChapter(int chapter)
     {
