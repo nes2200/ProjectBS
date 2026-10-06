@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
   executionStateTag: Attack
-  executeNormalizedTime: 0
+  executeNormalizedTime: 0.5
 --- !u!95 &2155545320631188112 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1911986083768049959, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}

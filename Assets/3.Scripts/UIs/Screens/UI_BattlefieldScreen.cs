@@ -42,6 +42,7 @@ public class UI_BattlefieldScreen : UI_ScreenBase
 
         GameManager.Camera.AddCameraController();
         GameManager.ResetBattle();
+        GameManager.UnPause();
 
         SetSelectAreaVisible(true);
 

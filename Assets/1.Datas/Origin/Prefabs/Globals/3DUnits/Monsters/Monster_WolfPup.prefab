@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
   executionStateTag: Attack
-  executeNormalizedTime: 0
+  executeNormalizedTime: 0.4
 --- !u!1 &7612453063173331272 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3035384091999026604, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
