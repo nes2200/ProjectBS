@@ -5,6 +5,7 @@ public class UI_CostChangeArea : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI costText;
     [SerializeField] TMP_InputField inputField;
+    [SerializeField] TextMeshProUGUI warningText;
 
     private UI_CostChangeWindow window;
     private int index;
@@ -13,6 +14,7 @@ public class UI_CostChangeArea : MonoBehaviour
     {
         window = owner;
         index = areaIndex;
+        SetWarning("");
     }
 
     public void ChangeCurrentCostText(int costLimit)
@@ -23,18 +25,23 @@ public class UI_CostChangeArea : MonoBehaviour
     public void OnEndEdit(string input)
     {
         if (!window) return;
+        OnValueChanged(input);
         window.TryChangeCost(index, input);
     }
 
     public void OnValueChanged(string input)
     {
-        if (!int.TryParse(input, out int value)) return;
-
-        int clamp = Mathf.Clamp(value, 0, 1000);
-
-        if(value != clamp)
+        if (!window || !int.TryParse(input, out int value))
         {
-            inputField.SetTextWithoutNotify(clamp.ToString());
+            SetWarning("");
+            return;
         }
+        SetWarning(window.GetCostWarning(index, value));
+    }
+
+    private void SetWarning(string message)
+    {
+        warningText.text = message;
+        warningText.gameObject.SetActive(!string.IsNullOrEmpty(message));
     }
 }

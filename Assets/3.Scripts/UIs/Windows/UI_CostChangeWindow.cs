@@ -8,6 +8,7 @@ public class UI_CostChangeWindow : OpenableUIBase
     UI_SandboxScreen sandboxScreen;
     int[] wantCostLimits;
 
+
     public override void Registration(UIManager manager)
     {
         base.Registration(manager);
@@ -39,22 +40,22 @@ public class UI_CostChangeWindow : OpenableUIBase
         }
     }
 
+    public string GetCostWarning(int index, int value)
+    {
+        if (value > 1000)return "1000이상 입력 불가";
+        if (value < 0) return "0 이하 입력 불가";
+        if (index < wantCostLimits.Length - 1 && value >= wantCostLimits[index + 1]) return "다음 코스트보다 낮아야함";
+        if (index > 0 && value <= wantCostLimits[index - 1]) return "이전 코스트보다 높아야함";
+        return "";
+    }
+
     public bool TryChangeCost(int index, string input)
     {
         if (wantCostLimits == null || index < 0 || index >= wantCostLimits.Length) return false;
-
         if (!int.TryParse(input, out int value)) return false;
+        if (!string.IsNullOrEmpty(GetCostWarning(index, value))) return false;
 
-        int[] copy = (int[])wantCostLimits.Clone();
-        copy[index] = value;
-
-        //코스트 제한에서 20 30 40은 가능. 30 30 40같은건 불가능
-        for(int i = 1; i < copy.Length; i++)
-        {
-            if (copy[i - 1] >= copy[i]) return false;
-        }
-
-        wantCostLimits = copy;
+        wantCostLimits[index] = value;
         costChangeArea[index].ChangeCurrentCostText(value);
         return true;
     }

@@ -3,6 +3,7 @@ using UnityEngine;
 using Firebase;
 using Firebase.Auth;
 using System;
+using UnityEngine.UI;
 
 public class UI_LogInWindow : OpenableUIBase
 {
@@ -11,15 +12,12 @@ public class UI_LogInWindow : OpenableUIBase
     [SerializeField] TMP_InputField passwordField;
 
     bool isLoggingIn;
-    bool isPasswordVisible;
 
     public override void Open()
     {
         base.Open();
         idField.text = "";
         passwordField.text = "";
-
-        SetPasswordVisible(false);
     }
     public override void Close()
     {
@@ -74,19 +72,5 @@ public class UI_LogInWindow : OpenableUIBase
         {
             isLoggingIn = false;
         }
-    }
-
-    public void TogglePasswordVisibility()
-    {
-        SetPasswordVisible(!isPasswordVisible);
-    }
-
-    private void SetPasswordVisible(bool visible)
-    {
-        isPasswordVisible = visible;
-
-        passwordField.contentType = visible ? TMP_InputField.ContentType.Standard : TMP_InputField.ContentType.Password;
-
-        passwordField.ForceLabelUpdate();
     }
 }

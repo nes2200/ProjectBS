@@ -34,7 +34,6 @@ public class UI_SaveMapWindow : OpenableUIBase
     public void OnEndEdit(string input)
     {
         mapName = input.Trim();
-        Debug.Log(mapName);
     }
 
     public void OpenForSave(StageDataAuthoring source)

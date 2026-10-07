@@ -96,6 +96,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Text
       objectReference: {fileID: 0}
+    - target: {fileID: 3564793263702835442, guid: 8e4480f17c479394db011981130dadaf, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264231227383258389, guid: 8e4480f17c479394db011981130dadaf, type: 3}
+      propertyPath: m_Name
+      value: ButtonText
+      objectReference: {fileID: 0}
     - target: {fileID: 6529660061266322545, guid: 8e4480f17c479394db011981130dadaf, type: 3}
       propertyPath: m_Sprite
       value: 

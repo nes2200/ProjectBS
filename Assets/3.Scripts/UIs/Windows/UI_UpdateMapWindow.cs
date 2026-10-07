@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class UI_UpdateMapWindow : OpenableUIBase
 {
+    [Header("Map Name")]
     [SerializeField] TMP_InputField inputField;
+    [SerializeField] GameObject warningText;
+
     StageDataAuthoring authoring;
     string mapID;
     string originalMapName;
@@ -19,7 +22,14 @@ public class UI_UpdateMapWindow : OpenableUIBase
     {
         base.Open();
         inputField.SetTextWithoutNotify(originalMapName);
+        warningText.SetActive(false);
 
+        inputField.onValueChanged.AddListener(InputChanged);
+    }
+    public override void Close()
+    {
+        inputField.onValueChanged.RemoveListener(InputChanged);
+        base.Close();
     }
 
     public void OpenForUpdate(StageDataAuthoring source, string targetMapID, string currentMapName)
@@ -27,8 +37,13 @@ public class UI_UpdateMapWindow : OpenableUIBase
         authoring = source;
         mapID = targetMapID;
         originalMapName = currentMapName;
-
         Open();
+    }
+
+    public void InputChanged(string value)
+    {
+        if (value != originalMapName) warningText.SetActive(true);
+        else warningText.SetActive(false);
     }
 
     public async void UpdateMap()
