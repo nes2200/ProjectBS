@@ -9,6 +9,10 @@ public class AnimationModule : CharacterModule
     [SerializeField] Rigidbody mainRigid;
     [SerializeField] bool useDeathAnimation;
 
+    [Header("Weapons")]
+    [SerializeField] private Rigidbody weaponRigid;
+    [SerializeField] private Collider weaponCollider;
+
     Rigidbody[] ragdollRigidbodies;
     public CapsuleCollider MainCollider => mainCollider;
 
@@ -32,6 +36,7 @@ public class AnimationModule : CharacterModule
         StageManager.OnStageStateChange += StopAnimationByEndBattle;
 
         //모든 rigid를 가져와 isKineatic을 true로 바꾼다
+        ResetWeapon();
         GetAllRigidbody();
         SetRigidbodyAndCollier();
     }
@@ -82,10 +87,29 @@ public class AnimationModule : CharacterModule
 
         //죽는 애니메이션 없이 래그돌 쓸 친구들
         anim.enabled = false;
-        foreach (Rigidbody rigid in ragdollRigidbodies) 
-        { 
-            rigid.isKinematic = false; 
+        foreach (Rigidbody rigid in ragdollRigidbodies)
+        {
+            if (rigid == mainRigid || rigid == weaponRigid) continue;
+            rigid.isKinematic = false;
         }
+        DropWeapon();
+    }
+    private void DropWeapon()
+    {
+        if (!weaponRigid) return;
+
+        weaponRigid.transform.SetParent(null, true);
+        weaponRigid.useGravity = true;
+        weaponRigid.isKinematic = false;
+        weaponCollider.isTrigger = false;
+    }
+    private void ResetWeapon()
+    {
+        if (!weaponRigid) return;
+
+        weaponRigid.useGravity = false;
+        weaponRigid.isKinematic = true;
+        weaponCollider.isTrigger = true;
     }
 
     public void AnimationByDamaged(in DamageStruct info)
@@ -102,7 +126,6 @@ public class AnimationModule : CharacterModule
             anim.SetTrigger("FullBodyDamaged");
         }
     }
-
 
     //모든 하위 rigidbody 가져오기
     public void GetAllRigidbody()
