@@ -9,6 +9,7 @@ public class UnitStatus : InfoContainer
     public int cost;
     public int maxHP;
     public int damage;
+    public int defense;
     public float attackSpeed;
     public float moveSpeed;
 

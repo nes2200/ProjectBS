@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+public delegate void HitEvent(DamageStruct damage);
+public delegate void HealEvent(RestoreStruct restore); 
+
 public struct DamageStruct
 {
     public GameObject from;
@@ -31,6 +34,12 @@ public class HitPointModule : CharacterModule
         add => fill.OnChanged += value;
         remove => fill.OnChanged -= value;
     }
+
+    public event HitEvent OnBeforeHit;
+    public event HitEvent OnAfterHit;
+
+    public event RestoreEvent OnBeforeRestore;
+    public event RestoreEvent OnAfterRestore;
 
     public override void OnRegistration(CharacterBase newOwner)
     {

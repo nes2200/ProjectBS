@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+public delegate void AttackEvent(CharacterBase target);
+
 public struct AttackInfo
 {
     public CharacterBase target;
@@ -28,6 +30,9 @@ public class AttackModule : CharacterModule
 
     //근거리 원거리 나누는 용도
     [SerializeField] AttackExecutor attackExecutor;
+
+    public event AttackEvent OnBeforeAttack;
+    public event AttackEvent OnAfterAttack;
 
     public override Type RegistrationType => typeof(AttackModule);
 

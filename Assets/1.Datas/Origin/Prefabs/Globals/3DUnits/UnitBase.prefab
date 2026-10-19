@@ -72,6 +72,8 @@ GameObject:
   - component: {fileID: -7265754008473529279}
   - component: {fileID: -8216830479399972252}
   - component: {fileID: 2085023195534024142}
+  - component: {fileID: 8195600507360225115}
+  - component: {fileID: 2326260122613829701}
   - component: {fileID: 1920007813887236209}
   - component: {fileID: -5608401926662398788}
   - component: {fileID: -8082197010707355841}
@@ -157,6 +159,8 @@ MonoBehaviour:
   mainCollider: {fileID: -5608401926662398788}
   mainRigid: {fileID: -8082197010707355841}
   useDeathAnimation: 0
+  weaponRigid: {fileID: 0}
+  weaponCollider: {fileID: 0}
 --- !u!114 &3965736155650930506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +232,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackSlotModule
   slotCount: 4
   margin: 0.05
+--- !u!114 &8195600507360225115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226144352791122500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8351ca0885519e40aa79f9f77531671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillModule
+  activeSkill: {fileID: 0}
+  passiveSkill: {fileID: 0}
+--- !u!114 &2326260122613829701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226144352791122500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3966a9b36738d4b99456c647397943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectModule
 --- !u!195 &1920007813887236209
 NavMeshAgent:
   m_ObjectHideFlags: 0
