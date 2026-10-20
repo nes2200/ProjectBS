@@ -44,7 +44,7 @@ public class HitPointModule : CharacterModule
     public override void OnRegistration(CharacterBase newOwner)
     {
         base.OnRegistration(newOwner);
-        SetFillValue(Owner.Status);
+        SetFillValue(Owner.finalStatus);
         fill.OnChanged -= FaintCheck;
         fill.OnChanged += FaintCheck;
     }
@@ -53,23 +53,31 @@ public class HitPointModule : CharacterModule
         base.OnUnregistration(oldOwner);
         fill.OnChanged -= FaintCheck;
     }
-    protected void SetFillValue(UnitStatus unitstatus)
+    protected void SetFillValue(FinalStatus unitstatus)
     {
         fill = new FillValue(unitstatus.maxHP, unitstatus.maxHP);
     }
 
     public int TakeDamage(in DamageStruct damageInfo)
     {
-        fill.DecreaseCurrent(damageInfo.damageAmount);
+        OnBeforeHit?.Invoke(damageInfo);
+
+        int finalDamage = Mathf.Max(0, damageInfo.damageAmount - Owner.finalStatus.defense);
+        fill.DecreaseCurrent(finalDamage);
+        
+        OnAfterHit?.Invoke(damageInfo);
 
         if (Owner.IsAlive) Owner.DamageNotify(damageInfo);
 
-        return damageInfo.damageAmount;
+        return finalDamage;
 
     }
     public int TakeRestore(in RestoreStruct restoreInfo)
     {
+        OnBeforeRestore?.Invoke(restoreInfo);
         fill.IncreaseCurrent(restoreInfo.restoreAmount);
+        OnAfterRestore?.Invoke(restoreInfo);
+
         return restoreInfo.restoreAmount;
     }
 

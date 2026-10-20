@@ -118,7 +118,7 @@ public class AttackModule : CharacterModule
     void AttackCooldownUpdate(float deltaTime)
     {
         attackCooldownCurrent += deltaTime;
-        if(attackCooldownCurrent >= Owner.Status.attackSpeed)
+        if(attackCooldownCurrent >= Owner.finalStatus.attackSpeed)
         {
             AttackCooldownEnd();
         }

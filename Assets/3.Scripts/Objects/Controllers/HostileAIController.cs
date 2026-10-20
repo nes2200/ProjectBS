@@ -150,7 +150,7 @@ public class HostileAIController : AIController
             {
                 target = targetCharacter,
                 instigator = this,
-                damageAmount = Character.Status.damage
+                damageAmount = Character.finalStatus.damage
             });
         }
     }

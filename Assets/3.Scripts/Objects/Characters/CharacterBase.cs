@@ -39,9 +39,24 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] UnitStatus _status;
     public UnitStatus Status => _status;
 
+    //버프나 변동치로 인한 계산을 끝낸 최종 스탯
+    public FinalStatus finalStatus { get; } = new FinalStatus();
+
+    [SerializeField] int hpBonus;
+    [SerializeField] int damageBonus;
+    [SerializeField] int defenseBonus;
+    [SerializeField] float attackSpeedMultiplier = 1f;
+    [SerializeField] float moveSpeedMultiplier = 1f;
+
+    public void RecalculateStatus()
+    {
+        finalStatus.Calculate(Status, hpBonus, damageBonus, defenseBonus, attackSpeedMultiplier, moveSpeedMultiplier);
+    }
+
     public void SetStatus(UnitStatus newStatus)
     {
         _status = newStatus;
+        RecalculateStatus();
     }
 
     [Header("Unit Anchors")]
@@ -117,6 +132,7 @@ public class CharacterBase : MonoBehaviour
         if (Controller) Unpossessed();
 
         _controller = from;
+        RecalculateStatus();
         AddAllModuleFromObject(gameObject);
         OnPossessed(Controller);
         OnCharacterReady?.Invoke(this);

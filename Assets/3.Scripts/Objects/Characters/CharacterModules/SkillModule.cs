@@ -2,12 +2,14 @@ using System;
 using UnityEngine;
 
 public delegate void SkillUseEvent(CharacterBase user, CharacterBase target);
+public delegate void SkillChangeEvent(SkillContainer oldSkill, SkillContainer newSkill);
 
 public class SkillModule : CharacterModule
 {
     public event SkillUseEvent OnBeforeUse;
     public event SkillUseEvent OnAfterUse;
-    public event Action OnSkillChanged;
+    public event SkillChangeEvent OnActiveSkillChanged;
+    public event SkillChangeEvent OnPassiveSkillChanged;
 
     [SerializeField] ActiveSkillContainer activeSkill;
     [SerializeField] PassiveSkillContainer passiveSkill;
@@ -32,10 +34,14 @@ public class SkillModule : CharacterModule
         base.OnUnregistration(oldOwner);
     }
 
-    public void TryUseActiveSkill()
+    public void TryUseActiveSkill(CharacterBase target)
     {
         if (!activeSkill || activeCooldownRemaining > 0f) return;
+        OnBeforeUse?.Invoke(Owner, target);
+        activeSkill.UseSkill(Owner, target);
+        OnAfterUse?.Invoke(Owner, target);
     }
+   
 
     public void TryTriggerPassiveSkill()
     {
@@ -72,12 +78,14 @@ public class SkillModule : CharacterModule
             GameManager.OnUpdateCharacter -= SkillCooldownUpdate;
     }
 
-    public void ChangeActiveSkill(/*±âÁ¸½½·Ô°ú »õ ½½·Ô*/)
+    public void ChangeActiveSkill(ActiveSkillContainer newSkill)
     {
-        OnSkillChanged?.Invoke();
+        OnActiveSkillChanged?.Invoke(activeSkill, newSkill);
+        activeSkill = newSkill;
     }
-    public void ChangePassiveSkill(/*±âÁ¸½½·Ô°ú »õ ½½·Ô*/)
+    public void ChangePassiveSkill(PassiveSkillContainer newSkill)
     {
-        OnSkillChanged?.Invoke();
+        OnPassiveSkillChanged?.Invoke(passiveSkill, newSkill);
+        passiveSkill = newSkill;
     }
 }

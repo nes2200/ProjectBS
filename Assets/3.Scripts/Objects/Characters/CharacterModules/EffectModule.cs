@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public delegate void EffectEvent(EffectContainer effect);
@@ -16,6 +17,7 @@ public class EffectModule : CharacterModule
     public override void OnRegistration(CharacterBase newOwner)
     {
         base.OnRegistration(newOwner);
+
         foreach (EffectInstance buff in buffs)
         {
             buff.ClearEffect();
@@ -25,12 +27,12 @@ public class EffectModule : CharacterModule
             buff.ClearEffect();
         }
 
-        GameManager.OnUpdateCharacter -= UpdateAllEffectsDuration;
-        GameManager.OnUpdateCharacter += UpdateAllEffectsDuration;
+        GameManager.OnUpdateCharacter -= UpdateEffects;
+        GameManager.OnUpdateCharacter += UpdateEffects;
     }
     public override void OnUnregistration(CharacterBase oldOwner)
     {
-        GameManager.OnUpdateCharacter -= UpdateAllEffectsDuration;
+        GameManager.OnUpdateCharacter -= UpdateEffects;
 
         foreach (EffectInstance buff in buffs)
         {
@@ -44,20 +46,64 @@ public class EffectModule : CharacterModule
         base.OnUnregistration(oldOwner);
     }
 
-    public void GetEffect(EffectContainer effect)
+    public void ApplyEffect(CharacterBase causer, EffectContainer effect)
     {
-        if (effect.Category == EffectCategory.Buff) return; //리스트에 하나 추가하고 거기다가 집어넣기
+        if (effect.Category == EffectCategory.Buff) 
+        {
+            foreach (EffectInstance buff in buffs)
+            {
+                if(buff.CanReapply(causer, effect))
+                {
+                    buff.Reapply();
+                    return;
+                }
+            }
+            buffs.Add(CreateEffectInstance(causer, effect));
+            OnEffectAdded?.Invoke(effect);
+        }
+        if (effect.Category == EffectCategory.Debuff)
+        {
+            foreach (EffectInstance debuff in debuffs)
+            {
+                if (debuff.CanReapply(causer, effect))
+                {
+                    debuff.Reapply();
+                    return;
+                }
+            }
+            debuffs.Add(CreateEffectInstance(causer, effect));
+            OnEffectAdded?.Invoke(effect);
+        }
     }
 
-    public void UpdateAllEffectsDuration(float deltaTime)
+    public EffectInstance CreateEffectInstance(CharacterBase causer, EffectContainer effect)
     {
-        foreach (EffectInstance buff in buffs)
+        EffectInstance newInstance = new();
+        newInstance.Initialize(causer, effect);
+        return newInstance;
+    }
+
+    public void UpdateEffects(float deltaTime)
+    {
+        for(int i = buffs.Count - 1; i >= 0; i--)
         {
-            buff.UpdateDuration(deltaTime);
+            buffs[i].UpdateDuration(deltaTime);
+
+            if (!buffs[i].IsActive)
+            {
+                OnEffectRemoved?.Invoke(buffs[i].Effect);
+                buffs.RemoveAt(i);
+            }
         }
-        foreach (EffectInstance buff in debuffs)
+        for (int i = debuffs.Count - 1; i >= 0; i--)
         {
-            buff.UpdateDuration(deltaTime);
+            debuffs[i].UpdateDuration(deltaTime);
+
+            if (!debuffs[i].IsActive)
+            {
+                OnEffectRemoved?.Invoke(debuffs[i].Effect);
+                debuffs.RemoveAt(i);
+            }
         }
     }
 }

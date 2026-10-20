@@ -55,7 +55,7 @@ public class MovementModule : CharacterModule, IRunnable
 
         // NavMeshAgent는 경로와 위치만 담당하고, 회전은 UpdateRotation에서 직접 제어한다.
         navAgent.updateRotation = false;
-        navAgent.speed = moveSpeed;
+        navAgent.speed = Owner.finalStatus.moveSpeed;
         navAgent.autoBraking = false;
 
         //우선순위 변경으로 양보하기 

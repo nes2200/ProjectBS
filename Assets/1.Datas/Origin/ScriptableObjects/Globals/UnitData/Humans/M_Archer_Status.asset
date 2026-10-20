@@ -18,6 +18,7 @@ MonoBehaviour:
   cost: 8
   maxHP: 20
   damage: 7
+  defense: 1
   attackSpeed: 2
   moveSpeed: 2
   colliderRadius: 0.4
