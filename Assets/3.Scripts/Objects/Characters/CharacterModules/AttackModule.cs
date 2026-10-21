@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public delegate void AttackEvent(CharacterBase target);
+public delegate void AttackEvent(CharacterBase attacker, CharacterBase target);
 
 public struct AttackInfo
 {
@@ -90,7 +90,9 @@ public class AttackModule : CharacterModule
         hasExecuteAttack = true;
         GameManager.OnUpdateCharacter -= UpdateAttack;
 
+        OnBeforeAttack?.Invoke(Owner, currentAttackInfo.target);
         attackExecutor.Execute(currentAttackInfo);
+        OnAfterAttack?.Invoke(Owner, currentAttackInfo.target);
     }
 
     public void OnAttackAnimationEnd()

@@ -20,3 +20,6 @@ MonoBehaviour:
   maxStack: 1
   refreshDurationOnReapply: 1
   allowMultipleInstances: 0
+  modifiers:
+  - stat: 2
+    value: 2

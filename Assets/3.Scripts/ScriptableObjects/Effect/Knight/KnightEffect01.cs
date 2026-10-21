@@ -3,12 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "KnightEffect01", menuName = "Scriptable Objects/Effect/Knight/Effect01")]
 public class KnightEffect01 : EffectContainer
 {
-    public override void Apply(CharacterBase target)
+    [SerializeField] StatModifier[] modifiers;
+
+    public override EffectBehavior CreateBehavior(EffectInstance instance, CharacterBase target)
     {
-        
-    }
-    public override void Remove()
-    {
-        
+        return new StatModifierBehavior(target, modifiers);
     }
 }

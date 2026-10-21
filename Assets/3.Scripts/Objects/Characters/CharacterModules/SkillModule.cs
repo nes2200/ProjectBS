@@ -24,12 +24,16 @@ public class SkillModule : CharacterModule
     public override void OnRegistration(CharacterBase newOwner)
     {
         base.OnRegistration(newOwner);
+
+        passiveSkill?.RegistrateEvents(newOwner);
     }
     public override void OnUnregistration(CharacterBase oldOwner)
     {
         GameManager.OnUpdateCharacter -= SkillCooldownUpdate;
         activeCooldownRemaining = 0f;
         passiveCooldownRemaining = 0f;
+
+        passiveSkill?.UnregistrateEvent(oldOwner);
 
         base.OnUnregistration(oldOwner);
     }
@@ -38,14 +42,17 @@ public class SkillModule : CharacterModule
     {
         if (!activeSkill || activeCooldownRemaining > 0f) return;
         OnBeforeUse?.Invoke(Owner, target);
+
         activeSkill.UseSkill(Owner, target);
+        ActiveCooldownStart();
+
         OnAfterUse?.Invoke(Owner, target);
     }
-   
 
     public void TryTriggerPassiveSkill()
     {
         if (!passiveSkill || passiveCooldownRemaining > 0f) return;
+
     }
 
     void ActiveCooldownStart()

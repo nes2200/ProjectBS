@@ -13,6 +13,8 @@ public class EffectModule : CharacterModule
     public event EffectEvent OnEffectAdded;
     public event EffectEvent OnEffectRemoved;
 
+    public GameObject test;
+
     public override Type RegistrationType => typeof(EffectModule);
     public override void OnRegistration(CharacterBase newOwner)
     {
@@ -79,7 +81,7 @@ public class EffectModule : CharacterModule
     public EffectInstance CreateEffectInstance(CharacterBase causer, EffectContainer effect)
     {
         EffectInstance newInstance = new();
-        newInstance.Initialize(causer, effect);
+        newInstance.Initialize(this, causer, effect);
         return newInstance;
     }
 

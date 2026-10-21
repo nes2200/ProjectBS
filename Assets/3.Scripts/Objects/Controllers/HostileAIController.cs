@@ -6,6 +6,7 @@ public class HostileAIController : AIController
     TargetingModule targetModule;
     AttackModule atkModule;
     AttackRangeModule atkRangeModule;
+    SkillModule skillModule;
 
     CharacterBase targetCharacter;
     HitPointModule targetHPModule;
@@ -27,6 +28,7 @@ public class HostileAIController : AIController
         targetModule = Character.GetModule<TargetingModule>();
         atkModule = Character.GetModule<AttackModule>();
         atkRangeModule = Character.GetModule<AttackRangeModule>();
+        skillModule = Character.GetModule<SkillModule>();
         teamEliminateNotifier = GetComponentInParent<TeamEliminateNotifier>();
 
         selfRadius = newCharacter.Status.colliderRadius;
@@ -78,6 +80,7 @@ public class HostileAIController : AIController
         //나 죽었으면 생각을 중지
         if (!Character || !Character.IsAlive) return;
 
+
         //공격 중에는 타겟 변경과 이동 금지
         if (atkModule.IsAttacking)
         {
@@ -88,6 +91,8 @@ public class HostileAIController : AIController
             }
             return;
         }
+
+        skillModule?.TryUseActiveSkill(Character);
 
         //바로 공격 가능한 적 공격
         if (TryHandleInAttackRange()) return;

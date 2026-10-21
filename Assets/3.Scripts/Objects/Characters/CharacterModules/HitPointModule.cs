@@ -9,6 +9,7 @@ public struct DamageStruct
     public GameObject from;
     public ControllerBase instigator;
     public int damageAmount;
+    public int defensePenetration;
 }
 public struct RestoreStruct
 {
@@ -61,8 +62,8 @@ public class HitPointModule : CharacterModule
     public int TakeDamage(in DamageStruct damageInfo)
     {
         OnBeforeHit?.Invoke(damageInfo);
-
-        int finalDamage = Mathf.Max(0, damageInfo.damageAmount - Owner.finalStatus.defense);
+        int effectiveDefense = damageInfo.defensePenetration == -1 ? 0 : Mathf.Max(0, Owner.finalStatus.defense - Mathf.Max(0, damageInfo.defensePenetration));
+        int finalDamage = Mathf.Max(0, damageInfo.damageAmount - effectiveDefense);
         fill.DecreaseCurrent(finalDamage);
         
         OnAfterHit?.Invoke(damageInfo);

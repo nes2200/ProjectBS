@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class EffectInstance
 {
+    EffectModule effectModule;
+
+    EffectBehavior behavior;
     EffectContainer effect;
     float finalduration;
     float remainingDuration;
@@ -21,23 +24,39 @@ public class EffectInstance
     //빈칸일수도 있으니까 null을 기본으로
     public void ClearEffect()
     {
-        OnEffectRemoved?.Invoke();
+        if (effect == null) return;
+
+        // 콜백 중 다시 제거를 요청해도 중복 실행하지 않도록 먼저 비활성 상태로 만들기.
+        EffectBehavior removingBehavior = behavior;
+
         effect = null;
+        behavior = null;
+
+        removingBehavior?.Remove();
+
         finalduration = 0;
         remainingDuration = 0;
         currentStack = 0;
         causer = null;
+
+        OnEffectRemoved?.Invoke();
     }
 
-    public void Initialize(CharacterBase causer, EffectContainer wantEffect)
+    public void Initialize(EffectModule module, CharacterBase causer, EffectContainer wantEffect)
     {
         ClearEffect();
+
+        effectModule = module;
 
         effect = wantEffect;
         finalduration = effect.Duration;
         remainingDuration = finalduration;
         currentStack = 1;
         this.causer = causer;
+
+        behavior = effect.CreateBehavior(this, effectModule.Owner);
+        behavior.Apply();
+
         OnEffectAdded?.Invoke();
     }
 
@@ -58,6 +77,7 @@ public class EffectInstance
 
         if (remainingDuration <= 0f) ClearEffect();
     }
+
     public void Reapply()
     {
         currentStack = Mathf.Min(currentStack + 1, effect.MaxStack);

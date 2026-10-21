@@ -42,15 +42,25 @@ public class CharacterBase : MonoBehaviour
     //버프나 변동치로 인한 계산을 끝낸 최종 스탯
     public FinalStatus finalStatus { get; } = new FinalStatus();
 
-    [SerializeField] int hpBonus;
-    [SerializeField] int damageBonus;
-    [SerializeField] int defenseBonus;
-    [SerializeField] float attackSpeedMultiplier = 1f;
-    [SerializeField] float moveSpeedMultiplier = 1f;
+    readonly List<StatModifier> statModifiers = new();
+
+    public void AddStatModifiers(IEnumerable<StatModifier> modifiers)
+    {
+        statModifiers.AddRange(modifiers);
+        RecalculateStatus();
+    }
+
+    public void RemoveStatModifiers(IEnumerable<StatModifier> modifiers)
+    {
+        foreach (var modifier in modifiers)
+            statModifiers.Remove(modifier);
+
+        RecalculateStatus();
+    }
 
     public void RecalculateStatus()
     {
-        finalStatus.Calculate(Status, hpBonus, damageBonus, defenseBonus, attackSpeedMultiplier, moveSpeedMultiplier);
+        finalStatus.Calculate(Status, statModifiers);
     }
 
     public void SetStatus(UnitStatus newStatus)

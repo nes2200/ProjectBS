@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FinalStatus
@@ -8,14 +9,43 @@ public class FinalStatus
     public float attackSpeed { get; private set; }
     public float moveSpeed { get; private set; }
 
-    public void Calculate(
-        UnitStatus origin, int hpBonus, int damageBonus, int defenseBonus, float attackSpeedMultiplier, float moveSpeedMultiplier)
+    public void Calculate(UnitStatus origin, IEnumerable<StatModifier> modifiers)
     {
-        maxHP = Mathf.Max(1, origin.maxHP + hpBonus);
-        damage = Mathf.Max(0, origin.damage + damageBonus);
-        defense = Mathf.Max(0, origin.defense + defenseBonus);
+        float hpBonus = 0f;
+        float damageBonus = 0f;
+        float defenseBonus = 0f;
+        float attackSpeedRate = 0f;
+        float moveSpeedRate = 0f;
 
-        attackSpeed = Mathf.Max(0.01f, origin.attackSpeed * attackSpeedMultiplier);
-        moveSpeed = Mathf.Max(0f, origin.moveSpeed * moveSpeedMultiplier);
+        foreach (var modifier in modifiers)
+        {
+            switch (modifier.stat)
+            {
+                case StatType.MaxHP:
+                    hpBonus += modifier.value;
+                    break;
+                case StatType.Damage:
+                    damageBonus += modifier.value;
+                    break;
+                case StatType.Defense:
+                    defenseBonus += modifier.value;
+                    break;
+                case StatType.AttackSpeedRate:
+                    attackSpeedRate += modifier.value;
+                    break;
+                case StatType.MoveSpeedRate:
+                    moveSpeedRate += modifier.value;
+                    break;
+            }
+        }
+
+        maxHP = Mathf.Max(1, origin.maxHP + Mathf.RoundToInt(hpBonus));
+        damage = Mathf.Max(0, origin.damage + Mathf.RoundToInt(damageBonus));
+        defense = Mathf.Max(0, origin.defense + Mathf.RoundToInt(defenseBonus));
+
+        attackSpeed = Mathf.Max(
+            0.01f, origin.attackSpeed * (1f + attackSpeedRate));
+        moveSpeed = Mathf.Max(
+            0f, origin.moveSpeed * (1f + moveSpeedRate));
     }
 }

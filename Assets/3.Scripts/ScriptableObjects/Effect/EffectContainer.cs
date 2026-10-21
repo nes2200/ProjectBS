@@ -20,7 +20,5 @@ public abstract class EffectContainer : InfoContainer
     public bool RefreshDurationOnReapply => refreshDurationOnReapply;
     public bool AllowMultipleInstance => allowMultipleInstances;
 
-
-    public abstract void Apply(CharacterBase target);
-    public abstract void Remove();
+    public abstract EffectBehavior CreateBehavior(EffectInstance instance, CharacterBase target);
 }

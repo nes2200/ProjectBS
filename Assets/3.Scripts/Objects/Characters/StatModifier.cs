@@ -1,10 +1,15 @@
-[System.Serializable]
-public struct StatModifier 
+public enum StatType
 {
-    public int maxHP;
-    public int damage;
-    public int defense;
+    MaxHP,
+    Damage,
+    Defense,
+    AttackSpeedRate,
+    MoveSpeedRate
+}
 
-    public float attackSpeedRate;
-    public float moveSpeedRate;
+[System.Serializable]
+public struct StatModifier
+{
+    public StatType stat;
+    public float value;
 }
