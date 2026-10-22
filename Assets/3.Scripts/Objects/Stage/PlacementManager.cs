@@ -92,7 +92,7 @@ public class PlacementManager : MonoBehaviour
         if(!selectedUnit) return;
 
         //생성할 유닛 비용이 추가될 시 리미트 최고점을 넘으면 생성 안함
-        if (!IsCostEnoughToSpawn(selectedUnit.GetComponent<CharacterBase>().Status.cost)) return;
+        if (!IsCostEnoughToSpawn(selectedUnit.GetComponent<CharacterBase>().Status.Cost)) return;
 
         //생성 불가능한 위치라면 생성 안함
         if (!indicator.CanSpawn) return;
@@ -129,7 +129,7 @@ public class PlacementManager : MonoBehaviour
             {
                 stageManager.CharacterRegistry.Register(targetCharacter, selectedTeam);
 
-                int unitCost = targetCharacter.Status.cost;
+                int unitCost = targetCharacter.Status.Cost;
                 if(!stageManager.IsSandbox) stageManager.CostIncreasByUnitSpawn(unitCost);
             }
             OnUnitSpawn?.Invoke(targetCharacter);
@@ -143,7 +143,7 @@ public class PlacementManager : MonoBehaviour
         if (!indicator.TryGetLockedRemoveTarget(out CharacterBase targetCharacter)) return;
         if (!CanRemove(targetCharacter)) return;
       
-        int unitCost = targetCharacter.Status.cost;
+        int unitCost = targetCharacter.Status.Cost;
 
         if (!stageManager.IsSandbox) stageManager.CostDecreaseByUnitDespawn(unitCost);
         OnUnitDespawn?.Invoke(targetCharacter);

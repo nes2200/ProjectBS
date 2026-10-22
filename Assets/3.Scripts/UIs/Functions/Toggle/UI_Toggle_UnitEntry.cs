@@ -28,7 +28,7 @@ public class UI_Toggle_UnitEntry : MonoBehaviour
         }
 
         unitNameText.text = character.Status.displayName;
-        unitCostText.text = character.Status.cost.ToString();
+        unitCostText.text = character.Status.Cost.ToString();
         unitImage.sprite = character.Status.icon;
 
         bool selected = stageManager.IsSelectableUnit(prefab);

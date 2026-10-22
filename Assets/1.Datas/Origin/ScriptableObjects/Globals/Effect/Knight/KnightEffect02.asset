@@ -16,6 +16,7 @@ MonoBehaviour:
   displayName: "\uC5F4\uC0C1"
   explain: "\uB2E4\uC74C \uACF5\uACA9\uC73C\uB85C \uBC1B\uB294 \uD53C\uD574\uAC00
     \uC99D\uAC00\uD569\uB2C8\uB2E4"
+  id: 200002
   category: 1
   duration: 5
   maxStack: 1

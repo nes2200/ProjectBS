@@ -1,5 +1,7 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public delegate void SkillUseEvent(CharacterBase user, CharacterBase target);
 public delegate void SkillChangeEvent(SkillContainer oldSkill, SkillContainer newSkill);
@@ -19,11 +21,17 @@ public class SkillModule : CharacterModule
     float activeCooldownRemaining;
     float passiveCooldownRemaining;
 
+    bool waitingForActiveCooldown;
+    int activeUseId;
+
     public override Type RegistrationType => typeof(SkillModule);
 
     public override void OnRegistration(CharacterBase newOwner)
     {
         base.OnRegistration(newOwner);
+
+        activeUseId++;
+        waitingForActiveCooldown = false;
 
         passiveSkill?.RegistrateEvents(newOwner);
     }
@@ -40,11 +48,20 @@ public class SkillModule : CharacterModule
 
     public void TryUseActiveSkill(CharacterBase target)
     {
-        if (!activeSkill || activeCooldownRemaining > 0f) return;
+        if (!activeSkill || waitingForActiveCooldown || activeCooldownRemaining > 0f) return;
+
+        var skill = activeSkill;
+        int useId = ++activeUseId;
+        float cooldown = Mathf.Max(0f, skill.Cooltime);
+
+        waitingForActiveCooldown = true;
+
         OnBeforeUse?.Invoke(Owner, target);
 
-        activeSkill.UseSkill(Owner, target);
-        ActiveCooldownStart();
+        // 이벤트 처리 중 스킬 교체나 모듈 해제가 발생했을 경우
+        if (useId != activeUseId) return;
+
+        skill.UseSkill(Owner, target, () => ActiveCooldownStart(useId, cooldown));
 
         OnAfterUse?.Invoke(Owner, target);
     }
@@ -52,12 +69,17 @@ public class SkillModule : CharacterModule
     public void TryTriggerPassiveSkill()
     {
         if (!passiveSkill || passiveCooldownRemaining > 0f) return;
+        PassiveCooldownStart();
 
     }
 
-    void ActiveCooldownStart()
+    void ActiveCooldownStart(int useId, float cooldown)
     {
-        activeCooldownRemaining = Mathf.Max(0f, activeSkill.Cooltime);
+        if (useId != activeUseId || !waitingForActiveCooldown)
+            return;
+
+        waitingForActiveCooldown = false;
+        activeCooldownRemaining = cooldown;
         RegisterCooldownUpdate();
     }
 
@@ -87,6 +109,8 @@ public class SkillModule : CharacterModule
 
     public void ChangeActiveSkill(ActiveSkillContainer newSkill)
     {
+        activeUseId++;
+        waitingForActiveCooldown = false;
         OnActiveSkillChanged?.Invoke(activeSkill, newSkill);
         activeSkill = newSkill;
     }

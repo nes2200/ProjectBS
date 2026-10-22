@@ -6,12 +6,19 @@ using UnityEditor; // 에디터 기능을 쓰기 위해 필요한 도구함
 [CreateAssetMenu(fileName = "UnitStatus", menuName = "Scriptable Objects/UnitStatus")]
 public class UnitStatus : InfoContainer
 {
-    public int cost;
-    public int maxHP;
-    public int damage;
-    public int defense;
-    public float attackSpeed;
-    public float moveSpeed;
+    [SerializeField] int cost;
+    [SerializeField] int maxHP;
+    [SerializeField] int damage;
+    [SerializeField] int defense;
+    [SerializeField] float attackSpeed;
+    [SerializeField] float moveSpeed;
+
+    public int Cost => cost;
+    public int MaxHP => maxHP;
+    public int Damage => damage;
+    public int Defense => defense;
+    public float AttackSpeed => attackSpeed;
+    public float MoveSpeed => moveSpeed;
 
     [Header("자동으로 계산될 값")]
     public float colliderRadius;

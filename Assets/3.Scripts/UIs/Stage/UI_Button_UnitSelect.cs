@@ -43,7 +43,7 @@ public class UI_Button_UnitSelect : UIBase
         placementTeam = newTeam;
 
         unitNameText.text = status.displayName;
-        unitCostText.text = status.cost.ToString();
+        unitCostText.text = status.Cost.ToString();
         unitImage.sprite = status.icon;
     }
 

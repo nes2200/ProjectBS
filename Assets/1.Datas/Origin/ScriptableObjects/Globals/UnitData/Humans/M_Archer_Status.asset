@@ -15,6 +15,7 @@ MonoBehaviour:
   icon: {fileID: -5157282206797536612, guid: b5035a7e17665004bb94cfce0b480a97, type: 3}
   displayName: "\uAD81\uC218"
   explain: "\uBA40\uB9AC\uC11C \uAE54\uC9DD\uC774\uB294\uB188"
+  id: 300001
   cost: 8
   maxHP: 20
   damage: 7

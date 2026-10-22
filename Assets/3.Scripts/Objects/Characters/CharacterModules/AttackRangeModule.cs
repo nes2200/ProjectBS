@@ -23,15 +23,13 @@ public class AttackRangeModule : CharacterModule
     {
         if (!Owner) return;
 
-        CharacterBase target = other.GetComponent<CharacterBase>();
-        if (!target || target == Owner) return;
+        if (!other.TryGetComponent<CharacterBase>(out var target) || target == Owner) return;
 
         targetsInRange.Add(target);
     }
     private void OnTriggerExit(Collider other)
     {
-        CharacterBase target = other.GetComponent<CharacterBase>();
-        if (!target) return;
+        if (!other.TryGetComponent<CharacterBase>(out var target)) return;
 
         targetsInRange.Remove(target);
     }

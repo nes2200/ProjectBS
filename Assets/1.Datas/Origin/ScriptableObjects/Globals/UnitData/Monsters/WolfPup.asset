@@ -15,9 +15,11 @@ MonoBehaviour:
   icon: {fileID: 7444046612802208997, guid: 2d8a27f6e37e4054c857854aab01bf70, type: 3}
   displayName: "\uC0C8\uB07C\uB291\uB300"
   explain: "\uADC0\uC5FD\uC9C0\uB9CC \uC774\uBE68\uC740 \uB0A0\uCE74\uB86D\uC2B5\uB2C8\uB2E4"
+  id: 300005
   cost: 10
   maxHP: 15
   damage: 5
+  defense: 0
   attackSpeed: 1
   moveSpeed: 3
   colliderRadius: 0.6

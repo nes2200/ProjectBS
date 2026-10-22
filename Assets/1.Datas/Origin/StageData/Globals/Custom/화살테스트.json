@@ -1,0 +1,1260 @@
+{
+  "objects": [
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 15.856,
+        "y": 0.056,
+        "z": 13.882
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 14.139,
+        "y": 0.056,
+        "z": -4.473
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 20.376,
+        "y": 0.056,
+        "z": -2.224
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 19.913,
+        "y": 0.056,
+        "z": -3.97
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 1.682,
+        "y": 0.056,
+        "z": -11.578
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 5.43,
+        "y": 0.056,
+        "z": 2.071
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 11.084,
+        "y": 0.056,
+        "z": -10.506
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 2.937,
+        "y": 0.056,
+        "z": -9.716
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 16.092,
+        "y": 0.056,
+        "z": 0.666
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 2.588,
+        "y": 0.056,
+        "z": 0.21
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 3.026,
+        "y": 0.056,
+        "z": 12.366
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 21.422,
+        "y": 0.056,
+        "z": 5.083
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 11.19,
+        "y": 0.056,
+        "z": -2.203
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 21.218,
+        "y": 0.056,
+        "z": 10.241
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 4.914,
+        "y": 0.056,
+        "z": 8.334
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 3.822,
+        "y": 0.056,
+        "z": -7.228
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 21.681,
+        "y": 0.056,
+        "z": 2.03
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 6.613,
+        "y": 0.056,
+        "z": -5.17
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Terrain",
+      "prefabName": "Terrain",
+      "parentName": "Floor",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 48.037,
+        "y": 0.055,
+        "z": 34.167
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 20.797,
+        "y": 0.056,
+        "z": 11.921
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 7.757,
+        "y": 0.056,
+        "z": 0.764
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 10.294,
+        "y": 0.056,
+        "z": -4.464
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 8.003,
+        "y": 0.056,
+        "z": -10.824
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 12.978,
+        "y": 0.056,
+        "z": -7.169
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 19.142,
+        "y": 0.056,
+        "z": -0.766
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 8.278,
+        "y": 0.056,
+        "z": -12.399
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 15.845,
+        "y": 0.056,
+        "z": 10.419
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 10.972,
+        "y": 0.056,
+        "z": 1.05
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 18.163,
+        "y": 0.056,
+        "z": 5.531
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 9.694,
+        "y": 0.056,
+        "z": -6.083
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 11.449,
+        "y": 0.056,
+        "z": -0.882
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 9.199,
+        "y": 0.056,
+        "z": -7.633
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 2.329,
+        "y": 0.056,
+        "z": -2.812
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 15.258,
+        "y": 0.056,
+        "z": -9.63
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 8.686,
+        "y": 0.056,
+        "z": 5.114
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 3.447,
+        "y": 0.056,
+        "z": -12.827
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 12.667,
+        "y": 0.056,
+        "z": -12.617
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 1.783,
+        "y": 0.056,
+        "z": 4.085
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 17.031,
+        "y": 0.056,
+        "z": -7.79
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 21.391,
+        "y": 0.056,
+        "z": 6.793
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 16.413,
+        "y": 0.056,
+        "z": -5.283
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 6.154,
+        "y": 0.056,
+        "z": -7.032
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 4.094,
+        "y": 0.056,
+        "z": -5.17
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 7.373,
+        "y": 0.056,
+        "z": -1.323
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 17.095,
+        "y": 0.056,
+        "z": -3.897
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 14.758,
+        "y": 0.056,
+        "z": 6.9
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 15.916,
+        "y": 0.056,
+        "z": 2.893
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "TeamLine",
+      "prefabName": "TeamLine",
+      "parentName": "Terrain",
+      "position": {
+        "x": 0.0,
+        "y": 78.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.707,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 4.709,
+        "y": 0.056,
+        "z": -2.292
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 1.558,
+        "y": 0.056,
+        "z": -6.561
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 13.944,
+        "y": 0.056,
+        "z": 4.661
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 7.066,
+        "y": 0.056,
+        "z": -3.105
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 21.304,
+        "y": 0.056,
+        "z": 8.521
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 9.719,
+        "y": 0.056,
+        "z": 10.209
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 5.753,
+        "y": 0.056,
+        "z": -10.506
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 5.955,
+        "y": 0.056,
+        "z": -8.466
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 2.399,
+        "y": 0.056,
+        "z": 7.463
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 14.765,
+        "y": 0.056,
+        "z": -2.727
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf(Clone)",
+      "prefabName": "Monster_Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 21.377,
+        "y": 0.056,
+        "z": -0.172
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    }
+  ],
+  "selectableUnits": [
+    {
+      "unitPrefabName": "M_Knight"
+    },
+    {
+      "unitPrefabName": "M_Swordsman"
+    },
+    {
+      "unitPrefabName": "M_Archer"
+    }
+  ],
+  "selectableEnemies": [],
+  "costLimits": [
+    20,
+    30,
+    1000
+  ]
+}

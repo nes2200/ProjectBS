@@ -15,6 +15,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   displayName: "\uAE30\uC0AC\uB2E8\uC758 \uAE0D\uC9C0"
   explain: "\uC77C\uC815 \uC2DC\uAC04\uB3D9\uC548 \uBC29\uC5B4\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4"
+  id: 200001
   category: 0
   duration: 3
   maxStack: 1

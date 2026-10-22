@@ -39,13 +39,11 @@ public class FinalStatus
             }
         }
 
-        maxHP = Mathf.Max(1, origin.maxHP + Mathf.RoundToInt(hpBonus));
-        damage = Mathf.Max(0, origin.damage + Mathf.RoundToInt(damageBonus));
-        defense = Mathf.Max(0, origin.defense + Mathf.RoundToInt(defenseBonus));
+        maxHP = Mathf.Max(1, origin.MaxHP + Mathf.RoundToInt(hpBonus));
+        damage = Mathf.Max(0, origin.Damage + Mathf.RoundToInt(damageBonus));
+        defense = Mathf.Max(0, origin.Defense + Mathf.RoundToInt(defenseBonus));
 
-        attackSpeed = Mathf.Max(
-            0.01f, origin.attackSpeed * (1f + attackSpeedRate));
-        moveSpeed = Mathf.Max(
-            0f, origin.moveSpeed * (1f + moveSpeedRate));
+        attackSpeed = Mathf.Max(0.01f, origin.AttackSpeed * (1f + attackSpeedRate));
+        moveSpeed = Mathf.Max(0f, origin.MoveSpeed * (1f + moveSpeedRate));
     }
 }

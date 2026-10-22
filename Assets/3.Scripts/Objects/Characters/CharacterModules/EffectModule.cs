@@ -7,8 +7,7 @@ public delegate void EffectEvent(EffectContainer effect);
 
 public class EffectModule : CharacterModule
 {
-    List<EffectInstance> buffs = new();
-    List<EffectInstance> debuffs = new();
+    List<EffectInstance> effects = new();
 
     public event EffectEvent OnEffectAdded;
     public event EffectEvent OnEffectRemoved;
@@ -19,14 +18,10 @@ public class EffectModule : CharacterModule
     public override void OnRegistration(CharacterBase newOwner)
     {
         base.OnRegistration(newOwner);
-
-        foreach (EffectInstance buff in buffs)
+     
+        foreach (EffectInstance effect in effects)
         {
-            buff.ClearEffect();
-        }
-        foreach (EffectInstance buff in debuffs)
-        {
-            buff.ClearEffect();
+            effect.ClearEffect();
         }
 
         GameManager.OnUpdateCharacter -= UpdateEffects;
@@ -35,47 +30,27 @@ public class EffectModule : CharacterModule
     public override void OnUnregistration(CharacterBase oldOwner)
     {
         GameManager.OnUpdateCharacter -= UpdateEffects;
-
-        foreach (EffectInstance buff in buffs)
+    
+        foreach (EffectInstance effect in effects)
         {
-            buff.ClearEffect();
-        }
-        foreach (EffectInstance buff in debuffs)
-        {
-            buff.ClearEffect();
+            effect.ClearEffect();
         }
 
         base.OnUnregistration(oldOwner);
     }
 
-    public void ApplyEffect(CharacterBase causer, EffectContainer effect)
+    public void ApplyEffect(CharacterBase causer, EffectContainer wantEffect)
     {
-        if (effect.Category == EffectCategory.Buff) 
+        foreach (EffectInstance effect in effects)
         {
-            foreach (EffectInstance buff in buffs)
+            if (effect.CanReapply(causer, wantEffect))
             {
-                if(buff.CanReapply(causer, effect))
-                {
-                    buff.Reapply();
-                    return;
-                }
+                effect.Reapply();
+                return;
             }
-            buffs.Add(CreateEffectInstance(causer, effect));
-            OnEffectAdded?.Invoke(effect);
         }
-        if (effect.Category == EffectCategory.Debuff)
-        {
-            foreach (EffectInstance debuff in debuffs)
-            {
-                if (debuff.CanReapply(causer, effect))
-                {
-                    debuff.Reapply();
-                    return;
-                }
-            }
-            debuffs.Add(CreateEffectInstance(causer, effect));
-            OnEffectAdded?.Invoke(effect);
-        }
+        effects.Add(CreateEffectInstance(causer, wantEffect));
+        OnEffectAdded?.Invoke(wantEffect);
     }
 
     public EffectInstance CreateEffectInstance(CharacterBase causer, EffectContainer effect)
@@ -87,24 +62,14 @@ public class EffectModule : CharacterModule
 
     public void UpdateEffects(float deltaTime)
     {
-        for(int i = buffs.Count - 1; i >= 0; i--)
+        for (int i = effects.Count - 1; i >= 0; i--)
         {
-            buffs[i].UpdateDuration(deltaTime);
+            effects[i].UpdateDuration(deltaTime);
 
-            if (!buffs[i].IsActive)
+            if (!effects[i].IsActive)
             {
-                OnEffectRemoved?.Invoke(buffs[i].Effect);
-                buffs.RemoveAt(i);
-            }
-        }
-        for (int i = debuffs.Count - 1; i >= 0; i--)
-        {
-            debuffs[i].UpdateDuration(deltaTime);
-
-            if (!debuffs[i].IsActive)
-            {
-                OnEffectRemoved?.Invoke(debuffs[i].Effect);
-                debuffs.RemoveAt(i);
+                OnEffectRemoved?.Invoke(effects[i].Effect);
+                effects.RemoveAt(i);
             }
         }
     }
