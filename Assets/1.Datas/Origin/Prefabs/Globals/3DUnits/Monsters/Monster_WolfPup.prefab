@@ -112,6 +112,10 @@ PrefabInstance:
       propertyPath: attackExecutor
       value: 
       objectReference: {fileID: 1874172997757010189}
+    - target: {fileID: 4870713796852193239, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: attackRange
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6738698059090476509, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: m_Height
       value: 1.42
@@ -138,9 +142,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2226144352791122500, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1874172997757010189}
-    - targetCorrespondingSourceObject: {fileID: 3035384091999026604, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4842454196070131378}
   m_SourcePrefab: {fileID: 100100000, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
 --- !u!4 &5527394209303647509 stripped
 Transform:
@@ -166,32 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
   executionStateTag: Attack
   executeNormalizedTime: 0.4
---- !u!1 &7612453063173331272 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3035384091999026604, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
-  m_PrefabInstance: {fileID: 4880499043320390884}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &4842454196070131378
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7612453063173331272}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.7
-  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!1001 &8936087245965833619
 PrefabInstance:
   m_ObjectHideFlags: 0

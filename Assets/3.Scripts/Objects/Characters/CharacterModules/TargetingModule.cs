@@ -6,155 +6,125 @@ public delegate void TargetScanEvent(Vector3 target);
 
 public class TargetingModule : CharacterModule
 {
+    public sealed override Type RegistrationType => typeof(TargetingModule);
+
     [SerializeField] Transform _hostileGroupParent;
     public Transform HostileGroupParent => _hostileGroupParent;
-    private List<CharacterBase> hostileCharacters = new List<CharacterBase>(100);
 
-    float scanCooltime; //스캔 쿨타임
-    float scanInterval = 0.2f; //스캔 인터벌. 한번에 모든 유닛이 스캔하지 않도록 하기 위해서
-    bool _canScan;
-    public bool CanScan => _canScan;
+    [SerializeField, Min(0.01f)] float scanInterval = 0.2f;
+
+    readonly List<CharacterBase> hostileCharacters = new(100);
+    float scanCooltime;
 
     public event TargetScanEvent OnTargetScanned;
-    public void ClaimOnTargetScanned(Vector3 target) => OnTargetScanned?.Invoke(target);
 
-    public sealed override Type RegistrationType => typeof(TargetingModule);
+    public void ClaimOnTargetScanned(Vector3 target)
+    {
+        OnTargetScanned?.Invoke(target);
+    }
 
     public override void OnRegistration(CharacterBase newOwner)
     {
         base.OnRegistration(newOwner);
 
-        //초기 쿨타임 세팅
-        scanCooltime = UpdateScanCooltime();
+        scanCooltime = UnityEngine.Random.Range(0f, scanInterval);
 
         StageManager.OnBattleStart -= OnBattleStart;
         StageManager.OnBattleStart += OnBattleStart;
     }
+
     public override void OnUnregistration(CharacterBase oldOwner)
     {
-        base.OnUnregistration(oldOwner);
-
         StageManager.OnBattleStart -= OnBattleStart;
+        hostileCharacters.Clear();
 
+        base.OnUnregistration(oldOwner);
     }
 
-    //미리 적 유닛들의 CharacterBase를 캐싱하는 함수. 매 프레임마다 GetComponent하는 것을 방지.
     private void CacheHostileCharacters()
     {
         hostileCharacters.Clear();
 
         if (!HostileGroupParent) return;
 
-        foreach(Transform target in HostileGroupParent)
+        foreach (Transform child in HostileGroupParent)
         {
-            CharacterBase targetCharacter = target.GetComponent<CharacterBase>();
-            if (targetCharacter)
+            if (child.TryGetComponent<CharacterBase>(out var character))
             {
-                hostileCharacters.Add(targetCharacter);
+                hostileCharacters.Add(character);
             }
         }
     }
 
-    //적 유닛들의 부모가 바뀌었을 때, 혹은 새로 등록할 때
     public void SetHostileGroupParents(Transform newHostileParent)
     {
-        //부모 바꿔주고 새로 캐싱하기
         _hostileGroupParent = newHostileParent;
         CacheHostileCharacters();
     }
 
-    //스캔 시도하기
-    public bool TryGetNewTarget(float deltaTime, out GameObject newTarget)
+    // true: 이번 호출에서 검색을 실행함. 결과는 null일 수도 있음.
+    // false: 검색 대기 중.
+    public bool TryScanTarget(float deltaTime, out GameObject target)
     {
-        newTarget = null;
+        target = null;
 
-        //스캔 불가능하면 쿨타임만 돌리기
-        if (!CanScan)
-        {
-            ScanCooltimeUpdate(deltaTime);
-            return false;
-        }
+        if (!Owner) return false;
 
-        //스캔 돌렸는데 돌린게 null이 아니다? 그럼 그걸 out에 넣어준다
-        GameObject target = ScanClosestTarget();
+        scanCooltime -= deltaTime;
+        if (scanCooltime > 0f) return false;
+
+        // 반복 검색 시점도 유닛마다 분산
+        scanCooltime = UnityEngine.Random.Range(scanInterval * 0.5f, scanInterval);
+
+        target = ScanClosestTarget();
+
         if (target)
         {
-            newTarget = target;
-            //스캔 했으니까 이벤트 실행
             OnTargetScanned?.Invoke(target.transform.position);
-            return true;
         }
-        //스캔을 돌렸는데, 돌린게 null이기 때문에 false를 반환한다
-        return false;
+
+        return true;
     }
 
-    //가장 가까운 타겟 스캔하기
     public GameObject ScanClosestTarget()
     {
-        //안전장치
-        if (hostileCharacters.Count == 0)
-        {
-            return null;
-        }
+        if (!Owner) return null;
 
-        float closestDistance = Mathf.Infinity;
         CharacterBase closestTarget = null;
-        Vector3 currentPosition = transform.position;
+        float closestDistance = Mathf.Infinity;
+        Vector3 origin = Owner.transform.position;
 
-        for(int i = 0; i < hostileCharacters.Count; i++)
+        for (int i = 0; i < hostileCharacters.Count; i++)
         {
             CharacterBase target = hostileCharacters[i];
 
-            //죽은 상태면 continue
-            if (!target.IsAlive)
+            if (!target || target == Owner || !target.IsAlive || !target.gameObject.activeInHierarchy || target.Team == Owner.Team)
             {
                 continue;
             }
 
-            //대상 슬롯이 꽉 찼으면
-            AttackSlotModule targetSlotModule = target.GetModule<AttackSlotModule>();
-            if(!targetSlotModule || !targetSlotModule.CanReserve(Owner))
-            {
-                continue;
-            }
+            AttackSlotModule slots = target.GetModule<AttackSlotModule>();
 
-            float distance = (target.transform.position - currentPosition).sqrMagnitude;
+            if (!slots || !slots.CanReserve(Owner)) continue;
 
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestTarget = target;
-            }
+            Vector3 offset = target.transform.position - origin;
+            offset.y = 0f;
+
+            float distance = offset.sqrMagnitude;
+            if (distance >= closestDistance) continue;
+
+            closestDistance = distance;
+            closestTarget = target;
         }
 
-        _canScan = false;
-        return closestTarget?.gameObject;
-    }
-
-    protected void ScanCooltimeUpdate(float deltaTime)
-    {
-        if (_canScan) return;
-
-        scanCooltime -= deltaTime;
-        if (scanCooltime <= 0f)
-        {
-            _canScan = true;
-            //모든 유닛이 한번에 스캔하여 갑자기 렉걸리는 사태를 막기위해
-            scanCooltime = UpdateScanCooltime();
-        }
+        return closestTarget ? closestTarget.gameObject : null;
     }
 
     public void ForceScanReady()
     {
-        _canScan = true;
         scanCooltime = 0f;
     }
-    float UpdateScanCooltime()
-    {
-        return UnityEngine.Random.Range(0.05f, scanInterval);
-    }
 
-    //변화했는데 Battle이 시작됬다? -> 그럼 적 유닛 캐싱해
     private void OnBattleStart()
     {
         CacheHostileCharacters();

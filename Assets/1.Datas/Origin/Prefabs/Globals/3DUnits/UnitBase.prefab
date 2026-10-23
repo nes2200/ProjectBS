@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetingModule
   _hostileGroupParent: {fileID: 0}
+  scanInterval: 0.2
 --- !u!114 &2085023195534024142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74abcb1481d16794dbf1ebe22589d6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackSlotModule
-  slotCount: 4
+  slotCount: 8
   margin: 0.05
 --- !u!114 &8195600507360225115
 MonoBehaviour:
@@ -258,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3966a9b36738d4b99456c647397943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EffectModule
+  test: {fileID: 0}
 --- !u!195 &1920007813887236209
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -399,6 +401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d318b8f9a8a778b41b8d1009d8bd6123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackRangeModule
+  attackRange: 0.2
+  attackHalfAngle: 30
 --- !u!1 &4022069452934711659
 GameObject:
   m_ObjectHideFlags: 0

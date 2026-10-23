@@ -31,9 +31,10 @@ public class HostileAIController : AIController
         skillModule = Character.GetModule<SkillModule>();
         teamEliminateNotifier = GetComponentInParent<TeamEliminateNotifier>();
 
-        selfRadius = newCharacter.Status.colliderRadius;
+        SetFocusTarget(null);
+        targetModule.ForceScanReady();
 
-       
+        selfRadius = newCharacter.Status.colliderRadius;
     }
     protected override void OnUnpossess(CharacterBase oldCharacter)
     {
@@ -77,72 +78,68 @@ public class HostileAIController : AIController
 
     protected override void Think(float deltaTime)
     {
-        //나 죽었으면 생각을 중지
         if (!Character || !Character.IsAlive) return;
 
-
-        //공격 중에는 타겟 변경과 이동 금지
+        // 공격 중에는 목표를 변경하지 않음
         if (atkModule.IsAttacking)
         {
             CommandStop();
-            if (FocusTarget)
+
+            if (IsTargetAlive())
             {
-                CommandRotateToDirection(FocusTarget.transform.position - transform.position);
+                CommandRotateToDirection(targetCharacter.transform.position - Character.transform.position);
             }
+
             return;
         }
 
         skillModule?.TryUseActiveSkill(Character);
 
-        //바로 공격 가능한 적 공격
-        if (TryHandleInAttackRange()) return;
-
-        //공격 범위에 아무도 없을 때 스캔
-        //적이 죽었다면 일단 탐색
-        if (!IsTargetAlive())
+        // 기존 목표가 죽거나 무효가 된 순간에는 즉시 재검색
+        if (FocusTarget && !IsTargetAlive())
         {
             SetFocusTarget(null);
             targetModule.ForceScanReady();
-
-            if (targetModule.TryGetNewTarget(deltaTime, out GameObject newTarget))
-            {
-                SetFocusTarget(newTarget);
-            }
         }
 
-        if(!FocusTarget)
+        // 유효한 목표가 있어도 주기적으로 더 가까운 적 검색
+        if (targetModule.TryScanTarget(deltaTime, out GameObject newTarget))
+        {
+            SetFocusTarget(newTarget);
+        }
+
+        if (!IsTargetAlive())
         {
             CommandStop();
             return;
         }
 
+        // 사거리 안이면 정지·회전·공격 처리
+        if (TryHandleInAttackRange()) return;
+
+        // 사거리 밖이면 기존 슬롯으로 접근
         if (targetSlotModule && targetSlotModule.TryGetOrReserveSlotPosition(Character, out Vector3 slotPosition))
         {
             CommandMoveToDestination(slotPosition, 0.02f);
-            
-            //이상한 방향 바라보는거 강제 제거
-            Vector3 targetDirection = FocusTarget.transform.position - transform.position;
-            CommandRotateToDirection(targetDirection);
+
+            CommandRotateToDirection(targetCharacter.transform.position - Character.transform.position);
         }
         else
         {
-            //슬롯 꽉차서 예약 못했으면 다른놈 찾기
-            Debug.Log($"{name}: 공격 슬롯 없음 - {FocusTarget.name}");
             SetFocusTarget(null);
             targetModule.ForceScanReady();
             CommandStop();
         }
-
-        return;
     }
 
     protected bool IsTargetAlive()
     {
-        if (!FocusTarget || targetHPModule?.IsHPEmpty == true)
-        {
-            return false;
-        }
-        return true;
+        return FocusTarget
+            && targetCharacter
+            && targetCharacter.IsAlive
+            && targetCharacter.gameObject.activeInHierarchy
+            && targetCharacter.Team != Character.Team
+            && targetHPModule?.IsHPEmpty != true;
     }
 
     //타겟과 가까워 졌을때 호출
@@ -163,30 +160,25 @@ public class HostileAIController : AIController
     //공격 범위 내에 적이 있는지 보기
     public bool TryHandleInAttackRange()
     {
-        //현재 타겟이 범위 안이라면 그대로 유지
-        if(targetCharacter && atkRangeModule.Contains(targetCharacter))
+        AttackRangeState state = atkRangeModule.Evaluate(targetCharacter);
+
+        if (state == AttackRangeState.InvalidTarget || state == AttackRangeState.OutOfRange)
         {
-            StopAndTryAttack();
-            return true;
+            return false;
         }
 
-        if (atkRangeModule.TryGetClosestTarget(out CharacterBase inRangeTarget))
-        {
-            SetFocusTarget(inRangeTarget.gameObject);
-            StopAndTryAttack();
-            return true;
-        }
-
-        return false;
-    }
-
-    private void StopAndTryAttack()
-    {
         CommandStop();
 
-        Vector3 direction = FocusTarget.transform.position - transform.position;
-        CommandRotateToDirection(direction);
-        TryAttack();
+        CommandRotateToDirection(targetCharacter.transform.position - Character.transform.position
+        );
+
+        if (state == AttackRangeState.Ready)
+        {
+            TryAttack();
+        }
+
+        // 회전 중에도 true를 반환해서 이동 처리를 막음
+        return true;
     }
 
     //죽었을 때, 내 모든 활동을 정지해야한다
