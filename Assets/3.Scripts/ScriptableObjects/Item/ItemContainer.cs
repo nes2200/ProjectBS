@@ -14,9 +14,6 @@ public enum ItemType
 [CreateAssetMenu(fileName = "ItemContainer", menuName = "Item/ItemBase")]
 public class ItemContainer :InfoContainer
 {
-    [Header("Item Base Info")]
-    public int id;
-    [Space]
     [Header("Item Detail")]
     public ItemType type;
     public int maxStack;
