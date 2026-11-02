@@ -7,7 +7,7 @@ public class PlacementManager : MonoBehaviour
     [Header("StageManager")]
     [SerializeField] StageManager stageManager;
 
-    GameObject selectedUnit;
+    UnitDefinition selectedUnitData;
     TeamID selectedTeam;
 
     [Header("Each Team Parent")]
@@ -89,16 +89,18 @@ public class PlacementManager : MonoBehaviour
         if (stageManager.CurrentState != StageState.Ready) return;
 
         //프리팹에 유닛이 저장되있지 않으면 생성 안함
-        if(!selectedUnit) return;
+        if(!selectedUnitData) return;
 
         //생성할 유닛 비용이 추가될 시 리미트 최고점을 넘으면 생성 안함
-        if (!IsCostEnoughToSpawn(selectedUnit.GetComponent<CharacterBase>().Status.Cost)) return;
+        if (!IsCostEnoughToSpawn(selectedUnitData.Status.Cost)) return;
 
         //생성 불가능한 위치라면 생성 안함
         if (!indicator.CanSpawn) return;
 
         //바닥에 맞았으면 유닛 생성
-        GameObject newUnit = ObjectManager.CreateObjectWithoutRegistration(selectedUnit);
+        GameObject spawnPrefab = Random.Range(0, 2) == 0 ? selectedUnitData.MalePrefab : selectedUnitData.FemalePrefab;
+        if (!spawnPrefab) return;
+        GameObject newUnit = ObjectManager.CreateObjectWithoutRegistration(spawnPrefab);
 
         //생성됬으면 등록하기
         if (newUnit)
@@ -152,9 +154,9 @@ public class PlacementManager : MonoBehaviour
     }
 
     //유닛 선택 버튼 클릭시 해당 유닛 정보를 받아오는 기능
-    public void ChangeCurrentSelectedUnit(GameObject newSelectedUnit, TeamID newTeam)
+    public void ChangeCurrentSelectedUnit(UnitDefinition newUnitData, TeamID newTeam)
     {
-        selectedUnit = newSelectedUnit;
+        selectedUnitData = newUnitData;
         selectedTeam = newTeam;
     }
 
@@ -174,7 +176,7 @@ public class PlacementManager : MonoBehaviour
             return false;
         }
 
-        MaleUnitAppearance appearance = unit.GetComponent<MaleUnitAppearance>();
+        UnitAppearance appearance = unit.GetComponent<UnitAppearance>();
         if (appearance && !appearance.ApplyAppearance()) return false;
 
         character.SetStatus(character.Status);

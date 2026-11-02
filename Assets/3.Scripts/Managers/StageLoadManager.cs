@@ -13,21 +13,21 @@ public class StageLoadManager : ManagerBase
     //내 유닛 로드시 StageScreen에서 버튼 생성하도록 명령 내리기
     public event Action<StageManager> OnStageLoaded;
 
-    private readonly List<GameObject> selectableUnits = new();
-    private readonly List<GameObject> selectableEnemies = new();
-    public IReadOnlyList<GameObject> SelectableUnits => selectableUnits;
-    public IReadOnlyList<GameObject> SelectableEnemies => selectableEnemies;
+    private readonly List<UnitDefinition> selectableUnits = new();
+    private readonly List<UnitDefinition> selectableEnemies = new();
+    public IReadOnlyList<UnitDefinition> SelectableUnits => selectableUnits;
+    public IReadOnlyList<UnitDefinition> SelectableEnemies => selectableEnemies;
 
     public event Action OnSelectableCharactersLoaded;
 
     public BattleFieldMode CurrentMode { get; private set; }
 
     //샌드박스용 전체 유닛 리스트. 나중에 커지면 분리 예정.
-    private readonly List<GameObject> sandboxUnits = new();
-    private readonly List<GameObject> sandboxEnemies = new();
+    private readonly List<UnitDefinition> sandboxUnits = new();
+    private readonly List<UnitDefinition> sandboxEnemies = new();
 
-    public IReadOnlyList<GameObject> SandboxUnits => sandboxUnits;
-    public IReadOnlyList<GameObject> SandboxEnemies => sandboxEnemies;
+    public IReadOnlyList<UnitDefinition> SandboxUnits => sandboxUnits;
+    public IReadOnlyList<UnitDefinition> SandboxEnemies => sandboxEnemies;
 
     protected override IEnumerator Onconnected(GameManager newManager)
     {
@@ -349,7 +349,7 @@ public class StageLoadManager : ManagerBase
         }
     }
 
-    private void LoadSelectableUnits(IReadOnlyList<StageUnitEntry> entries, List<GameObject> result)
+    private void LoadSelectableUnits(IReadOnlyList<StageUnitEntry> entries, List<UnitDefinition> result)
     {
         if (result == null)
         {
@@ -369,9 +369,9 @@ public class StageLoadManager : ManagerBase
 
             if (!loadNames.Add(entry.unitPrefabName)) continue;
 
-            if(DataManager.TryLoadDataFile(entry.unitPrefabName, out GameObject prefab))
+            if (DataManager.TryLoadDataFile(entry.unitPrefabName, out UnitDefinition unitData))
             {
-                result.Add(prefab);
+                result.Add(unitData);
             }
         }
     }

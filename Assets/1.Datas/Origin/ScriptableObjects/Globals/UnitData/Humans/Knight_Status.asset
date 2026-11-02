@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4a8306574de8154fbe56055f3f3dccf, type: 3}
-  m_Name: M_Knight_Status
+  m_Name: Knight_Status
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
   icon: {fileID: -6484028887975271816, guid: b946200773ddf424f8e6fff56f6fcf3a, type: 3}
   displayName: "\uAE30\uC0AC"

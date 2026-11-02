@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4a8306574de8154fbe56055f3f3dccf, type: 3}
-  m_Name: M_Swrodsman_Status
+  m_Name: Archer_Status
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
-  icon: {fileID: -7467361549438300848, guid: b08acaf844aa34043b0040f9d0b4a0dc, type: 3}
-  displayName: "\uAC80\uC0AC"
-  explain: "\uAC80\uC744 \uB2E4\uB8E8\uB294 \uC790"
-  id: 300003
+  icon: {fileID: -5157282206797536612, guid: b5035a7e17665004bb94cfce0b480a97, type: 3}
+  displayName: "\uAD81\uC218"
+  explain: "\uBA40\uB9AC\uC11C \uAE54\uC9DD\uC774\uB294\uB188"
+  id: 300001
   cost: 8
-  maxHP: 30
-  damage: 5
-  defense: 2
+  maxHP: 20
+  damage: 7
+  defense: 1
   attackSpeed: 2
   moveSpeed: 2
   colliderRadius: 0.4

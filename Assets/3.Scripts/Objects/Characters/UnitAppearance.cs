@@ -19,7 +19,7 @@ public class JobAppearance
     public bool coverHair;
 }
 
-public class MaleUnitAppearance : MonoBehaviour
+public class UnitAppearance : MonoBehaviour
 {
     [Header("Job Appearance")]
     [SerializeField] JobAppearance jobAppearances;
@@ -49,9 +49,6 @@ public class MaleUnitAppearance : MonoBehaviour
         RandomizeDecorations(jobAppearances.decorations);
 
         bool headDecorationActive = RandomizeHeadDecoration(jobAppearances.headDecoration, headDecorationPercent);
-        
-        //투구 있고 투구가 머리를 가린다면 그대로 끝
-        if (headDecorationActive && jobAppearances.coverHead) return true;
 
         return ApplyHeadAppearance(headDecorationActive && jobAppearances.coverHead, headDecorationActive, jobAppearances.coverHair);
     }
@@ -59,7 +56,7 @@ public class MaleUnitAppearance : MonoBehaviour
 
     bool ApplyHeadAppearance(bool headCovered, bool headDecorationActive , bool hairCovered)
     {
-        if (!face || !eyebrows || !eyes || !mouths || !facialHair || !hair || !hairForHeadwear)
+        if (!face || !eyebrows || !eyes || !mouths || !hair || !hairForHeadwear)
         {
             Debug.LogError("[MaleUnitAppearance] 공통 머리 외형 오브젝트를 찾지 못했습니다.", this);
             return false;
@@ -69,9 +66,9 @@ public class MaleUnitAppearance : MonoBehaviour
         if (headCovered)
         {
             face.SetActive(false);
-            facialHair.gameObject.SetActive(false);
             hair.gameObject.SetActive(false);
             hairForHeadwear.gameObject.SetActive(false);
+            if (facialHair) facialHair.gameObject.SetActive(false);
             return true;
         }
 
@@ -80,34 +77,31 @@ public class MaleUnitAppearance : MonoBehaviour
         eyes.gameObject.SetActive(true);
         eyebrows.gameObject.SetActive(true);
         mouths.gameObject.SetActive(true);
-        facialHair.gameObject.SetActive(true);
+        if (facialHair) facialHair.gameObject.SetActive(true);
 
         //얼굴 각 요소 결정하기
         SetOnlyRandomChildActive(eyebrows, false);
         SetOnlyRandomChildActive(eyes, false);
         SetOnlyRandomChildActive(mouths, false);
-        RandomizeEachChild(facialHair, facialHairPercent);
+        if (facialHair) RandomizeEachChild(facialHair, facialHairPercent);
 
         hair.gameObject.SetActive(false);
         hairForHeadwear.gameObject.SetActive(false);
 
-        //머리장식이 꺼져있으면 일반머리 사용
-        if (!headDecorationActive)
+        // 머리장식이 없거나, 머리카락을 가리지 않으면 일반 머리 사용
+        if (!headDecorationActive || !hairCovered)
         {
             hair.gameObject.SetActive(true);
             SetOnlyRandomChildActive(hair, false);
             return true;
         }
 
-        // 머리 장식이 머리카락 전체를 가리는 경우
-        if (hairCovered)
-        {
-            return true;
-        }
-
-        // 머리 장식이 있지만 머리카락 전체를 가리지 않는 경우
+        // 머리장식이 머리카락을 가리면 장식용 머리 사용
         hairForHeadwear.gameObject.SetActive(true);
+
         Transform selectedHair = SetOnlyRandomChildActive(hairForHeadwear, false);
+
+        // 선택된 머리 아래의 추가 파츠 끄기
         if (selectedHair)
         {
             for (int i = 0; i < selectedHair.childCount; i++)
@@ -115,6 +109,7 @@ public class MaleUnitAppearance : MonoBehaviour
                 selectedHair.GetChild(i).gameObject.SetActive(false);
             }
         }
+
         return true;
     }
 
