@@ -243,6 +243,10 @@ PrefabInstance:
       propertyPath: prefabKey
       value: Monster_Wolf
       objectReference: {fileID: 0}
+    - target: {fileID: 3599557065128697381, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: unitDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 387777a32cc902b4aa8f8a4a9263a494, type: 2}
     - target: {fileID: 3836209138201581117, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: prefabKey
       value: Monster_WolfPup
       objectReference: {fileID: 0}
+    - target: {fileID: 3599557065128697381, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: unitDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 431e48c5e3154704684a103e6b015979, type: 2}
     - target: {fileID: 3836209138201581117, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

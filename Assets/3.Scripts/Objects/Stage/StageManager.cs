@@ -115,19 +115,19 @@ public class StageManager : MonoBehaviour
     }
 
     //샌드박스 모드에서 유닛 등록하는 용도
-    public void SetSelectableUnit(GameObject prefab, bool select)
+    public void SetSelectableUnit(UnitDefinition prefab, bool select)
     {
         if (!IsSandbox || !stageDataAuthoring) return;
 
         stageDataAuthoring.SetSelectableUnit(prefab, select);
     }
-    public bool IsSelectableUnit(GameObject prefab)
+    public bool IsSelectableUnit(UnitDefinition prefab)
     {
         return stageDataAuthoring && stageDataAuthoring.IsSelectableUnit(prefab);
     }
    
     //저장된 스테이지를 열었을 때 등록 목록을 복구하는 기능
-    public void InitializeSelectableUnits(IEnumerable<GameObject> prefabs)
+    public void InitializeSelectableUnits(IEnumerable<UnitDefinition> prefabs)
     {
         if (!IsSandbox || !stageDataAuthoring) return;
 

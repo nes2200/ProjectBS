@@ -213,8 +213,8 @@ public class SceneScannerWindow : EditorWindow
             return;
         }
 
-        List<GameObject> selectableUnitPrefabs = new();
-        List<GameObject> selectableEnemyPrefabs = new();
+        List<UnitDefinition> selectableUnitPrefabs = new();
+        List<UnitDefinition> selectableEnemyPrefabs = new();
         LoadUnits(loadData.selectableUnits, selectableUnitPrefabs);
         LoadUnits(loadData.selectableEnemies, selectableEnemyPrefabs);
         
@@ -278,7 +278,32 @@ public class SceneScannerWindow : EditorWindow
             GameObject spawnObject = null;
 
             //프로젝트 내 프리팹 검색
-            GameObject prefabAsset = FindPrefabAsset(data.prefabName);
+            GameObject prefabAsset;
+
+            // 유닛 정의가 있으면 정의에서 랜덤 프리팹 선택
+            if (!string.IsNullOrWhiteSpace(data.unitDefinitionName))
+            {
+                UnitDefinition unitDefinition = FindUnitDefinitionAsset(data.unitDefinitionName);
+
+                if (!unitDefinition)
+                {
+                    Debug.LogError($"[SceneScanner] 유닛 정의를 찾지 못했습니다: {data.unitDefinitionName}");
+                    continue;
+                }
+
+                prefabAsset = unitDefinition.GetRandomPrefab();
+
+                if (!prefabAsset)
+                {
+                    Debug.LogError($"[SceneScanner] 소환할 프리팹이 없습니다: {unitDefinition.name}");
+                    continue;
+                }
+            }
+            // 일반 오브젝트 또는 기존 JSON 데이터
+            else
+            {
+                prefabAsset = FindPrefabAsset(data.prefabName);
+            }
 
             //프리팹을 찾았다면 Prefab 연결을 유지하며 스폰
             if (prefabAsset)
@@ -489,7 +514,7 @@ public class SceneScannerWindow : EditorWindow
             
         }
     }
-    private void LoadUnits(IEnumerable<StageUnitEntry> entries, List<GameObject> selectablePrefabs)
+    private void LoadUnits(IEnumerable<StageUnitEntry> entries, List<UnitDefinition> selectablePrefabs)
     {
         if (entries is null) return;
 
@@ -508,7 +533,7 @@ public class SceneScannerWindow : EditorWindow
                 continue;
             }
 
-            GameObject unitPrefab = FindPrefabAsset(entry.unitPrefabName);
+            UnitDefinition unitPrefab = FindUnitDefinitionAsset(entry.unitPrefabName);
 
             if (!unitPrefab)
             {
@@ -521,7 +546,7 @@ public class SceneScannerWindow : EditorWindow
     }
 
 
-    private bool ApplySelectableUnits(StageDataAuthoring authoring, IEnumerable<GameObject> unitPrefabs, string undoName)
+    private bool ApplySelectableUnits(StageDataAuthoring authoring, IEnumerable<UnitDefinition> unitPrefabs, string undoName)
     {
         if (!authoring) return false;
 
@@ -570,6 +595,26 @@ public class SceneScannerWindow : EditorWindow
     private static string GetPrefabKey(GameObject obj)
     {
         return obj.TryGetComponent<PrefabIdentity>(out var identity) ? identity.PrefabKey : null;
+    }
+
+    private UnitDefinition FindUnitDefinitionAsset(string unitName)
+    {
+        string[] guids = AssetDatabase.FindAssets(
+            $"{unitName} t:UnitDefinition");
+
+        foreach (string guid in guids)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            UnitDefinition unit =
+                AssetDatabase.LoadAssetAtPath<UnitDefinition>(path);
+
+            if (unit && unit.name == unitName)
+            {
+                return unit;
+            }
+        }
+
+        return null;
     }
 }
 #endif

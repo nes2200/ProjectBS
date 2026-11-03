@@ -6,6 +6,7 @@ public class StageObject
 {
     public string name;
     public string prefabName;
+    public string unitDefinitionName;
     public string parentName;
     public SerializableVector3 position;
     public SerializableVector3 scale;

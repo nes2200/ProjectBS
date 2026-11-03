@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3db1feda529246489eec6271cced4fc, type: 3}
+  m_Name: Wolf
+  m_EditorClassIdentifier: Assembly-CSharp::UnitDefinition
+  status: {fileID: 11400000, guid: 91077cc0009638f4999b8e517310ec9f, type: 2}
+  spawnPrefabs:
+  - {fileID: 1839278737806150131, guid: 3a151406367ba3248a4620f06832455f, type: 3}

@@ -87,6 +87,7 @@
     {
       "name": "Monster_Wolf",
       "prefabName": "Monster_Wolf",
+      "unitDefinitionName": "Wolf",
       "parentName": "TeamB",
       "position": {
         "x": 8.61,
@@ -108,7 +109,7 @@
   ],
   "selectableUnits": [
     {
-      "unitPrefabName": "M_Knight"
+      "unitPrefabName": "Knight"
     }
   ],
   "selectableEnemies": [],

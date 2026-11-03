@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: prefabKey
       value: F_Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 911117880053030021, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: unitDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: ef8b7798ae67b76499562c6639d79df9, type: 2}
     - target: {fileID: 1113168510338110268, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: jobAppearances.jobRoot
       value: 
@@ -111,6 +115,14 @@ PrefabInstance:
     - target: {fileID: 5391107130417498349, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135695409800746359, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: attackRange
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135695409800746359, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: attackHalfAngle
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

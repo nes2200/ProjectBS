@@ -114,7 +114,7 @@ public class StageLoadManager : ManagerBase
         }
 
         CurrentMode = mode;
-        if(mode == BattleFieldMode.Stage && ContainsUnit(loadData.selectableUnits, "M_Archer"))
+        if(mode == BattleFieldMode.Stage && ContainsUnit(loadData.selectableUnits, "Archer"))
         {
             GameManager.ObjectM.PreparePool("ArrowBasic", 20);
         }
@@ -192,13 +192,76 @@ public class StageLoadManager : ManagerBase
                 continue;
             }
 
-            GameObject spawnObject = ObjectManager.CreateObjectWithoutRegistration(data.prefabName);
-            if(!spawnObject)
+            UnitDefinition unitDefinition = null;
+            GameObject spawnObject;
+
+            // 유닛 정의가 있으면 정의에서 랜덤 프리팹 선택
+            if (!string.IsNullOrWhiteSpace(data.unitDefinitionName))
             {
-                Debug.LogWarning($"[StageLoadManager] '{data.prefabName}' 오브젝트를 생성하지 못했습니다.");
+                if (!DataManager.TryLoadDataFile<UnitDefinition>(data.unitDefinitionName, out unitDefinition))
+                {
+                    Debug.LogError($"[StageLoadManager] 유닛 정의를 찾지 못했습니다: {data.unitDefinitionName}");
+                    continue;
+                }
+
+                if (!unitDefinition.Status)
+                {
+                    Debug.LogError($"[StageLoadManager] 능력치가 없습니다: {unitDefinition.name}");
+                    continue;
+                }
+
+                GameObject prefab = unitDefinition.GetRandomPrefab();
+
+                if (!prefab)
+                {
+                    Debug.LogError($"[StageLoadManager] 소환할 프리팹이 없습니다: {unitDefinition.name}");
+                    continue;
+                }
+
+                spawnObject = ObjectManager.CreateObjectWithoutRegistration(prefab);
+            }
+            // 일반 오브젝트 또는 기존 JSON 데이터
+            else
+            {
+                spawnObject = ObjectManager.CreateObjectWithoutRegistration(data.prefabName);
+            }
+
+            if (!spawnObject)
+            {
+                Debug.LogWarning($"[StageLoadManager] 오브젝트를 생성하지 못했습니다: {data.name}");
                 continue;
             }
-           
+
+            // 정의로 생성한 유닛의 능력치와 외형 초기화
+            if (unitDefinition)
+            {
+                if (!spawnObject.TryGetComponent<CharacterBase>(out CharacterBase loadedCharacter))
+                {
+                    Debug.LogError($"[StageLoadManager] CharacterBase가 없습니다: {spawnObject.name}");
+
+                    Destroy(spawnObject);
+                    continue;
+                }
+
+                if (!spawnObject.GetComponentInChildren<Animator>(true))
+                {
+                    Debug.LogError($"[StageLoadManager] Animator가 없습니다: {spawnObject.name}");
+
+                    Destroy(spawnObject);
+                    continue;
+                }
+
+                loadedCharacter.SetStatus(unitDefinition.Status);
+
+                UnitAppearance appearance = spawnObject.GetComponent<UnitAppearance>();
+
+                if (appearance && !appearance.ApplyAppearance())
+                {
+                    Destroy(spawnObject);
+                    continue;
+                }
+            }
+
             spawnedObjects.Add(spawnObject);
             spawnObject.name = data.name;
 

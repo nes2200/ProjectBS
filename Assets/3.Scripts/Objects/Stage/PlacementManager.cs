@@ -98,7 +98,7 @@ public class PlacementManager : MonoBehaviour
         if (!indicator.CanSpawn) return;
 
         //바닥에 맞았으면 유닛 생성
-        GameObject spawnPrefab = Random.Range(0, 2) == 0 ? selectedUnitData.MalePrefab : selectedUnitData.FemalePrefab;
+        GameObject spawnPrefab = selectedUnitData.GetRandomPrefab();
         if (!spawnPrefab) return;
         GameObject newUnit = ObjectManager.CreateObjectWithoutRegistration(spawnPrefab);
 

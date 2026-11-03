@@ -45,6 +45,7 @@
     {
       "name": "Monster_WolfPup",
       "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
       "parentName": "TeamB",
       "position": {
         "x": 5.24,
@@ -87,6 +88,7 @@
     {
       "name": "Monster_WolfPup (2)",
       "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
       "parentName": "TeamB",
       "position": {
         "x": 6.73,
@@ -129,6 +131,7 @@
     {
       "name": "Monster_Wolf",
       "prefabName": "Monster_Wolf",
+      "unitDefinitionName": "Wolf",
       "parentName": "TeamB",
       "position": {
         "x": 2.32,
@@ -150,6 +153,7 @@
     {
       "name": "Monster_WolfPup (1)",
       "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
       "parentName": "TeamB",
       "position": {
         "x": 3.45,
@@ -192,13 +196,16 @@
   ],
   "selectableUnits": [
     {
-      "unitPrefabName": "M_Knight"
+      "unitPrefabName": "Knight"
     },
     {
-      "unitPrefabName": "M_Swordsman"
+      "unitPrefabName": "Swordsman"
     },
     {
-      "unitPrefabName": "M_Archer"
+      "unitPrefabName": "Rogue"
+    },
+    {
+      "unitPrefabName": "Archer"
     }
   ],
   "selectableEnemies": [],

@@ -26,7 +26,8 @@ public static class SceneScanner
 
             if (!isSpecialObject && !isContainerChild) continue;
 
-            string prefabName = GetPrefabKey(obj);
+            string prefabName = GetPrefabName(obj);
+            string definitionName = GetDefinition(obj);
 
             if(string.IsNullOrEmpty(prefabName)) throw new InvalidOperationException($"프리팹 이름을 찾을 수 없음: {obj.name}");
 
@@ -35,6 +36,7 @@ public static class SceneScanner
                 name = obj.name,
                 prefabName = prefabName,
                 parentName = parentName,
+                unitDefinitionName = definitionName,
                 position = obj.transform.localPosition,
                 scale = obj.transform.localScale,
                 rotation = obj.transform.localRotation
@@ -48,25 +50,30 @@ public static class SceneScanner
     }
 
     //유닛 엔트리 수집
-    private static void CaptureUnits(IReadOnlyList<GameObject> prefabs, List<StageUnitEntry> destination)
+    private static void CaptureUnits(IReadOnlyList<UnitDefinition> units, List<StageUnitEntry> destination)
     {
         HashSet<string> savedNames = new();
 
-        foreach(GameObject prefab in prefabs)
+        foreach (UnitDefinition unit in units)
         {
-            if (!prefab) continue;
-            string prefabKey = GetPrefabKey(prefab);
-            if (!savedNames.Add(prefabKey)) continue;
+            if (!unit) continue;
+
+            string unitKey = unit.name;
+            if (!savedNames.Add(unitKey)) continue;
 
             destination.Add(new StageUnitEntry
             {
-                unitPrefabName = prefabKey
+                unitPrefabName = unitKey
             });
         }
     }
 
-    private static string GetPrefabKey(GameObject obj)
+    private static string GetPrefabName(GameObject obj)
     {
         return obj.TryGetComponent<PrefabIdentity>(out PrefabIdentity identity) ? identity.PrefabKey : null;
+    }
+    private static string GetDefinition(GameObject obj)
+    {
+        return obj.TryGetComponent<PrefabIdentity>(out PrefabIdentity identity) ? identity.UnitDefinition.name : null;
     }
 }

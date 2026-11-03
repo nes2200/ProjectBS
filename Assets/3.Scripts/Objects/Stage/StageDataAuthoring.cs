@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class StageDataAuthoring : MonoBehaviour
 {
-    [SerializeField] List<GameObject> selectableUnitsEntry = new();
-    [SerializeField] List<GameObject> selectableEnemiesEntry = new();
+    [SerializeField] List<UnitDefinition> selectableUnitsEntry = new();
+    [SerializeField] List<UnitDefinition> selectableEnemiesEntry = new();
     [SerializeField] private int[] costLimits;
 
-    public IReadOnlyList<GameObject> SelectableUnitsEntry => selectableUnitsEntry;
-    public IReadOnlyList<GameObject> SelectableEnemiesEntry => selectableEnemiesEntry;
+    public IReadOnlyList<UnitDefinition> SelectableUnitsEntry => selectableUnitsEntry;
+    public IReadOnlyList<UnitDefinition> SelectableEnemiesEntry => selectableEnemiesEntry;
 
 
     //청소 및 리셋용
@@ -20,13 +20,13 @@ public class StageDataAuthoring : MonoBehaviour
     }
 
     //로드할 때 내용 채워넣기
-    public void SetSelectableUnits(IEnumerable<GameObject> unitPrefabs)
+    public void SetSelectableUnits(IEnumerable<UnitDefinition> unitPrefabs)
     {
         selectableUnitsEntry.Clear();
 
         if (unitPrefabs == null) return;
 
-        foreach (GameObject unitPrefab in unitPrefabs)
+        foreach (UnitDefinition unitPrefab in unitPrefabs)
         {
             if (!unitPrefab) continue;
 
@@ -35,13 +35,13 @@ public class StageDataAuthoring : MonoBehaviour
             selectableUnitsEntry.Add(unitPrefab);   
         }
     }
-    public void SetSelectableEnemies(IEnumerable<GameObject> enemyPrefabs)
+    public void SetSelectableEnemies(IEnumerable<UnitDefinition> enemyPrefabs)
     {
         selectableEnemiesEntry.Clear();
 
         if (enemyPrefabs == null) return;
 
-        foreach (GameObject enemyPrefab in enemyPrefabs)
+        foreach (UnitDefinition enemyPrefab in enemyPrefabs)
         {
             if (!enemyPrefab) continue;
             if (selectableEnemiesEntry.Contains(enemyPrefab)) continue;
@@ -50,7 +50,7 @@ public class StageDataAuthoring : MonoBehaviour
         }
     }
 
-    public void SetSelectableUnit(GameObject prefab, bool selected)
+    public void SetSelectableUnit(UnitDefinition prefab, bool selected)
     {
         if (!prefab) return;
         if (selected)
@@ -62,7 +62,7 @@ public class StageDataAuthoring : MonoBehaviour
             selectableUnitsEntry.Remove(prefab);
         }
     }
-    public bool IsSelectableUnit(GameObject prefab)
+    public bool IsSelectableUnit(UnitDefinition prefab)
     {
         return selectableUnitsEntry.Contains(prefab);
     }

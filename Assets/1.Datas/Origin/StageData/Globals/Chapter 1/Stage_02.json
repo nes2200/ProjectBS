@@ -3,6 +3,7 @@
     {
       "name": "Monster_WolfPup (1)",
       "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
       "parentName": "TeamB",
       "position": {
         "x": 3.42,
@@ -24,6 +25,7 @@
     {
       "name": "Monster_WolfPup (4)",
       "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
       "parentName": "TeamB",
       "position": {
         "x": 7.89,
@@ -66,6 +68,7 @@
     {
       "name": "Monster_WolfPup (3)",
       "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
       "parentName": "TeamB",
       "position": {
         "x": 9.23,
@@ -108,6 +111,7 @@
     {
       "name": "Monster_WolfPup",
       "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
       "parentName": "TeamB",
       "position": {
         "x": 4.42,
@@ -150,6 +154,7 @@
     {
       "name": "Monster_WolfPup (2)",
       "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
       "parentName": "TeamB",
       "position": {
         "x": 3.56,
@@ -213,7 +218,7 @@
   ],
   "selectableUnits": [
     {
-      "unitPrefabName": "M_Swordsman"
+      "unitPrefabName": "Swordsman"
     }
   ],
   "selectableEnemies": [],

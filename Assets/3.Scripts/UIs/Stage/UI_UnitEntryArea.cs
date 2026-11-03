@@ -14,9 +14,9 @@ public class UI_UnitEntryArea : MonoBehaviour
 
         if (!manager || !manager.IsSandbox || GameManager.StageLoad?.SandboxUnits == null) return;
 
-        HashSet<GameObject> added = new();
+        HashSet<UnitDefinition> added = new();
 
-        foreach (GameObject prefab in GameManager.StageLoad.SandboxUnits)
+        foreach (UnitDefinition prefab in GameManager.StageLoad.SandboxUnits)
         {
             if (!prefab || !added.Add(prefab)) continue;
 

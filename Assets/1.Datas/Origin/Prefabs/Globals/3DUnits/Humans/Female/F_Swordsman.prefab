@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: prefabKey
       value: F_Swordsman
       objectReference: {fileID: 0}
+    - target: {fileID: 911117880053030021, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: unitDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: e64c6f20e37001145b733c32db398e00, type: 2}
     - target: {fileID: 1113168510338110268, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: jobAppearances.job
       value: 7
@@ -108,6 +112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: F_Swordsman
       objectReference: {fileID: 0}
+    - target: {fileID: 2871185227891549063, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 86d96d0719cfe0448bb5d55bcfe29432, type: 2}
     - target: {fileID: 2991457901644583847, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: m_IsActive
       value: 0

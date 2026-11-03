@@ -4,10 +4,19 @@ using UnityEngine;
 public class UnitDefinition : ScriptableObject
 {
     [SerializeField] UnitStatus status;
-    [SerializeField] GameObject malePrefab;
-    [SerializeField] GameObject femalePrefab;
+    [SerializeField] GameObject[] spawnPrefabs;
+
 
     public UnitStatus Status => status;
-    public GameObject MalePrefab => malePrefab;
-    public GameObject FemalePrefab => femalePrefab;
+    public GameObject GetRandomPrefab()
+    {
+        if (spawnPrefabs == null || spawnPrefabs.Length == 0)
+        {
+            Debug.LogError($"[{name}] 소환할 프리팹이 없습니다.", this);
+            return null;
+        }
+
+        int index = Random.Range(0, spawnPrefabs.Length);
+        return spawnPrefabs[index];
+    }
 }

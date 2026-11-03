@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: prefabKey
       value: F_Knight
       objectReference: {fileID: 0}
+    - target: {fileID: 911117880053030021, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: unitDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 765c2dfa614b58049a1315de4b604257, type: 2}
     - target: {fileID: 1113168510338110268, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: jobAppearances.job
       value: 3
@@ -102,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1113168510338110268, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: jobAppearances.coverHead
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1113168510338110268, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: jobAppearances.headDecoration
@@ -136,6 +140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: F_Knight
       objectReference: {fileID: 0}
+    - target: {fileID: 2871185227891549063, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 105427baec86cd342a16dea555206261, type: 2}
     - target: {fileID: 3449273307570817054, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: weaponRigid
       value: 

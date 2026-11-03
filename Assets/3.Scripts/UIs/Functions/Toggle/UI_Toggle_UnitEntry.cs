@@ -11,25 +11,25 @@ public class UI_Toggle_UnitEntry : MonoBehaviour
     [SerializeField] Image unitImage;
     [SerializeField] Image checkImage;
 
-    GameObject unitPrefab;
+    UnitDefinition unitPrefab;
     StageManager stageManager;
 
-    public void Initialize(GameObject prefab, StageManager newManager)
+    public void Initialize(UnitDefinition prefab, StageManager newManager)
     {
         toggle.onValueChanged.RemoveListener(OnValueChanged);
 
         unitPrefab = prefab;
         stageManager = newManager;
 
-        if(!prefab || !stageManager || !prefab.TryGetComponent<CharacterBase>(out CharacterBase character) || !character.Status)
+        if(!prefab || !stageManager || !prefab.Status)
         {
             toggle.interactable = false;
             return;
         }
 
-        unitNameText.text = character.Status.displayName;
-        unitCostText.text = character.Status.Cost.ToString();
-        unitImage.sprite = character.Status.icon;
+        unitNameText.text = prefab.Status.displayName;
+        unitCostText.text = prefab.Status.Cost.ToString();
+        unitImage.sprite = prefab.Status.icon;
 
         bool selected = stageManager.IsSelectableUnit(prefab);
 
