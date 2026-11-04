@@ -8,10 +8,17 @@ public class AnimationModule : CharacterModule
     [SerializeField] CapsuleCollider mainCollider;
     [SerializeField] Rigidbody mainRigid;
     [SerializeField] bool useDeathAnimation;
+    [SerializeField] bool useMovingHitReaction = true;
+
+    [System.Serializable]
+    private struct WeaponInfo
+    {
+        public Rigidbody rigid;
+        public Collider collider;
+    }
 
     [Header("Weapons")]
-    [SerializeField] private Rigidbody weaponRigid;
-    [SerializeField] private Collider weaponCollider;
+    [SerializeField] private WeaponInfo[] weapons = new WeaponInfo[0];
 
     Rigidbody[] ragdollRigidbodies;
     public CapsuleCollider MainCollider => mainCollider;
@@ -89,27 +96,50 @@ public class AnimationModule : CharacterModule
         anim.enabled = false;
         foreach (Rigidbody rigid in ragdollRigidbodies)
         {
-            if (rigid == mainRigid || rigid == weaponRigid) continue;
+            if (rigid == mainRigid || IsWeaponRigidbody(rigid)) continue;
             rigid.isKinematic = false;
         }
         DropWeapon();
     }
     private void DropWeapon()
     {
-        if (!weaponRigid) return;
+        foreach (WeaponInfo weapon in weapons)
+        {
+            if (!weapon.rigid) continue;
 
-        weaponRigid.transform.SetParent(null, true);
-        weaponRigid.useGravity = true;
-        weaponRigid.isKinematic = false;
-        weaponCollider.isTrigger = false;
+            weapon.rigid.transform.SetParent(null, true);
+            weapon.rigid.useGravity = true;
+            weapon.rigid.isKinematic = false;
+
+            if (weapon.collider)
+            {
+                weapon.collider.isTrigger = false;
+            }
+        }
     }
     private void ResetWeapon()
     {
-        if (!weaponRigid) return;
+        foreach (WeaponInfo weapon in weapons)
+        {
+            if (!weapon.rigid) continue;
 
-        weaponRigid.useGravity = false;
-        weaponRigid.isKinematic = true;
-        weaponCollider.isTrigger = true;
+            weapon.rigid.useGravity = false;
+            weapon.rigid.isKinematic = true;
+
+            if (weapon.collider)
+            {
+                weapon.collider.isTrigger = true;
+            }
+        }
+    }
+    private bool IsWeaponRigidbody(Rigidbody rigid)
+    {
+        foreach (WeaponInfo weapon in weapons)
+        {
+            if (weapon.rigid == rigid) return true;
+        }
+
+        return false;
     }
 
     public void AnimationByDamaged(in DamageStruct info)
@@ -117,7 +147,7 @@ public class AnimationModule : CharacterModule
         AttackModule atkModule = Owner.GetModule<AttackModule>();
         if (atkModule && atkModule.IsAttacking) return;
 
-        if (isMoving)
+        if (isMoving && useMovingHitReaction)
         {
             anim.SetTrigger("MovingDamaged");
         }

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: useDeathAnimation
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7886219411373045058, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: useMovingHitReaction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -5608401926662398788, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: m_Height
       value: 1.42

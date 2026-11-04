@@ -152,6 +152,18 @@ PrefabInstance:
       propertyPath: weaponCollider
       value: 
       objectReference: {fileID: 3438377963739695429}
+    - target: {fileID: 3449273307570817054, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: weapons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449273307570817054, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: weapons.Array.data[0].rigid
+      value: 
+      objectReference: {fileID: 7057025641366087915}
+    - target: {fileID: 3449273307570817054, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: weapons.Array.data[0].collider
+      value: 
+      objectReference: {fileID: 3438377963739695429}
     - target: {fileID: 3621594627732776092, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: m_IsActive
       value: 0

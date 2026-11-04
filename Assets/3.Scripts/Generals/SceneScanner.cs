@@ -74,6 +74,12 @@ public static class SceneScanner
     }
     private static string GetDefinition(GameObject obj)
     {
-        return obj.TryGetComponent<PrefabIdentity>(out PrefabIdentity identity) ? identity.UnitDefinition.name : null;
+        if (!obj.TryGetComponent<PrefabIdentity>(out PrefabIdentity identity))
+            return null;
+
+        if (!identity.UnitDefinition)
+            return null;
+
+        return identity.UnitDefinition.name;
     }
 }

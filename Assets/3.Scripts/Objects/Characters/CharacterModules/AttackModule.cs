@@ -30,6 +30,8 @@ public class AttackModule : CharacterModule
 
     //근거리 원거리 나누는 용도
     [SerializeField] AttackExecutor attackExecutor;
+    //다양한 공격 애니메이션 용도
+    [SerializeField] string[] attackTriggers = { "Attack" };
 
     public event AttackEvent OnBeforeAttack;
     public event AttackEvent OnAfterAttack;
@@ -64,7 +66,14 @@ public class AttackModule : CharacterModule
         attackExecutor.Prepare();
 
         animModule.SetBool("IsAttacking", true);
-        animModule.TriggerAnimation("Attack");
+
+        string attackTrigger = "Attack";
+        if (attackTriggers != null && attackTriggers.Length > 0)
+        {
+            int index = UnityEngine.Random.Range(0, attackTriggers.Length);
+            attackTrigger = attackTriggers[index];
+        }
+        animModule.TriggerAnimation(attackTrigger);
 
         currentAttackInfo = attackInfo;
         hasExecuteAttack = false;

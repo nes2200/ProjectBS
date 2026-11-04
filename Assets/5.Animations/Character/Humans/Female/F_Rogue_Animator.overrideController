@@ -8,4 +8,6 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: F_Rogue_Animator
   m_Controller: {fileID: 9100000, guid: 8517d53e9c4717f41a449da8e17460f6, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 3094330708855449807, guid: 408142c06e2d48c4db8065d1fbbcc8eb, type: 3}
+    m_OverrideClip: {fileID: 3094330708855449807, guid: b961f4de9666fdc49b2945c36721d431, type: 3}

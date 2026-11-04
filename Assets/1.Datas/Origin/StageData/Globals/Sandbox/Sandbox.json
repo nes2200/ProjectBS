@@ -56,6 +56,9 @@
   ],
   "selectableEnemies": [
     {
+      "unitPrefabName": "Monster_Werewolf"
+    },
+    {
       "unitPrefabName": "Monster_Wolf"
     },
     {
