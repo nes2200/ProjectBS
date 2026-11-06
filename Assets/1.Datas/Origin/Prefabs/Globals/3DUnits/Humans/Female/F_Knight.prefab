@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: attackExecutor
       value: 
       objectReference: {fileID: 74860652016200733}
+    - target: {fileID: 745876748973913578, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
+      propertyPath: attackMotions.Array.data[0].normalizedTime
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 911117880053030021, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}
       propertyPath: prefabKey
       value: F_Knight
@@ -969,7 +973,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
   executionStateTag: Attack
-  executeNormalizedTime: 0
 --- !u!1 &3803905964553026129 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2593494302725934632, guid: 12946a0d6ee78214994e17b45dc18e8e, type: 3}

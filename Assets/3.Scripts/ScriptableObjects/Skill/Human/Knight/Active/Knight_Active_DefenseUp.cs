@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "KnightActive01", menuName = "Scriptable Objects/Skill/Knight/Active01")]
-public class KnightActive01 : ActiveSkillContainer
+[CreateAssetMenu(fileName = "Knight_Active_DefenseUp", menuName = "Scriptable Objects/Skill/Human/Knight/Knight_Active_DefenseUp")]
+public class Knight_Active_DefenseUp : ActiveSkillContainer
 {
     [SerializeField] EffectContainer effect;
 

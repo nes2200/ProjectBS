@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KnightEffect02Behavior : EffectBehavior
+public class Knight_Effect_DamageDebuff_Behavior : EffectBehavior
 {
     readonly EffectInstance instance;
     readonly CharacterBase target;
@@ -9,7 +9,7 @@ public class KnightEffect02Behavior : EffectBehavior
 
     bool subscribed;
 
-    public KnightEffect02Behavior(EffectInstance instance, CharacterBase target, int damage)
+    public Knight_Effect_DamageDebuff_Behavior(EffectInstance instance, CharacterBase target, int damage)
     {
         this.instance = instance;
         this.target = target;

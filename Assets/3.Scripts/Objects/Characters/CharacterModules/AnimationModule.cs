@@ -68,13 +68,17 @@ public class AnimationModule : CharacterModule
     public void AnimationByMovement(Vector3 moveDelta)
     {
         if (!anim) return;
-        isMoving = moveDelta.sqrMagnitude > 0.01f;
+
+        float moveSpeed = moveDelta.magnitude / Time.fixedDeltaTime;
+        isMoving = moveSpeed > 0.05f;
+
         if (isRotationByMovement && isMoving)
         {
             AnimationByLookRotation(moveDelta);
         }
-        anim.SetFloat("MoveSpeed", moveDelta.magnitude / Time.fixedDeltaTime);
-    }
+
+        anim.SetFloat("MoveSpeed", moveSpeed);
+    } 
 
     public void AnimationByFaint()
     {

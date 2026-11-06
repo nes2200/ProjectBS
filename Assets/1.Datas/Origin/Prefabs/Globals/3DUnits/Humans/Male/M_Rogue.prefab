@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: attackExecutor
       value: 
       objectReference: {fileID: -8898699973657516175}
+    - target: {fileID: 745876748973913578, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: attackMotions.Array.data[0].normalizedTime
+      value: 0.22
+      objectReference: {fileID: 0}
     - target: {fileID: 911117880053030021, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: prefabKey
       value: M_Rogue
@@ -333,7 +337,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
   executionStateTag: Attack
-  executeNormalizedTime: 0.22
 --- !u!4 &7379562400388002092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1845959163656566808, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}

@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: attackExecutor
       value: 
       objectReference: {fileID: 2819386856123330442}
+    - target: {fileID: 3965736155650930506, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      propertyPath: attackMotions.Array.data[0].normalizedTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4870713796852193239, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: attackRange
       value: 0.4
@@ -332,7 +336,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
   executionStateTag: Attack
-  executeNormalizedTime: 0.5
 --- !u!95 &2155545320631188112 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1911986083768049959, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}

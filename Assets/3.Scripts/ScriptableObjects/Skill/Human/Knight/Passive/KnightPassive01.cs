@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "KnightPassive01", menuName = "Scriptable Objects/Skill/Knight/Passive01")]
-public class KnightPassive01 : PassiveSkillContainer
+[CreateAssetMenu(fileName = "Knight_Passive_DamageDebuff", menuName = "Scriptable Objects/Skill/Human/Knight/Knight_Passive_DamageDebuff")]
+public class Knight_Passive_DamageDebuff : PassiveSkillContainer
 {
     [SerializeField]EffectContainer effect;
     AttackModule atkModule;

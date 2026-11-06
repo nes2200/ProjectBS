@@ -565,7 +565,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Moving Upper Body
     m_StateMachine: {fileID: -2239894012841935895}
-    m_Mask: {fileID: 31900000, guid: 142a22760aae7114f82e9cfc781709d0, type: 2}
+    m_Mask: {fileID: 31900000, guid: d31224bea6a9efe488305a427cb34d53, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0

@@ -10,6 +10,15 @@ public struct AttackInfo
     public int damageAmount;
 }
 
+[Serializable]
+public struct AttackMotion
+{
+    public string trigger;
+
+    [Range(0f, 1f)]
+    public float normalizedTime;
+}
+
 //이 모듈은 '공격'을 담당하는 모듈.
 //hit과 같은 '맞는 역할'은 HitPointModule이 담당한다.
 public class AttackModule : CharacterModule
@@ -30,8 +39,18 @@ public class AttackModule : CharacterModule
 
     //근거리 원거리 나누는 용도
     [SerializeField] AttackExecutor attackExecutor;
+
     //다양한 공격 애니메이션 용도
-    [SerializeField] string[] attackTriggers = { "Attack" };
+    [SerializeField]
+    AttackMotion[] attackMotions =
+    {
+        new AttackMotion
+        {
+            trigger = "Attack",
+            normalizedTime = 0f
+        }
+    };
+    AttackMotion currentAttackMotion;
 
     public event AttackEvent OnBeforeAttack;
     public event AttackEvent OnAfterAttack;
@@ -55,28 +74,38 @@ public class AttackModule : CharacterModule
         attackCooldownCurrent = 0f;
 
         currentAttackInfo = default;
+        currentAttackMotion = default;
         animModule = null;
     }
 
     public void AttackTarget(in AttackInfo attackInfo)
     {
-        if (isAttackCooldown || isAttacking || !attackExecutor) return;
+        if (isAttackCooldown || isAttacking || !attackExecutor || !animModule)
+            return;
 
-        isAttacking = true;
-        attackExecutor.Prepare();
-
-        animModule.SetBool("IsAttacking", true);
-
-        string attackTrigger = "Attack";
-        if (attackTriggers != null && attackTriggers.Length > 0)
+        if (attackMotions == null || attackMotions.Length == 0)
         {
-            int index = UnityEngine.Random.Range(0, attackTriggers.Length);
-            attackTrigger = attackTriggers[index];
+            Debug.LogError("공격 모션이 설정되지 않았습니다.", this);
+            return;
         }
-        animModule.TriggerAnimation(attackTrigger);
+
+        int index = UnityEngine.Random.Range(0, attackMotions.Length);
+        currentAttackMotion = attackMotions[index];
+
+        if (string.IsNullOrWhiteSpace(currentAttackMotion.trigger))
+        {
+            Debug.LogError("공격 트리거 이름이 비어 있습니다.", this);
+            return;
+        }
 
         currentAttackInfo = attackInfo;
         hasExecuteAttack = false;
+        isAttacking = true;
+
+        attackExecutor.Prepare();
+
+        animModule.SetBool("IsAttacking", true);
+        animModule.TriggerAnimation(currentAttackMotion.trigger);
 
         GameManager.OnUpdateCharacter -= UpdateAttack;
         GameManager.OnUpdateCharacter += UpdateAttack;
@@ -94,7 +123,7 @@ public class AttackModule : CharacterModule
 
         if (!animModule.TryGetNormalizedTime(out float normalizedProgress, attackExecutor.ExecutionStateTag)) return;
 
-        if (normalizedProgress < attackExecutor.ExecuteNormalizedTime) return;
+        if (normalizedProgress < currentAttackMotion.normalizedTime) return;
         
         hasExecuteAttack = true;
         GameManager.OnUpdateCharacter -= UpdateAttack;

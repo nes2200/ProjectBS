@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "KnightEffect01", menuName = "Scriptable Objects/Effect/Knight/Effect01")]
-public class KnightEffect01 : EffectContainer
+[CreateAssetMenu(fileName = "Knight_Effect_DefenseUp", menuName = "Scriptable Objects/Effect/Human/Knight/Knight_Effect_DefenseUp")]
+public class Knight_Effect_DefenseUp : EffectContainer
 {
     [SerializeField] StatModifier[] modifiers;
 

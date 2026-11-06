@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4990a8724cf391549b36cd9cdf70be9e, type: 3}
-  m_Name: KnightEffect01
+  m_Name: Knight_Effect_DefenseUp
   m_EditorClassIdentifier: Assembly-CSharp::KnightEffect01
   icon: {fileID: 0}
   displayName: "\uAE30\uC0AC\uB2E8\uC758 \uAE0D\uC9C0"

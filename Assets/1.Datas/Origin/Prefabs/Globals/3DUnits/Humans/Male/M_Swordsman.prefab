@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: attackExecutor
       value: 
       objectReference: {fileID: 7501783703962071877}
+    - target: {fileID: 745876748973913578, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: attackMotions.Array.data[0].normalizedTime
+      value: 0.33
+      objectReference: {fileID: 0}
     - target: {fileID: 780860280071909585, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -351,7 +355,7 @@ PrefabInstance:
     - target: {fileID: 2871185227891549063, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: 86d96d0719cfe0448bb5d55bcfe29432, type: 2}
+      objectReference: {fileID: 22100000, guid: 1fa619e02d9020a4fbe80e28ee86035b, type: 2}
     - target: {fileID: 2912561527634904467, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -1146,7 +1150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
   executionStateTag: Attack
-  executeNormalizedTime: 0.33
 --- !u!1 &3045918759686313531 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2410761527018102440, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
