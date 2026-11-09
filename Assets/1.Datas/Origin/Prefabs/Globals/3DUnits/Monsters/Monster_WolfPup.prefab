@@ -150,6 +150,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2226144352791122500, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1874172997757010189}
+    - targetCorrespondingSourceObject: {fileID: 2226144352791122500, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6805935563485471567}
   m_SourcePrefab: {fileID: 100100000, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
 --- !u!4 &5527394209303647509 stripped
 Transform:
@@ -174,7 +177,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackExecutor
   executionStateTag: Attack
-  executeNormalizedTime: 0.4
+--- !u!114 &6805935563485471567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728340988670359200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b69ac55936c3144e9f2d346dab9cc47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnFade
+  duration: 0.5
 --- !u!1001 &8936087245965833619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -183,6 +198,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5527394209303647509}
     m_Modifications:
+    - target: {fileID: 8530477259689935259, guid: 1d2465e625f23fd4594038dc128f9bc9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 32472c32d68dd7a4d84fae37c6c07bb5, type: 2}
     - target: {fileID: 8530477259692888253, guid: 1d2465e625f23fd4594038dc128f9bc9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

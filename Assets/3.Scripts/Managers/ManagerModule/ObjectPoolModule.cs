@@ -108,6 +108,8 @@ public class ObjectPoolModule
     //오브젝트 생성 부탁
     public GameObject CreateObject(Transform parent = null)
     {
+        EnsureInitialized();
+
         //대기자중에 꺼내보기
         GameObject result;
         //대기열에 아무도 없을때

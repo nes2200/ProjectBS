@@ -1,0 +1,134 @@
+{
+  "objects": [
+    {
+      "name": "TeamLine",
+      "prefabName": "TeamLine",
+      "unitDefinitionName": null,
+      "parentName": "Terrain",
+      "position": {
+        "x": 0.0,
+        "y": 78.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.707,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
+      "name": "Monster_Werewolf(Clone)",
+      "prefabName": "Monster_Werewolf",
+      "unitDefinitionName": "Werewolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 3.349,
+        "y": 0.056,
+        "z": 4.221
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Werewolf(Clone)",
+      "prefabName": "Monster_Werewolf",
+      "unitDefinitionName": "Werewolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 2.131,
+        "y": 0.056,
+        "z": -7.145
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Terrain",
+      "prefabName": "Terrain",
+      "unitDefinitionName": null,
+      "parentName": "Floor",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 48.037,
+        "y": 0.055,
+        "z": 34.167
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      }
+    },
+    {
+      "name": "Monster_Werewolf(Clone)",
+      "prefabName": "Monster_Werewolf",
+      "unitDefinitionName": "Werewolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 2.682,
+        "y": 0.056,
+        "z": -2.336
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    }
+  ],
+  "selectableUnits": [
+    {
+      "unitPrefabName": "Knight"
+    },
+    {
+      "unitPrefabName": "Archer"
+    },
+    {
+      "unitPrefabName": "Rogue"
+    },
+    {
+      "unitPrefabName": "Swordsman"
+    }
+  ],
+  "selectableEnemies": [],
+  "costLimits": [
+    20,
+    30,
+    40
+  ]
+}

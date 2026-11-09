@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a8306574de8154fbe56055f3f3dccf, type: 3}
+  m_Name: Mage_Status
+  m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
+  icon: {fileID: 7803488565672167263, guid: 7d6d25ec8456e2243911d09a0fbbde82, type: 3}
+  displayName: "\uB9C8\uBC95\uC0AC"
+  explain: "\uB9C8\uBC95\uC744 \uC0AC\uC6A9\uD558\uC5EC \uACF5\uACA9\uD558\uB294
+    \uB2E4\uC7AC\uB2E4\uB2A5\uD55C \uC720\uB2DB"
+  id: 310005
+  cost: 15
+  maxHP: 20
+  damage: 10
+  defense: 1
+  attackSpeed: 2
+  moveSpeed: 2
+  colliderRadius: 0.4

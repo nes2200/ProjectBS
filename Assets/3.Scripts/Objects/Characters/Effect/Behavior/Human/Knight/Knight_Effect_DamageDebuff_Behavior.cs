@@ -25,8 +25,6 @@ public class Knight_Effect_DamageDebuff_Behavior : EffectBehavior
         hpModule.OnAfterHit -= OnAfterHit;
         hpModule.OnAfterHit += OnAfterHit;
         subscribed = true;
-
-        target.GetModule<EffectModule>().test.SetActive(true);
     }
 
     public override void Remove()
@@ -37,8 +35,6 @@ public class Knight_Effect_DamageDebuff_Behavior : EffectBehavior
             hpModule.OnAfterHit -= OnAfterHit;
 
         subscribed = false;
-        target.GetModule<EffectModule>().test.SetActive(false);
-
     }
 
     void OnAfterHit(DamageStruct hit)

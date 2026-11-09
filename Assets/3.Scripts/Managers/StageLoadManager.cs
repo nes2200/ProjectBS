@@ -118,6 +118,10 @@ public class StageLoadManager : ManagerBase
         {
             GameManager.ObjectM.PreparePool("ArrowBasic", 20);
         }
+        if (mode == BattleFieldMode.Stage && ContainsUnit(loadData.selectableUnits, "Mage"))
+        {
+            GameManager.ObjectM.PreparePool("FireballBasic", 20);
+        }
 
         LoadSelectableUnits(loadData.selectableUnits, selectableUnits);
         LoadSelectableUnits(loadData.selectableEnemies, selectableEnemies); 

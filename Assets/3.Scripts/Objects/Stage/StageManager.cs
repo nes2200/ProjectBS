@@ -47,6 +47,7 @@ public class StageManager : MonoBehaviour
     public Transform TeamB => teamB;
 
     public StageCharacterRegistry CharacterRegistry => characterRegistry;
+    public PlacementManager Placement => placementManager;
     public UnitPlaceIndicator Indicator => placementManager.Indicator;
 
     BattleFieldMode fieldMode = BattleFieldMode.Stage;

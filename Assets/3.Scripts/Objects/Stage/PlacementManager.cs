@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public delegate void UnitSpawnEvent(CharacterBase targetUnit);
 
@@ -79,63 +80,74 @@ public class PlacementManager : MonoBehaviour
 
     private void TryUnitSpawn(bool value, Vector2 screenPosition, Vector3 worldPosition)
     {
-        //게임이 멈춰있다면 생성 안함
         if (!GameManager.Instance.IsPlaying) return;
-
-        ////마우스 누를때는 유닛 생성 안함
-        //if (value) return;
-
-        //준비 상태 아니라면 소환 안하기
         if (stageManager.CurrentState != StageState.Ready) return;
-
-        //프리팹에 유닛이 저장되있지 않으면 생성 안함
-        if(!selectedUnitData) return;
-
-        //생성할 유닛 비용이 추가될 시 리미트 최고점을 넘으면 생성 안함
+        if (!selectedUnitData || !selectedUnitData.Status) return;
         if (!IsCostEnoughToSpawn(selectedUnitData.Status.Cost)) return;
-
-        //생성 불가능한 위치라면 생성 안함
         if (!indicator.CanSpawn) return;
 
-        //바닥에 맞았으면 유닛 생성
         GameObject spawnPrefab = selectedUnitData.GetRandomPrefab();
-        if (!spawnPrefab) return;
-        GameObject newUnit = ObjectManager.CreateObjectWithoutRegistration(spawnPrefab);
+        Vector3 position = indicator.GetCurrentIndicatorLoaction();
+        Quaternion rotation = selectedTeam == TeamID.TeamA
+            ? Quaternion.Euler(0f, 90f, 0f)
+            : Quaternion.Euler(0f, 270f, 0f);
 
-        //생성됬으면 등록하기
-        if (newUnit)
+        if (!TrySpawnUnit(spawnPrefab, selectedUnitData.Status, selectedTeam,
+                position, rotation, out CharacterBase targetCharacter))
+            return;
+
+        // 준비 단계에서의 배치 비용과 배치 이벤트만 이곳에서 처리한다.
+        if (!stageManager.IsSandbox)
+            stageManager.CostIncreasByUnitSpawn(targetCharacter.Status.Cost);
+        OnUnitSpawn?.Invoke(targetCharacter);
+    }
+
+    // 위치를 정하는 쪽에서 프리팹을 한 번 선택해 전달한다.
+    // Indicator, 선택 중인 유닛, 비용, 전투 상태에 의존하지 않는 공통 생성 함수.
+    public bool TrySpawnUnit(GameObject prefab, UnitStatus status, TeamID team,
+        Vector3 position, Quaternion rotation, out CharacterBase spawnedCharacter)
+    {
+        spawnedCharacter = null;
+        if (!prefab || !status || !stageManager || !stageManager.CharacterRegistry)
+            return false;
+        if (team != TeamID.TeamA && team != TeamID.TeamB) return false;
+
+        Transform unitParent = team == TeamID.TeamA ? teamA_Parent : teamB_Parent;
+        Transform hostileParent = team == TeamID.TeamA ? teamB_Parent : teamA_Parent;
+        if (!unitParent || !hostileParent) return false;
+
+        GameObject newUnit = ObjectManager.CreateObjectWithoutRegistration(prefab, unitParent);
+        if (!newUnit) return false;
+
+        // Agent를 끄고 배치한 뒤 다시 켜서 NavMesh 위치를 맞춘다.
+        NavMeshAgent agent = newUnit.GetComponent<NavMeshAgent>();
+        if (agent) agent.enabled = false;
+        newUnit.transform.SetPositionAndRotation(position, rotation);
+
+        if (!TryConfigureUnit(newUnit, status, out CharacterBase character))
         {
-            if (!TryConfigureUnit(newUnit, out CharacterBase targetCharacter))
+            Destroy(newUnit);
+            return false;
+        }
+        character.SetTeam(team);
+
+        if (agent)
+        {
+            agent.enabled = true;
+            if (!agent.isOnNavMesh || !agent.Warp(position))
             {
                 Destroy(newUnit);
-                return;
+                return false;
             }
-
-            Transform unitParent = selectedTeam == TeamID.TeamB ? teamB_Parent : teamA_Parent;
-            //유닛의 부모 설정으로 팀 배정
-            newUnit.transform.SetParent(unitParent, false);
-            newUnit.transform.position = indicator.GetCurrentIndicatorLoaction();
-            newUnit.transform.rotation = selectedTeam == TeamID.TeamA ? Quaternion.Euler(0f, 90f, 0f) : Quaternion.Euler(0f, 270f, 0f);
-            ObjectManager.RegistrationObject(newUnit);
-
-            //추적할 적 유닛 등록하기
-            TargetingModule targetModule = newUnit.GetComponent<TargetingModule>();
-            if (targetModule)
-            {
-                //부모가 A면 적은 B, 부모가 B면 적은 A
-                targetModule.SetHostileGroupParents((unitParent == teamA_Parent) ? teamB_Parent : teamA_Parent);
-            }
-
-            //배치한 만큼 코스트 증가시키기
-            if (targetCharacter)
-            {
-                stageManager.CharacterRegistry.Register(targetCharacter, selectedTeam);
-
-                int unitCost = targetCharacter.Status.Cost;
-                if(!stageManager.IsSandbox) stageManager.CostIncreasByUnitSpawn(unitCost);
-            }
-            OnUnitSpawn?.Invoke(targetCharacter);
         }
+
+        // 위치, 스탯, 팀 설정이 끝난 후 컨트롤러와 모듈을 초기화한다.
+        ObjectManager.RegistrationObject(newUnit);
+        TargetingModule targeting = newUnit.GetComponent<TargetingModule>();
+        if (targeting) targeting.SetHostileGroupParents(hostileParent);
+        stageManager.CharacterRegistry.Register(character, team);
+        spawnedCharacter = character;
+        return true;
     }
 
     private void TryUnitDespawn(bool value, Vector2 screenPosition, Vector3 worldPosition)
@@ -160,7 +172,7 @@ public class PlacementManager : MonoBehaviour
         selectedTeam = newTeam;
     }
 
-    bool TryConfigureUnit(GameObject unit, out CharacterBase character)
+    bool TryConfigureUnit(GameObject unit, UnitStatus status, out CharacterBase character)
     {
         character = unit.GetComponent<CharacterBase>();
         if (!character)
@@ -179,7 +191,7 @@ public class PlacementManager : MonoBehaviour
         UnitAppearance appearance = unit.GetComponent<UnitAppearance>();
         if (appearance && !appearance.ApplyAppearance()) return false;
 
-        character.SetStatus(character.Status);
+        character.SetStatus(status);
         return true;
     }
 

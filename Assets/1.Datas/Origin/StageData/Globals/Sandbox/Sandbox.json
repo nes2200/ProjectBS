@@ -45,24 +45,30 @@
   ],
   "selectableUnits": [
     {
-      "unitPrefabName": "M_Knight"
+      "unitPrefabName": "Knight"
     },
     {
-      "unitPrefabName": "M_Swordsman"
+      "unitPrefabName": "Swordsman"
     },
     {
-      "unitPrefabName": "M_Archer"
+      "unitPrefabName": "Rogue"
+    },
+    {
+      "unitPrefabName": "Archer"
+    },
+    {
+      "unitPrefabName": "Mage"
     }
   ],
   "selectableEnemies": [
     {
-      "unitPrefabName": "Monster_Werewolf"
+      "unitPrefabName": "Werewolf"
     },
     {
-      "unitPrefabName": "Monster_Wolf"
+      "unitPrefabName": "Wolf"
     },
     {
-      "unitPrefabName": "Monster_WolfPup"
+      "unitPrefabName": "WolfPup"
     }
   ],
   "costLimits": [

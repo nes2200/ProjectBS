@@ -38,6 +38,15 @@ public class EffectModule : CharacterModule
         base.OnUnregistration(oldOwner);
     }
 
+    public bool HasActiveEffect(EffectContainer effect)
+    {
+        foreach (EffectInstance instance in effects)
+        {
+            if (instance.IsActive && instance.Effect == effect) return true;
+        }
+        return false;
+    }
+
     public void ApplyEffect(CharacterBase causer, EffectContainer wantEffect)
     {
         foreach (EffectInstance effect in effects)

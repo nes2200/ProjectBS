@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada7e748c5cd6a441a63f69bce8dc22f, type: 3}
+  m_Name: Wolf_Passive_DamageBuff
+  m_EditorClassIdentifier: Assembly-CSharp::Wolf_Passive_DamageBuff
+  icon: {fileID: 0}
+  displayName: "새끼 늑대의 복수"
+  explain: "아군 WolfPup 사망 시 공격력 +5, 5초 지속. 각 버프는 독립적으로 만료됩니다."
+  id: 0
+  cooltime: 0
+  pupDefinition: {fileID: 11400000, guid: 431e48c5e3154704684a103e6b015979, type: 2}
+  effect: {fileID: 11400000, guid: 279467935bdb4f66ac03fb228991b880, type: 2}

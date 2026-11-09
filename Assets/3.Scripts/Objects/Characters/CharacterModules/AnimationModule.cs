@@ -151,6 +151,9 @@ public class AnimationModule : CharacterModule
         AttackModule atkModule = Owner.GetModule<AttackModule>();
         if (atkModule && atkModule.IsAttacking) return;
 
+        SkillModule skillModule = Owner.GetModule<SkillModule>();
+        if (skillModule && skillModule.IsUsingActiveSkill) return;
+
         if (isMoving && useMovingHitReaction)
         {
             anim.SetTrigger("MovingDamaged");
@@ -226,5 +229,9 @@ public class AnimationModule : CharacterModule
     {
         anim.SetBool(parameter, value);
     }
-
+    public void ResetTrigger(string parameter)
+    {
+        if (anim)
+            anim.ResetTrigger(parameter);
+    }
 }

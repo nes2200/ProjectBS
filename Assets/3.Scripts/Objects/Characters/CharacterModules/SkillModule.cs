@@ -24,6 +24,8 @@ public class SkillModule : CharacterModule
     bool waitingForActiveCooldown;
     int activeUseId;
 
+    public bool IsUsingActiveSkill => waitingForActiveCooldown;
+
     public override Type RegistrationType => typeof(SkillModule);
 
     public override void OnRegistration(CharacterBase newOwner)
@@ -50,6 +52,7 @@ public class SkillModule : CharacterModule
     {
         if (!activeSkill || waitingForActiveCooldown || activeCooldownRemaining > 0f) return;
 
+        if (!activeSkill.CanUse(Owner, target)) return;
         var skill = activeSkill;
         int useId = ++activeUseId;
         float cooldown = Mathf.Max(0f, skill.Cooltime);
@@ -116,7 +119,10 @@ public class SkillModule : CharacterModule
     }
     public void ChangePassiveSkill(PassiveSkillContainer newSkill)
     {
+        if (passiveSkill == newSkill) return;
+        if (Owner) passiveSkill?.UnregistrateEvent(Owner);
         OnPassiveSkillChanged?.Invoke(passiveSkill, newSkill);
         passiveSkill = newSkill;
+        if (Owner) passiveSkill?.RegistrateEvents(Owner);
     }
 }

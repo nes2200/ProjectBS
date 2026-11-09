@@ -79,6 +79,11 @@ public class HostileAIController : AIController
     protected override void Think(float deltaTime)
     {
         if (!Character || !Character.IsAlive) return;
+        if (skillModule && skillModule.IsUsingActiveSkill)
+        {
+            CommandStop();
+            return;
+        }
 
         // 공격 중에는 목표를 변경하지 않음
         if (atkModule.IsAttacking)
@@ -94,6 +99,13 @@ public class HostileAIController : AIController
         }
 
         skillModule?.TryUseActiveSkill(Character);
+
+        // 이번 프레임에 스킬을 시작했다면 일반 공격과 이동을 중단
+        if (skillModule && skillModule.IsUsingActiveSkill)
+        {
+            CommandStop();
+            return;
+        }
 
         // 기존 목표가 죽거나 무효가 된 순간에는 즉시 재검색
         if (FocusTarget && !IsTargetAlive())

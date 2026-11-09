@@ -6,6 +6,7 @@ public class TeamEliminateNotifier : MonoBehaviour
 {
     [Header("Stage Manager")]
     [SerializeField] StageManager stageManager;
+    public StageManager Stage => stageManager;
     [Header("Player Check")]
     [SerializeField] bool isPlayer;
 
@@ -44,9 +45,11 @@ public class TeamEliminateNotifier : MonoBehaviour
     //내 팀 유닛들이 전부 죽었는지 체크
     public void TeamEliminateCheck()
     {
-        for(int i = 0; i < teamCharacters.Count; i++)
+        foreach (Transform child in transform)
         {
-            if (teamCharacters[i].IsAlive) return;
+            if (child.TryGetComponent(out CharacterBase character) &&
+                character.IsAlive && character.gameObject.activeInHierarchy)
+                return;
         }
 
         TeamEliminated();

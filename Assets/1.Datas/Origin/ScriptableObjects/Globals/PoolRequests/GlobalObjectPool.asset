@@ -17,3 +17,7 @@ MonoBehaviour:
     target: {fileID: 1781093431462472902, guid: 8e89080402e84f543b3d3796708709db, type: 3}
     countInitial: 0
     countAdditional: 10
+  - poolName: FireballBasic
+    target: {fileID: 7606620699271223679, guid: 545b63a9c9cfd0e45ac1587a7c1f2752, type: 3}
+    countInitial: 0
+    countAdditional: 10

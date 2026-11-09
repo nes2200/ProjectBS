@@ -90,6 +90,8 @@ public class TargetingModule : CharacterModule
     {
         if (!Owner) return null;
 
+        CacheHostileCharacters();
+
         CharacterBase closestTarget = null;
         float closestDistance = Mathf.Infinity;
         Vector3 origin = Owner.transform.position;

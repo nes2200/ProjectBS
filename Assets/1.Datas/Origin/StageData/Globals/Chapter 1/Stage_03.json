@@ -206,6 +206,9 @@
     },
     {
       "unitPrefabName": "Archer"
+    },
+    {
+      "unitPrefabName": "Mage"
     }
   ],
   "selectableEnemies": [],

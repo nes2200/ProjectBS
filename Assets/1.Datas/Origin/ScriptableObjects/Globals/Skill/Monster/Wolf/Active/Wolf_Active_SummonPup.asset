@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b0339b95d3285f42b266cc25e0d4d8e, type: 3}
+  m_Name: Wolf_Active_SummonPup
+  m_EditorClassIdentifier: Assembly-CSharp::Wolf_Active_SummonPup
+  icon: {fileID: 0}
+  displayName: "\uC0C8\uB07C \uB291\uB300 \uC18C\uD658"
+  explain: "\uC8FC\uBCC0\uC758 \uC801\uC5D0\uAC8C\uC11C \uB5A8\uC5B4\uC9C4 \uC704\uCE58\uC5D0
+    \uC0C8\uB07C \uB291\uB300 \uD55C \uB9C8\uB9AC\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4."
+  id: 0
+  cooltime: 10
+  pupDefinition: {fileID: 11400000, guid: 431e48c5e3154704684a103e6b015979, type: 2}
+  minSpawnDistance: 1.5
+  maxSpawnDistance: 3
+  positionSamples: 24
+  summonNormalizedTime: 0.55
+  maxDuration: 5
