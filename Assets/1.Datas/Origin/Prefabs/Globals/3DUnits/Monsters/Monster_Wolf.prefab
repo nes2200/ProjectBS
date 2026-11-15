@@ -273,7 +273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4870713796852193239, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: attackRange
-      value: 0.4
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6738698059090476509, guid: 72de7f11dd0b67d4db1fcc339921200c, type: 3}
       propertyPath: m_Height
@@ -387,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6260966173753591792, guid: e13b7d7d61d4e364bb3a69b258ae54b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 6260966173753591792, guid: e13b7d7d61d4e364bb3a69b258ae54b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

@@ -122,7 +122,9 @@ public class AttackSlotModule : CharacterModule
         float radian = angle * Mathf.Deg2Rad;
 
         Vector3 direction = new Vector3(Mathf.Cos(radian), 0f, Mathf.Sin(radian));
-        float distance = Owner.Status.colliderRadius + attacker.Status.colliderRadius + margin;
+
+        float attackRange = attacker.GetModule<AttackRangeModule>().Range;
+        float distance = Owner.Status.colliderRadius + attacker.Status.colliderRadius + Mathf.Max(0f, attackRange - margin);
 
         //타겟 위치만 따라가며 타겟 회전은 사용하지 않음
         return Owner.transform.position + direction * distance;

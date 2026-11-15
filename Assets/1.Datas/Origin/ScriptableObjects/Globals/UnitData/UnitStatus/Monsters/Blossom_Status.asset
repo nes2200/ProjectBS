@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4a8306574de8154fbe56055f3f3dccf, type: 3}
-  m_Name: Werewolf
+  m_Name: Blossom_Status
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
-  icon: {fileID: 8859273575814025313, guid: 3e86490de6988f842a82d6b45c104658, type: 3}
-  displayName: "\uC6E8\uC5B4\uC6B8\uD504"
-  explain: "\uAC15\uB825\uD55C \uB291\uB300\uC778\uAC04\uC785\uB2C8\uB2E4."
-  id: 320001
-  cost: 25
-  maxHP: 100
-  damage: 15
+  icon: {fileID: -7511077668876154819, guid: ce070cbc5d9f471489066992fa1578ee, type: 3}
+  displayName: "\uB300\uD615\uAF43"
+  explain: "\uAC00\uC7A5 \uD070 \uAF43\uC774\uB2E4"
+  id: 0
+  cost: 15
+  maxHP: 80
+  damage: 10
   defense: 3
   attackSpeed: 2.5
-  moveSpeed: 2.5
-  colliderRadius: 0.9
+  moveSpeed: 1.5
+  colliderRadius: 0.96

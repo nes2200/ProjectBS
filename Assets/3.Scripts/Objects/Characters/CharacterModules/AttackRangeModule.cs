@@ -14,6 +14,7 @@ public class AttackRangeModule : CharacterModule
 
     [Header("몸통 바깥으로 닿는 공격 거리")]
     [SerializeField, Min(0f)] float attackRange = 0.2f;
+    public float Range => attackRange;
 
     [Header("정면 기준 좌우 공격 허용 각도")]
     [SerializeField, Range(0f, 90f)] float attackHalfAngle = 30f;

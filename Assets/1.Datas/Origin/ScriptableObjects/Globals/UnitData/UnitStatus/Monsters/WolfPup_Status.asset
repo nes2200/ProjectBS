@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4a8306574de8154fbe56055f3f3dccf, type: 3}
-  m_Name: Wolf
+  m_Name: WolfPup_Status
   m_EditorClassIdentifier: Assembly-CSharp::UnitStatus
   icon: {fileID: 7444046612802208997, guid: 2d8a27f6e37e4054c857854aab01bf70, type: 3}
-  displayName: "\uB291\uB300"
-  explain: "\uB09C\uD3ED\uD55C \uB291\uB300\uC785\uB2C8\uB2E4"
-  id: 320002
-  cost: 20
-  maxHP: 80
-  damage: 13
-  defense: 2
-  attackSpeed: 2
-  moveSpeed: 2
-  colliderRadius: 0.8
+  displayName: "\uC0C8\uB07C\uB291\uB300"
+  explain: "\uADC0\uC5FD\uC9C0\uB9CC \uC774\uBE68\uC740 \uB0A0\uCE74\uB86D\uC2B5\uB2C8\uB2E4"
+  id: 320003
+  cost: 10
+  maxHP: 15
+  damage: 5
+  defense: 0
+  attackSpeed: 1
+  moveSpeed: 3
+  colliderRadius: 0.6

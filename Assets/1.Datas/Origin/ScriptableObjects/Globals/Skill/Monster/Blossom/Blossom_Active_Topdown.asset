@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3968070b2e69ca74cbd8551f4e857568, type: 3}
+  m_Name: Blossom_Active_Topdown
+  m_EditorClassIdentifier: Assembly-CSharp::Blossom_Active_Topdown
+  icon: {fileID: 0}
+  displayName: "\uC528\uC557\uD3ED\uACA9"
+  explain: "\uC528\uC557\uC744 \uC704\uB85C \uBC1C\uC0AC\uD574 \uB300\uC0C1\uC758
+    \uBA38\uB9AC \uC704\uC5D0 \uB5A8\uC5B4\uB728\uB9B0\uB2E4"
+  id: 0
+  cooltime: 8
+  seedPrefab: {fileID: 4131973653040939668, guid: 810d2ded5642fc545812400b22c17ce6, type: 3}
+  searchRange: 10
+  riseHeight: 6
+  fallHeight: 6
+  riseSpeed: 12
+  fallSpeed: 18
+  disappearDelay: 0.2
+  radius: 1.5
+  damage: 15
+  launchNormalizedTime: 0.55
+  maxDuration: 8

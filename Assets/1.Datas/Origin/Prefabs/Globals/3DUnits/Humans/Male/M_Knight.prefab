@@ -824,6 +824,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9135695409800746359, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
+      propertyPath: attackRange
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 9136512651874817357, guid: 9f226bcd93bdba442b7606ab80b95006, type: 3}
       propertyPath: m_Layer
       value: 6

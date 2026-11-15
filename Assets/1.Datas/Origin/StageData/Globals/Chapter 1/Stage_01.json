@@ -1,6 +1,94 @@
 {
   "objects": [
     {
+      "name": "Monster_Blossom",
+      "prefabName": "Blossom",
+      "unitDefinitionName": "Blossom",
+      "parentName": "TeamB",
+      "position": {
+        "x": 8.76,
+        "y": 0.028,
+        "z": -1.06
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.707,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
+      "name": "Monster_Wolf (1)",
+      "prefabName": "Monster_Wolf",
+      "unitDefinitionName": "Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 3.98,
+        "y": 0.028,
+        "z": 0.54
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.707,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
+      "name": "Monster_Werewolf",
+      "prefabName": "Monster_Werewolf",
+      "unitDefinitionName": "Werewolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 2.4,
+        "y": 0.028,
+        "z": -1.9
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.707,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
+      "name": "Monster_WolfPup (2)",
+      "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
+      "parentName": "TeamB",
+      "position": {
+        "x": 6.52,
+        "y": 0.028,
+        "z": 0.48
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.707,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
       "name": "Acacia_Tree_l_03_LOD (1)",
       "prefabName": "Acacia_Tree_l_03_LOD",
       "unitDefinitionName": null,
@@ -23,14 +111,14 @@
       }
     },
     {
-      "name": "Monster_Werewolf",
-      "prefabName": "Monster_Werewolf",
-      "unitDefinitionName": "Werewolf",
+      "name": "Monster_WolfPup (1)",
+      "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
       "parentName": "TeamB",
       "position": {
-        "x": 9.44,
-        "y": 0.027,
-        "z": -0.19
+        "x": 6.34,
+        "y": 0.028,
+        "z": -1.54
       },
       "scale": {
         "x": 1.0,
@@ -89,6 +177,50 @@
       }
     },
     {
+      "name": "Monster_Wolf",
+      "prefabName": "Monster_Wolf",
+      "unitDefinitionName": "Wolf",
+      "parentName": "TeamB",
+      "position": {
+        "x": 3.75,
+        "y": 0.027,
+        "z": -4.09
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.707,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
+      "name": "Monster_WolfPup",
+      "prefabName": "Monster_WolfPup",
+      "unitDefinitionName": "WolfPup",
+      "parentName": "TeamB",
+      "position": {
+        "x": 6.03,
+        "y": 0.028,
+        "z": -4.47
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": -0.707,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
       "name": "Acacia_Tree_l_03_LOD",
       "prefabName": "Acacia_Tree_l_03_LOD",
       "unitDefinitionName": null,
@@ -114,12 +246,24 @@
   "selectableUnits": [
     {
       "unitPrefabName": "Knight"
+    },
+    {
+      "unitPrefabName": "Archer"
+    },
+    {
+      "unitPrefabName": "Mage"
+    },
+    {
+      "unitPrefabName": "Rogue"
+    },
+    {
+      "unitPrefabName": "Swordsman"
     }
   ],
   "selectableEnemies": [],
   "costLimits": [
-    30,
-    40,
-    50
+    80,
+    120,
+    150
   ]
 }
