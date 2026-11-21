@@ -71,7 +71,25 @@
       "unitPrefabName": "WolfPup"
     },
     {
+      "unitPrefabName": "Bud"
+    },
+    {
+      "unitPrefabName": "Bloom"
+    },
+    {
       "unitPrefabName": "Blossom"
+    },
+    {
+      "unitPrefabName": "Snakelet"
+    },
+    {
+      "unitPrefabName": "Snake"
+    },
+    {
+      "unitPrefabName": "Snake Naga"
+    },
+    {
+      "unitPrefabName": "HermitKing"
     }
   ],
   "costLimits": [

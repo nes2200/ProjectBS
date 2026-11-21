@@ -23,6 +23,7 @@ public class HitPointModule : CharacterModule
     protected FillValue fill; /*= new FillValue(20, 20);*/
     public override Type RegistrationType => typeof(HitPointModule);
 
+    public int HPCurrent => fill.Current;
     public int HPMax => fill.Max;
     public int HPMin => fill.Min;
     public float HPPercent => fill.Percent;

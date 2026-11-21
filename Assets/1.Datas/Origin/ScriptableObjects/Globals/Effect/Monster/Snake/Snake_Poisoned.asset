@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850970d9f07b46d4a9258e18c083a125, type: 3}
+  m_Name: Snake_Poisoned
+  m_EditorClassIdentifier: Assembly-CSharp::Snake_Poisoned
+  icon: {fileID: 0}
+  displayName: "지속 독"
+  explain: "일정 시간 동안 주기적으로 독 피해를 받습니다."
+  id: 0
+  category: 1
+  duration: 6
+  maxStack: 1
+  refreshDurationOnReapply: 1
+  allowMultipleInstances: 0
+  damagePerTick: 1
+  tickInterval: 1

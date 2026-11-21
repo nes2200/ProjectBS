@@ -8,7 +8,7 @@ public class EffectInstance
     EffectBehavior behavior;
     EffectContainer effect;
     float finalduration;
-    float remainingDuration;
+    double remainingDuration;
     int currentStack;
     CharacterBase causer;
 
@@ -16,6 +16,7 @@ public class EffectInstance
     public CharacterBase Causer => causer;
 
     public bool IsActive => effect != null;
+    public bool IsStun => IsActive && Effect.CausesStun;
 
     public event Action OnEffectAdded; //추가됨
     public event Action OnEffectUpdated; //중복으로 들어와 시간 연장, 스택 추가 등등 어떠한 방식으로는 내부 데이터 변경
@@ -72,7 +73,11 @@ public class EffectInstance
 
     public void UpdateDuration(float deltaTime)
     {
+        double elapsedTime = Math.Min(deltaTime, remainingDuration);
         remainingDuration -= deltaTime;
+        if (elapsedTime > 0d) behavior?.Update(elapsedTime);
+        if (!IsActive) return;
+
         OnEffectUpdated?.Invoke();
 
         if (remainingDuration <= 0f) ClearEffect();

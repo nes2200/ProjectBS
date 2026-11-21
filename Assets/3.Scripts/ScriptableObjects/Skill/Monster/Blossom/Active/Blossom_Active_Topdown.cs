@@ -17,6 +17,8 @@ public class Blossom_Active_Topdown : ActiveSkillContainer
     [SerializeField, Min(0.1f)] float radius = 1.5f;
     [SerializeField, Min(0)] int damage = 30;
 
+    public float DamageRadius => radius;
+
     [SerializeField, Range(0f, 1f)] float launchNormalizedTime = 0.55f;
     [SerializeField, Min(0.1f)] float maxDuration = 8f;
 
@@ -29,6 +31,7 @@ public class Blossom_Active_Topdown : ActiveSkillContainer
     {
         public GameObject visual;
         public Vector3 riseEnd;
+        public Vector3 impactPosition;
     }
 
     public override bool CanUse(CharacterBase user, CharacterBase target)
@@ -82,7 +85,6 @@ public class Blossom_Active_Topdown : ActiveSkillContainer
         bool finished = false;
         float elapsed = 0f;
         float hiddenElapsed = 0f;
-        Vector3 impactPosition = default;
 
         void Finish()
         {
@@ -157,7 +159,7 @@ public class Blossom_Active_Topdown : ActiveSkillContainer
                     return false;
                 }
 
-                Vector3 destination = falling ? impactPosition : flight.riseEnd;
+                Vector3 destination = falling ? flight.impactPosition : flight.riseEnd;
                 Transform visual = flight.visual.transform;
                 visual.position = Vector3.MoveTowards(visual.position, destination, speed * deltaTime);
                 if ((visual.position - destination).sqrMagnitude > 0.000001f)
@@ -168,11 +170,19 @@ public class Blossom_Active_Topdown : ActiveSkillContainer
 
         void BeginFall()
         {
-            impactPosition = victim.transform.position;
+            // 낙하 시작 시 위치를 한 번 확정한다. 이후 목표가 움직이면 피할 수 있다.
+            Vector3 targetPosition = victim.transform.position;
             phase = FlightPhase.Falling;
-            Vector3 position = impactPosition + Vector3.up * fallHeight;
-            foreach (SeedFlight flight in flights)
+            for (int i = 0; i < flights.Count; i++)
             {
+                SeedFlight flight = flights[i];
+                Vector2 offset = i == 0
+                    ? Vector2.zero
+                    : UnityEngine.Random.insideUnitCircle * radius;
+
+                // 첫 발은 목표 위치, 나머지는 목표에서 피해 반지름 이내에 착탄한다.
+                flight.impactPosition = targetPosition + new Vector3(offset.x, 0f, offset.y);
+                Vector3 position = flight.impactPosition + Vector3.up * fallHeight;
                 flight.visual = ObjectManager.CreateObject(seedPrefab, position,
                     Quaternion.LookRotation(Vector3.down, Vector3.forward));
                 if (!flight.visual)
@@ -180,6 +190,10 @@ public class Blossom_Active_Topdown : ActiveSkillContainer
                     Finish();
                     return;
                 }
+#if UNITY_EDITOR
+                if (flight.visual.TryGetComponent(out SeedTopdownRangeGizmo rangeGizmo))
+                    rangeGizmo.SetImpactPosition(flight.impactPosition, this);
+#endif
             }
         }
 
@@ -189,18 +203,6 @@ public class Blossom_Active_Topdown : ActiveSkillContainer
             Transform hostileParent = targeting ? targeting.HostileGroupParent : null;
             if (!hostileParent) return;
 
-            // 피해로 적이 제거되기 전에 대상을 수집한다.
-            hitTargets.Clear();
-            foreach (Transform child in hostileParent)
-            {
-                if (!child.TryGetComponent(out CharacterBase enemy) || !IsEnemy(user, enemy))
-                    continue;
-                Vector3 offset = enemy.transform.position - impactPosition;
-                offset.y = 0f;
-                if (offset.sqrMagnitude <= radius * radius)
-                    hitTargets.Add(enemy);
-            }
-
             var damageInfo = new DamageStruct
             {
                 from = user.gameObject,
@@ -209,9 +211,23 @@ public class Blossom_Active_Topdown : ActiveSkillContainer
                 defensePenetration = 0
             };
 
-            // 피해는 발당 적용한다. 범위가 겹친 대상은 최대 세 번 맞는다.
-            for (int i = 0; i < flights.Count && !finished; i++)
+            // 각 착탄점에서 따로 검색한다. 겹치는 범위의 적은 발마다 피해를 받는다.
+            foreach (SeedFlight flight in flights)
             {
+                if (finished || !hostileParent) return;
+
+                // 피해로 적이 제거되기 전에 이번 Seed의 대상을 먼저 수집한다.
+                hitTargets.Clear();
+                foreach (Transform child in hostileParent)
+                {
+                    if (!child.TryGetComponent(out CharacterBase enemy) || !IsEnemy(user, enemy))
+                        continue;
+                    Vector3 offset = enemy.transform.position - flight.impactPosition;
+                    offset.y = 0f;
+                    if (offset.sqrMagnitude <= radius * radius)
+                        hitTargets.Add(enemy);
+                }
+
                 foreach (CharacterBase enemy in hitTargets)
                 {
                     if (finished) return;

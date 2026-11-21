@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8de0022e7a125b4098733ef5df0e17c, type: 3}
+  m_Name: HermitKing_Stun
+  m_EditorClassIdentifier: Assembly-CSharp::HermitKing_Stun
+  icon: {fileID: 0}
+  displayName: "기절"
+  explain: "잠시 이동과 공격을 멈춥니다."
+  id: 0
+  category: 1
+  causesStun: 1
+  duration: 1.5
+  maxStack: 1
+  refreshDurationOnReapply: 1
+  allowMultipleInstances: 0

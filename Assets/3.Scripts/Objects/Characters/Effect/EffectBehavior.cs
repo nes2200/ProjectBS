@@ -4,4 +4,5 @@ public abstract class EffectBehavior
 {
     public abstract void Apply();
     public abstract void Remove();
+    public virtual void Update(double elapsedTime) {}
 }

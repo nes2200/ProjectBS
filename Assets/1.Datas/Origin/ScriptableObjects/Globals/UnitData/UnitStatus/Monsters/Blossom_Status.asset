@@ -17,7 +17,7 @@ MonoBehaviour:
   explain: "\uAC00\uC7A5 \uD070 \uAF43\uC774\uB2E4"
   id: 0
   cost: 15
-  maxHP: 80
+  maxHP: 40
   damage: 10
   defense: 3
   attackSpeed: 2.5

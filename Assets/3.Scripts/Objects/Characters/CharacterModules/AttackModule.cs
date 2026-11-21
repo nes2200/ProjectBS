@@ -137,6 +137,7 @@ public class AttackModule : CharacterModule
     {
         if (!isAttacking) return;
 
+        GameManager.OnUpdateCharacter -= UpdateAttack;
         isAttacking = false;
         animModule.SetBool("IsAttacking", false);
 

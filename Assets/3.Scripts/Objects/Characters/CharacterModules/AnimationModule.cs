@@ -10,6 +10,10 @@ public class AnimationModule : CharacterModule
     [SerializeField] bool useDeathAnimation;
     [SerializeField] bool useMovingHitReaction = true;
 
+    AttackModule attackModule;
+    SkillModule skillModule;
+    EffectModule effectModule;
+
     [System.Serializable]
     private struct WeaponInfo
     {
@@ -46,6 +50,16 @@ public class AnimationModule : CharacterModule
         ResetWeapon();
         GetAllRigidbody();
         SetRigidbodyAndCollier();
+
+        attackModule = Owner.GetModule<AttackModule>();
+        skillModule = Owner.GetModule<SkillModule>();
+        effectModule = Owner.GetModule<EffectModule>();
+        if (effectModule)
+        {
+            effectModule.OnStunChanged -= SetStunned;
+            effectModule.OnStunChanged += SetStunned;
+            SetStunned(effectModule.IsStunned);
+        }
     }
     public override void OnUnregistration(CharacterBase oldOwner)
     {
@@ -55,6 +69,10 @@ public class AnimationModule : CharacterModule
         oldOwner.OnFaint -= AnimationByFaint;
         StageManager.OnStageStateChange -= StopAnimationByEndBattle;
         oldOwner.OnDamage -= AnimationByDamaged;
+
+        EffectModule effects = oldOwner.GetModule<EffectModule>();
+        if (effects) effects.OnStunChanged -= SetStunned;
+        SetStunned(false);
     }
 
     public void AnimationByLookRotation(Vector3 lookRotation)
@@ -148,10 +166,7 @@ public class AnimationModule : CharacterModule
 
     public void AnimationByDamaged(in DamageStruct info)
     {
-        AttackModule atkModule = Owner.GetModule<AttackModule>();
-        if (atkModule && atkModule.IsAttacking) return;
-
-        SkillModule skillModule = Owner.GetModule<SkillModule>();
+        if (attackModule && attackModule.IsAttacking) return;
         if (skillModule && skillModule.IsUsingActiveSkill) return;
 
         if (isMoving && useMovingHitReaction)
@@ -225,6 +240,21 @@ public class AnimationModule : CharacterModule
     {
         anim.SetTrigger(wantAnim);
     }
+    void SetStunned(bool value)
+    {
+        if (!anim || !anim.runtimeAnimatorController) return;
+
+        const string parameterName = "IsStunned";
+        foreach (AnimatorControllerParameter parameter in anim.parameters)
+        {
+            if (parameter.name == parameterName && parameter.type == AnimatorControllerParameterType.Bool)
+            {
+                anim.SetBool(parameterName, value);
+                return;
+            }
+        }
+    }
+
     public void SetBool(string parameter, bool value)
     {
         anim.SetBool(parameter, value);

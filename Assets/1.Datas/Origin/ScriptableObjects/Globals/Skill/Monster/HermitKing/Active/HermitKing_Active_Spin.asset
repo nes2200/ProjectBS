@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aec607d065070343bba806b56f135f1, type: 3}
+  m_Name: HermitKing_Active_Spin
+  m_EditorClassIdentifier: Assembly-CSharp::HermitKing_Active_Spin
+  icon: {fileID: 0}
+  displayName: "껍질 회전"
+  explain: "껍질 속에 숨은 채 회전한 뒤 주변 적에게 피해를 주고 기절시킵니다."
+  id: 0
+  cooltime: 8
+  radius: 3.5
+  damageMultiplier: 1.5
+  stunEffect: {fileID: 11400000, guid: 3396f056e7b24f03ba7ae2814d34845f, type: 2}

@@ -36,7 +36,7 @@ public class AttackSlotModule : CharacterModule
         if (!TryReserve(attacker)) return false;
 
         int slotIndex = reservations[attacker];
-        slotPosition = CalculateSlotPosition(slotIndex, attacker);
+        slotPosition = CalculateSlotPosition(slotIndex, attacker, baseAngle);
 
         return true;
     }
@@ -81,7 +81,7 @@ public class AttackSlotModule : CharacterModule
         {
             if (IsOccupied(i)) continue;
 
-            Vector3 candidate = CalculateSlotPosition(i, attacker);
+            Vector3 candidate = CalculateSlotPosition(i, attacker, baseAngle);
             float distance = (candidate - attacker.transform.position).sqrMagnitude;
             if(distance < closestDistance)
             {
@@ -94,6 +94,46 @@ public class AttackSlotModule : CharacterModule
 
         reservations.Add(attacker, closestIndex);
         return true;
+    }
+
+    public bool TryReserveRearSlot(CharacterBase attacker, Vector3 rear, Predicate<Vector3> tryLand)
+    {
+        if (!Owner || !attacker || !Owner.Status || !attacker.Status ||
+            !attacker.GetModule<AttackRangeModule>() || tryLand == null)
+            return false;
+
+        bool hasReservation = reservations.TryGetValue(attacker, out int currentIndex);
+        if (!hasReservation && reservations.Count >= slotCount) return false;
+
+        float firstSlotAngle = reservations.Count == 0
+            ? Mathf.Atan2(rear.z, rear.x) * Mathf.Rad2Deg
+            : baseAngle;
+        Vector3 center = Owner.transform.position;
+        var candidates = new List<(int Index, Vector3 Position, float Alignment)>(slotCount);
+
+        for (int i = 0; i < slotCount; i++)
+        {
+            if ((!hasReservation || i != currentIndex) && IsOccupied(i)) continue;
+
+            Vector3 position = CalculateSlotPosition(i, attacker, firstSlotAngle);
+            float alignment = Vector3.Dot(position - center, rear);
+            if (alignment > 0.0001f)
+                candidates.Add((i, position, alignment));
+        }
+
+        candidates.Sort((left, right) => right.Alignment.CompareTo(left.Alignment));
+
+        foreach (var candidate in candidates)
+        {
+            if (!tryLand(candidate.Position)) continue;
+
+            // Keep the old reservation until the landing succeeds.
+            baseAngle = firstSlotAngle;
+            reservations[attacker] = candidate.Index;
+            return true;
+        }
+
+        return false;
     }
 
     public void Release(CharacterBase attacker)
@@ -115,10 +155,10 @@ public class AttackSlotModule : CharacterModule
         return false;
     }
 
-    Vector3 CalculateSlotPosition(int slotIndex, CharacterBase attacker)
+    Vector3 CalculateSlotPosition(int slotIndex, CharacterBase attacker, float firstSlotAngle)
     {
         float interval = 360f / slotCount;
-        float angle = baseAngle + interval * slotIndex;
+        float angle = firstSlotAngle + interval * slotIndex;
         float radian = angle * Mathf.Deg2Rad;
 
         Vector3 direction = new Vector3(Mathf.Cos(radian), 0f, Mathf.Sin(radian));

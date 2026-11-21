@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75336bb9fabe3704287a9d2771e04f37, type: 3}
+  m_Name: Snake_Active_Ambush
+  m_EditorClassIdentifier: Assembly-CSharp::Snake_Active_Ambush
+  icon: {fileID: 0}
+  displayName: "잠복 기습"
+  explain: "땅속으로 잠복한 뒤 범위 안에서 남은 체력이 낮은 적부터 빈 후방 슬롯을 찾아 나타나 지속 독을 부여합니다."
+  id: 0
+  cooltime: 8
+  emergeDelay: 0.5
+  castRange: 3
+  poisonEffect: {fileID: 11400000, guid: ca49b11fe6624d39a8c8a4ee40db51a1, type: 2}

@@ -1,0 +1,181 @@
+{
+  "objects": [
+    {
+      "name": "Monster_Snake(Clone)",
+      "prefabName": "Snake",
+      "unitDefinitionName": "Snake",
+      "parentName": "TeamB",
+      "position": {
+        "x": 0.7,
+        "y": 0.056,
+        "z": -7.715
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Snake(Clone)",
+      "prefabName": "Snake",
+      "unitDefinitionName": "Snake",
+      "parentName": "TeamB",
+      "position": {
+        "x": 0.6,
+        "y": 0.056,
+        "z": -0.938
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Snake Naga(Clone)",
+      "prefabName": "Snake Naga",
+      "unitDefinitionName": "Snake Naga",
+      "parentName": "TeamB",
+      "position": {
+        "x": 2.272,
+        "y": 0.056,
+        "z": 2.699
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "TeamLine",
+      "prefabName": "TeamLine",
+      "unitDefinitionName": null,
+      "parentName": "Terrain",
+      "position": {
+        "x": 0.0,
+        "y": 78.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.707,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.707
+      }
+    },
+    {
+      "name": "Monster_Snakelet(Clone)",
+      "prefabName": "Snakelet",
+      "unitDefinitionName": "Snakelet",
+      "parentName": "TeamB",
+      "position": {
+        "x": 1.227,
+        "y": 0.056,
+        "z": -5.835
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Snakelet(Clone)",
+      "prefabName": "Snakelet",
+      "unitDefinitionName": "Snakelet",
+      "parentName": "TeamB",
+      "position": {
+        "x": 1.29,
+        "y": 0.056,
+        "z": -3.828
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Terrain",
+      "prefabName": "Terrain",
+      "unitDefinitionName": null,
+      "parentName": "Floor",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 48.037,
+        "y": 0.055,
+        "z": 34.167
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      }
+    }
+  ],
+  "selectableUnits": [
+    {
+      "unitPrefabName": "Knight"
+    },
+    {
+      "unitPrefabName": "Swordsman"
+    },
+    {
+      "unitPrefabName": "Rogue"
+    },
+    {
+      "unitPrefabName": "Archer"
+    },
+    {
+      "unitPrefabName": "Mage"
+    }
+  ],
+  "selectableEnemies": [],
+  "costLimits": [
+    20,
+    30,
+    100
+  ]
+}

@@ -1,13 +1,14 @@
 {
   "objects": [
     {
-      "name": "Monster_Wolf(Clone)",
-      "prefabName": "Monster_Wolf",
+      "name": "Monster_Bud(Clone)",
+      "prefabName": "Bud",
+      "unitDefinitionName": "Bud",
       "parentName": "TeamB",
       "position": {
-        "x": 4.141,
+        "x": 2.011,
         "y": 0.056,
-        "z": -10.072
+        "z": -3.828
       },
       "scale": {
         "x": 1.0,
@@ -22,13 +23,14 @@
       }
     },
     {
-      "name": "TeamLine",
-      "prefabName": "TeamLine",
-      "parentName": "Terrain",
+      "name": "Monster_Bud(Clone)",
+      "prefabName": "Bud",
+      "unitDefinitionName": "Bud",
+      "parentName": "TeamB",
       "position": {
-        "x": 0.0,
-        "y": 78.0,
-        "z": 0.0
+        "x": 1.473,
+        "y": 0.056,
+        "z": -6.65
       },
       "scale": {
         "x": 1.0,
@@ -36,15 +38,38 @@
         "z": 1.0
       },
       "rotation": {
-        "x": 0.707,
-        "y": 0.0,
+        "x": 0.0,
+        "y": 0.707,
         "z": 0.0,
-        "w": 0.707
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Bloom(Clone)",
+      "prefabName": "Bloom",
+      "unitDefinitionName": "Bloom",
+      "parentName": "TeamB",
+      "position": {
+        "x": 4.306,
+        "y": 0.056,
+        "z": 2.763
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
       }
     },
     {
       "name": "Terrain",
       "prefabName": "Terrain",
+      "unitDefinitionName": null,
       "parentName": "Floor",
       "position": {
         "x": 0.0,
@@ -62,20 +87,95 @@
         "z": 0.0,
         "w": 1.0
       }
+    },
+    {
+      "name": "Monster_Bloom(Clone)",
+      "prefabName": "Bloom",
+      "unitDefinitionName": "Bloom",
+      "parentName": "TeamB",
+      "position": {
+        "x": 3.617,
+        "y": 0.056,
+        "z": -5.58
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "Monster_Bloom(Clone)",
+      "prefabName": "Bloom",
+      "unitDefinitionName": "Bloom",
+      "parentName": "TeamB",
+      "position": {
+        "x": 2.345,
+        "y": 0.056,
+        "z": -9.441
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.707,
+        "z": 0.0,
+        "w": -0.707
+      }
+    },
+    {
+      "name": "TeamLine",
+      "prefabName": "TeamLine",
+      "unitDefinitionName": null,
+      "parentName": "Terrain",
+      "position": {
+        "x": 0.0,
+        "y": 78.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "rotation": {
+        "x": 0.707,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.707
+      }
     }
   ],
   "selectableUnits": [
     {
-      "unitPrefabName": "M_Knight"
+      "unitPrefabName": "Knight"
     },
     {
-      "unitPrefabName": "M_Swordsman"
+      "unitPrefabName": "Swordsman"
+    },
+    {
+      "unitPrefabName": "Rogue"
+    },
+    {
+      "unitPrefabName": "Archer"
+    },
+    {
+      "unitPrefabName": "Mage"
     }
   ],
   "selectableEnemies": [],
   "costLimits": [
-    10,
+    20,
     30,
-    40
+    100
   ]
 }

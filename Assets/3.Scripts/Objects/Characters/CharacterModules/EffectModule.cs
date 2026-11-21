@@ -10,6 +10,9 @@ public class EffectModule : CharacterModule
 
     public event EffectEvent OnEffectAdded;
     public event EffectEvent OnEffectRemoved;
+    public event Action<bool> OnStunChanged;
+
+    public bool IsStunned { get; private set; }
 
     public GameObject test;
 
@@ -33,6 +36,7 @@ public class EffectModule : CharacterModule
         foreach (EffectInstance effect in effects)
         {
             effect.ClearEffect();
+            effect.OnEffectRemoved -= RefreshStunState;
         }
 
         base.OnUnregistration(oldOwner);
@@ -57,8 +61,20 @@ public class EffectModule : CharacterModule
                 return;
             }
         }
-        effects.Add(CreateEffectInstance(causer, wantEffect));
+        EffectInstance newInstance = CreateEffectInstance(causer, wantEffect);
+        effects.Add(newInstance);
+        newInstance.OnEffectRemoved += RefreshStunState;
+        RefreshStunState();
         OnEffectAdded?.Invoke(wantEffect);
+    }
+
+    void RefreshStunState()
+    {
+        bool isStunned = effects.Exists(instance => instance.IsStun);
+        if (IsStunned == isStunned) return;
+
+        IsStunned = isStunned;
+        OnStunChanged?.Invoke(IsStunned);
     }
 
     public EffectInstance CreateEffectInstance(CharacterBase causer, EffectContainer effect)
@@ -77,6 +93,7 @@ public class EffectModule : CharacterModule
             if (!effects[i].IsActive)
             {
                 OnEffectRemoved?.Invoke(effects[i].Effect);
+                effects[i].OnEffectRemoved -= RefreshStunState;
                 effects.RemoveAt(i);
             }
         }

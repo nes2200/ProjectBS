@@ -7,6 +7,7 @@ public class HostileAIController : AIController
     AttackModule atkModule;
     AttackRangeModule atkRangeModule;
     SkillModule skillModule;
+    EffectModule effectModule;
 
     CharacterBase targetCharacter;
     HitPointModule targetHPModule;
@@ -29,6 +30,7 @@ public class HostileAIController : AIController
         atkModule = Character.GetModule<AttackModule>();
         atkRangeModule = Character.GetModule<AttackRangeModule>();
         skillModule = Character.GetModule<SkillModule>();
+        effectModule = Character.GetModule<EffectModule>();
         teamEliminateNotifier = GetComponentInParent<TeamEliminateNotifier>();
 
         SetFocusTarget(null);
@@ -79,6 +81,14 @@ public class HostileAIController : AIController
     protected override void Think(float deltaTime)
     {
         if (!Character || !Character.IsAlive) return;
+
+        if (effectModule?.IsStunned == true)
+        {
+            CommandStop();
+            CommandRotateToDirection(Vector3.zero);
+            return;
+        }
+
         if (skillModule && skillModule.IsUsingActiveSkill)
         {
             CommandStop();
